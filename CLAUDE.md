@@ -4,7 +4,7 @@ Site statique (HTML/CSS/JS) publié avec GitHub Pages depuis la branche `main` d
 https://julienduq59.github.io/PortfolioLea/
 Projet mené avec Julien Duquesne (julienduq59@gmail.com). Le site de Julien sert de référence
 technique (julienduq59/PortfolioDuquesneJulien), mais ce site a son propre design.
-Ne jamais publier ce site dans le dépôt de Julien.
+Ne jamais publier ce site dans le dépôt du portfolio de Julien (PortfolioDuquesneJulien).
 
 ## Langue
 
