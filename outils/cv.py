@@ -3,13 +3,15 @@
 Usage : python3 outils/cv.py   (depuis la racine du dépôt)
 Nécessite segno (pip install segno), Node et Playwright.
 
-- assets/cv-lea-rybak.pdf : version publique, liée depuis le site. Coordonnées : e-mail et
-  portfolio seulement, sans téléphone ni adresse.
-- prive/cv-lea-rybak-avec-telephone.pdf : version pour les candidatures, avec le numéro lu dans
-  prive/telephone.txt. Le dossier prive/ n'est pas versionné : rien de ce qu'il contient n'est publié.
+La mise en page reproduit le CV de Léa d'octobre 2026 (Liberation Sans, titres bleus #2e74b5,
+photo ronde en haut à droite). Le QR code vers le portfolio est placé dans l'en-tête, à gauche
+de la photo. Les données (formation, compétences, expériences…) viennent de outils/generer.py.
 
-Les données (formation, expériences…) viennent de outils/generer.py : le site et le CV disent
-toujours la même chose. Ne rien inventer.
+Deux versions :
+- prive/CV-Lea-Rybak.pdf : le CV complet pour les candidatures (téléphone lu dans
+  prive/telephone.txt, photo prive/photo-lea.jpg). Le dossier prive/ n'est pas versionné :
+  rien de ce qu'il contient n'est publié.
+- assets/cv-lea-rybak.pdf : la version publique, liée depuis le site, sans téléphone ni photo.
 """
 import base64
 import html
@@ -24,134 +26,138 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import generer as g  # noqa: E402
 
 RACINE = g.RACINE
+POLICES = "/usr/share/fonts/truetype/liberation"
 e = html.escape
 
+# Icônes des coordonnées, comme sur le CV de Léa (24 × 24)
+ICONES = {
+    "tel": "M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57"
+           ".55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2"
+           " 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z",
+    "mail": "M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z",
+    "lieu": "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5"
+            "s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z",
+}
 
-def police(nom):
-    with open(os.path.join(RACINE, "assets/fonts", nom), "rb") as f:
-        return "data:font/woff2;base64," + base64.b64encode(f.read()).decode()
+
+def police(fichier, poids, style):
+    with open(os.path.join(POLICES, fichier), "rb") as f:
+        donnees = base64.b64encode(f.read()).decode()
+    return (f'@font-face{{font-family:"CV";src:url("data:font/ttf;base64,{donnees}") format("truetype");'
+            f"font-weight:{poids};font-style:{style}}}")
+
+
+def image_base64(chemin):
+    with open(chemin, "rb") as f:
+        return "data:image/jpeg;base64," + base64.b64encode(f.read()).decode()
 
 
 def qr_svg():
-    return segno.make(g.URL, error="m").svg_inline(scale=1, border=0, dark="#0b1320", omitsize=True)
+    return segno.make(g.URL, error="m").svg_inline(scale=1, border=0, dark="#000000", omitsize=True)
 
 
-def bloc(date, titre, detail):
-    det = f'<span class="det">{e(detail)}</span>' if detail else ""
-    return f'<li><span class="date">{e(date)}</span><span><b>{e(titre)}</b>{det}</span></li>'
+def icone(nom):
+    return f'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="{ICONES[nom]}"/></svg>'
 
 
-def cv_html(telephone=""):
+def ligne(date, titre, lieu, details):
+    return (f'<div class="ligne"><div class="date">{e(date)}</div><div class="contenu">'
+            f'<div class="titre">{titre}</div><div class="lieu">{e(lieu)}</div>{details}</div></div>')
+
+
+def formation(f):
+    note = f'<div class="note">{e(f["note"])}</div>' if f["note"] else ""
+    return ligne(f["date"], f'<b>{e(f["titre"])}</b>', f["lieu"], note)
+
+
+def experience(x):
+    titre = f'<b>{e(x["titre"])}</b>' + (f' – {e(x["precision"])}' if x["precision"] else "")
+    missions = '<ul class="puces">' + "".join(f"<li>{e(m)}</li>" for m in x["missions"]) + "</ul>"
+    return ligne(x["date"], titre, x["lieu"], missions)
+
+
+def cv_html(telephone="", photo=""):
     url_courte = g.URL.replace("https://", "").rstrip("/")
-    coord = [f'<a href="mailto:{g.MAIL}">{g.MAIL}</a>']
+    coord = []
     if telephone:
-        coord.append(e(telephone))
-    coord.append(f'<a href="{g.URL}">{url_courte}</a>')
-    coord.append("Permis B")
-
-    expos = g.EXPOS_LICENCE
-    editions = "".join(
-        f'<li><span class="date">{e(c["date"])}</span><span><b>{e(c["titre"])}</b>'
-        f'<span class="det">{e(c["lieu"])} · œuvre exposée : <i>{e(c["oeuvre"])}</i></span></span></li>'
-        for c in expos)
-    if all(c["roles"] == expos[0]["roles"] for c in expos):
-        # Mêmes missions pour chaque édition : on les écrit une seule fois.
-        missions = ('<p class="missions-titre">Missions sur chaque édition</p><ul class="missions">'
-                    + "".join(f"<li>{e(r)}</li>" for r in expos[0]["roles"]) + "</ul>")
-    else:
-        missions = "".join(f'<p class="missions-titre">{e(c["titre"])}</p><ul class="missions">'
-                           + "".join(f"<li>{e(r)}</li>" for r in c["roles"]) + "</ul>" for c in expos)
+        coord.append(f'<li>{icone("tel")}<span>{e(telephone)}</span></li>')
+    coord.append(f'<li>{icone("mail")}<a href="mailto:{g.MAIL}">{g.MAIL}</a></li>')
+    coord.append(f'<li>{icone("lieu")}<span>{e(g.VILLE)}</span></li>')
+    image = f'<img class="photo" src="{image_base64(photo)}" alt="">' if photo else ""
+    competences = "".join(f"<h3>{e(t)}</h3>" for t, _ in g.COMPETENCES) + "".join(
+        '<ul class="puces">' + "".join(f"<li>{e(c)}</li>" for c in liste) + "</ul>" for _, liste in g.COMPETENCES)
 
     return f"""<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>CV · Léa Rybak</title>
+<title>CV Léa Rybak</title>
 <meta name="author" content="Léa Rybak">
 <style>
-@font-face{{font-family:"Schibsted Grotesk";src:url("{police("schibsted-grotesk-latin.woff2")}") format("woff2");font-weight:400 900;font-style:normal}}
-@font-face{{font-family:"Schibsted Grotesk";src:url("{police("schibsted-grotesk-italic-latin.woff2")}") format("woff2");font-weight:400 900;font-style:italic}}
+{police("LiberationSans-Regular.ttf", 400, "normal")}
+{police("LiberationSans-Bold.ttf", 700, "normal")}
+{police("LiberationSans-Italic.ttf", 400, "italic")}
 @page{{size:A4;margin:0}}
 *{{box-sizing:border-box;margin:0;padding:0}}
 html,body{{width:210mm;height:297mm}}
-body{{font-family:"Schibsted Grotesk",Arial,sans-serif;font-size:9pt;line-height:1.4;color:#17202e;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+body{{font-family:"CV",Arial,sans-serif;color:#000;font-size:11px;line-height:1.3;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 a{{color:inherit;text-decoration:none}}
-.page{{width:210mm;height:297mm;overflow:hidden;display:grid;grid-template-rows:auto minmax(0,1fr)}}
-.entete{{background:#0b1320;color:#fff;padding:9mm 13mm 8mm;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8mm;align-items:center}}
-h1{{font-size:30pt;font-weight:900;letter-spacing:-.03em;line-height:1}}
-.cible{{display:inline-block;margin-top:3mm;border:1px solid #fff;border-radius:2.5mm;padding:1.3mm 3.2mm;font-weight:700;font-size:10.5pt}}
-.titre{{margin-top:2.5mm;font-size:10pt;color:#d6dbe4}}
-.coord{{margin-top:3mm;display:flex;flex-wrap:wrap;gap:1mm 6mm;font-size:9pt;font-weight:500}}
-.qr{{background:#fff;color:#0b1320;padding:3.5mm;border-radius:2mm;display:grid;grid-template-columns:27mm 25mm;gap:3.5mm;align-items:center}}
-.qr svg{{display:block;width:27mm;height:27mm}}
-.qr p{{font-size:9pt;line-height:1.3;font-weight:800}}
-.qr p span{{display:block;font-weight:400;color:#4b5468;font-size:8pt;margin-top:1mm}}
-.corps{{display:grid;grid-template-columns:minmax(0,1.72fr) minmax(0,1fr);gap:8.5mm;padding:7mm 13mm 8mm;min-height:0}}
-.colonne{{display:flex;flex-direction:column;justify-content:space-between;gap:5mm;min-height:0;overflow:hidden}}
-h2{{font-size:11.5pt;font-weight:800;color:#0b1320;border-bottom:1.4pt solid #0b1320;padding-bottom:1.2mm;margin-bottom:3mm;letter-spacing:-.005em}}
-.note{{color:#4b5468;font-size:8.6pt}}
-.profil p{{font-size:9.4pt}}
-.projets{{margin-top:3.6mm;padding-top:3mm;border-top:.6pt solid #cfd4dd}}
-.projets h3{{font-size:10.4pt;font-weight:800;line-height:1.3;color:#0b1320;margin-bottom:.6mm}}
-.projets .note{{margin:0 0 2.2mm}}
-.missions-titre{{font-weight:700;margin-top:2.4mm}}
-.missions{{margin:1mm 0 0 4.2mm}}
-.missions li+li{{margin-top:.5mm}}
-.liste{{list-style:none;display:flex;flex-direction:column;gap:1.7mm}}
-.liste li{{display:grid;grid-template-columns:19mm minmax(0,1fr);gap:3mm}}
-.colonne-cote .liste li{{grid-template-columns:minmax(0,1fr);gap:.2mm}}
-.liste .date{{color:#4b5468;font-size:8.4pt;padding-top:.35mm;font-variant-numeric:tabular-nums}}
-.liste b{{font-weight:700;display:block;line-height:1.3}}
-.liste .det{{display:block;color:#4b5468;font-size:8.6pt}}
+.page{{position:relative;width:210mm;height:297mm;overflow:hidden;padding:26px 40px 0}}
+.tete{{position:relative;height:144px}}
+h1{{font-size:23px;font-weight:700;line-height:1.15}}
+.coord{{list-style:none;margin-top:7px}}
+.coord li{{display:flex;align-items:center;font-size:11.5px;line-height:17px}}
+.coord svg{{width:12px;height:12px;flex:none;margin-right:10px;fill:#000}}
+.photo{{position:absolute;top:0;right:0;width:136px;height:136px;border-radius:50%;object-fit:cover}}
+.qr{{position:absolute;top:24px;right:{"154" if photo else "0"}px;display:flex;align-items:center;gap:12px;text-align:right}}
+.qr svg{{display:block;width:92px;height:92px}}
+.qr p{{font-size:10.5px;line-height:1.4}}
+.qr b{{display:block;color:#2e74b5;font-size:11.5px}}
+.qr .url{{display:block;font-size:9.5px}}
+.accroche{{text-align:right;font-size:13px;font-weight:700;line-height:1.15}}
+h2{{font-size:13px;font-weight:400;color:#2e74b5;line-height:1.15;border-bottom:1px solid #2e74b5;padding-bottom:1px;margin:13px 0 7px}}
+.ligne{{display:grid;grid-template-columns:84px minmax(0,1fr)}}
+.ligne+.ligne{{margin-top:8px}}
+.date{{font-size:9px;line-height:1.15;padding-top:3px}}
+.titre{{font-size:12.5px;line-height:17px}}
+.lieu{{font-style:italic;font-size:11px;line-height:15px}}
+.note{{padding-left:22px;font-size:11px;line-height:14px}}
+.puces{{list-style:none}}
+.puces li::before{{content:"•";display:inline-block;width:13px}}
+.contenu .puces{{padding-left:22px}}
+.contenu .puces li{{line-height:14.67px}}
+.competences{{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:14px;padding:1px 0 2px}}
+.competences h3{{font-size:11.5px;font-weight:700;line-height:15px}}
+.competences .puces{{padding-left:4px}}
+.competences .puces li{{font-size:10.5px;line-height:16px}}
+.interets{{font-size:11px}}
 </style>
 </head>
 <body>
 <div class="page">
-  <header class="entete">
-    <div>
-      <h1>Léa Rybak</h1>
-      <p class="cible">À la recherche d'un poste dans le secteur culturel</p>
-      <p class="titre">Master exposition-production des œuvres d'art contemporain, Université de Lille</p>
-      <p class="coord">{"".join(f"<span>{c}</span>" for c in coord)}</p>
-    </div>
-    <div class="qr">{qr_svg()}<p>Mon portfolio<span>Scannez pour voir mes œuvres, expositions et parcours</span></p></div>
+  <header class="tete">
+    <h1>Léa RYBAK</h1>
+    <ul class="coord">{"".join(coord)}</ul>
+    <div class="qr"><p><b>Mon portfolio</b>Œuvres, expositions et parcours<a class="url" href="{g.URL}">{url_courte}</a></p>{qr_svg()}</div>
+    {image}
   </header>
-  <div class="corps">
-    <div class="colonne">
-      <section>
-        <h2>Formation</h2>
-        <ul class="liste">{"".join(bloc(a, t, d) for a, t, d in g.FORMATIONS)}</ul>
-        <div class="projets">
-          <h3>Expositions réalisées pendant la licence</h3>
-          <p class="note">STARTER : l'exposition des étudiantes et étudiants en licence d'arts plastiques de l'Université de Lille.</p>
-          <ul class="liste">{editions}</ul>
-          {missions}
-        </div>
-      </section>
-      <section>
-        <h2>Expériences professionnelles</h2>
-        <ul class="liste">{"".join(bloc(a, t, d) for a, t, d in g.EXPERIENCES)}</ul>
-      </section>
-    </div>
-    <div class="colonne colonne-cote">
-      <section class="profil">
-        <h2>Profil</h2>
-        <p>Formée à la conception, à la communication, au montage et à la médiation d'expositions. Solide expérience de l'accueil des publics. Pratique artistique : installation, sculpture, performance, photographie.</p>
-      </section>
-      <section>
-        <h2>Brevets et certificats</h2>
-        <ul class="liste">{"".join(bloc(a, t, d) for a, t, d in g.CERTIFICATS)}</ul>
-      </section>
-      <section>
-        <h2>Compétences</h2>
-        <ul class="liste">{"".join(bloc(a, t, d) for a, t, d in g.COMPETENCES)}</ul>
-      </section>
-      <section>
-        <h2>Pratiques</h2>
-        <ul class="liste">{"".join(bloc(a, t, d) for a, t, d in g.PRATIQUES)}</ul>
-      </section>
-    </div>
-  </div>
+  <p class="accroche">{e(g.TITRE_CV)}</p>
+  <section>
+    <h2>Formation</h2>
+    {"".join(formation(f) for f in g.DIPLOMES + g.CERTIFICATS)}
+  </section>
+  <section>
+    <h2>Compétences</h2>
+    <div class="competences">{competences}</div>
+  </section>
+  <section>
+    <h2>Expériences professionnelles</h2>
+    {"".join(experience(x) for x in g.EXPERIENCES)}
+  </section>
+  <section>
+    <h2>Centres d’intérêt</h2>
+    <p class="interets">{e(g.CENTRES_INTERET)}</p>
+  </section>
 </div>
 </body>
 </html>
@@ -171,7 +177,8 @@ def imprimer(contenu, sortie):
 if __name__ == "__main__":
     imprimer(cv_html(), os.path.join(RACINE, g.CV))
     fichier_tel = os.path.join(RACINE, "prive/telephone.txt")
-    if os.path.exists(fichier_tel):
+    photo = os.path.join(RACINE, "prive/photo-lea.jpg")
+    if os.path.exists(fichier_tel) and os.path.exists(photo):
         with open(fichier_tel, encoding="utf-8") as f:
             tel = f.read().strip()
-        imprimer(cv_html(tel), os.path.join(RACINE, "prive/cv-lea-rybak-avec-telephone.pdf"))
+        imprimer(cv_html(tel, photo), os.path.join(RACINE, "prive/CV-Lea-Rybak.pdf"))

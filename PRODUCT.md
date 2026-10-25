@@ -56,6 +56,15 @@ Le portfolio V1 de Léa (PDF Canva de 28 pages, 2026) contient :
 - Couleurs retenues (reprises de la V1) : bleu nuit #0b1320 et blanc.
 - Attention : la V1 contient des photos d'enfants au gala de danse. Elles ne seront pas publiées sans l'accord des familles.
 
+Le CV de Léa d'octobre 2026 (PDF d'une page), source principale du parcours depuis le 25/10/2026 :
+- Formation : master Exposition-production des œuvres d'art contemporain, Université de Lille (2024-2026),
+  avec la bourse « Aide à la recherche et à la mobilité » (M2) ; licence Arts plastiques et visuels (2021-2024) ;
+  BAFA (2021) ; PSC1 (2018).
+- Expériences : guide animatrice au musée de La Piscine à Roubaix (2024-2026), stage au Couvent à Roubaix (2026),
+  animatrice (depuis 2021), hôtesse et animation commerciale en intérim (depuis 2023), conseillère de vente chez
+  Fan Avenue au stade Pierre-Mauroy (depuis 2023) et chez La Fée Maraboutée (2023).
+- Compétences en quatre groupes, outils (Canva, Affinity), centres d'intérêt, photo.
+
 Ce qui manque et ne doit pas être inventé : les projets et les réalisations artistiques (photos, titres, années, techniques, textes), ce qu'elle a fait depuis 2024, les liens vers ses réseaux, et son accord sur la photo.
 
 ## Product Principles

@@ -22,8 +22,11 @@ Les textes viennent du portfolio V1. Les corrections suivantes ont été faites,
 ## 2. Contenu
 
 - L'e-mail lea.rybak@outlook.fr est-il bien celui à afficher ?
-- Les expériences viennent du CV de février 2024 (animatrice « depuis 2021 », etc.). Sont-elles
-  encore à jour ? Y a-t-il de nouvelles expériences depuis 2024 (stages du master, par exemple) ?
+- Le parcours suit le CV d'octobre 2026. Les expériences du CV de 2024 qui n'y figurent plus
+  (hôtesse au Casino Barrière, comédienne au Parc Koezio) ont été retirées du site.
+- Le baccalauréat (mention très bien) reste sur la page Parcours du site, bien qu'absent du CV
+  d'octobre 2026 : le garder ?
+- Photo et téléphone : seulement dans le CV privé, pas en ligne, sauf accord de Léa.
 - Les dimensions ne sont connues que pour Signum Cruci. Peut-elle donner celles des autres œuvres ?
 - La performance (marche collective) et une photo argentique montrent des personnes : sont-elles
   d'accord pour apparaître en ligne ?

@@ -8,7 +8,7 @@ import json
 import os
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "20261025-7"  # à changer à chaque modification de styles.css ou site.js
+VERSION = "20261025-8"  # à changer à chaque modification de styles.css ou site.js
 MAIL = "lea.rybak@outlook.fr"
 URL = "https://julienduq59.github.io/PortfolioLea/"
 
@@ -104,12 +104,59 @@ OEUVRES = [
 ]
 PAR_ID = {o["id"]: o for o in OEUVRES}
 
-# Formation : portfolio V1 et CV de Léa.
-FORMATIONS = [("2024-2026", "Master exposition-production des œuvres d'art contemporain", "Université de Lille"),
-              ("2021-2024", "Licence arts plastiques et visuels", "Université de Lille, pôle arts plastiques de Tourcoing"),
-              ("2021", "Baccalauréat, mention très bien", "Lycée Baudelaire, Roubaix · spécialité humanités, philosophie, littérature et théâtre")]
-CERTIFICATS = [("2021", "BAFA", "Cemea"),
-               ("2018", "PSC1", "")]
+# ---------------------------------------------------------------- Parcours
+# Source principale : CV de Léa d'octobre 2026. Formulations reprises telles quelles (apostrophes
+# typographiques comprises) : le CV PDF (outils/cv.py) reproduit ce CV à partir de ces données.
+TITRE_CV = "Exposition-production d’art contemporain – Master (Bac+5)"
+VILLE = "Croix, Hauts-de-France"
+
+# Diplômes, puis brevets et certificats, dans l'ordre du CV.
+DIPLOMES = [
+    dict(date="2024 - 2026", titre="Master Exposition-production des œuvres d’art contemporain",
+         lieu="Université de Lille", note="Obtention de la bourse « Aide à la recherche et à la mobilité » (M2)"),
+    dict(date="2021 - 2024", titre="Licence Arts plastiques et visuels", lieu="Université de Lille", note=""),
+]
+CERTIFICATS = [
+    dict(date="2021", titre="BAFA", lieu="Brevet d’aptitude aux fonctions d’animateur – Cemea", note=""),
+    dict(date="2018", titre="PSC1", lieu="Prévention et secours civiques de niveau 1", note=""),
+]
+# Sur le site seulement : le baccalauréat (portfolio V1), absent du CV d'octobre 2026.
+BAC = dict(date="2021", titre="Baccalauréat, mention très bien",
+           lieu="Lycée Baudelaire, Roubaix · spécialité humanités, philosophie, littérature et théâtre", note="")
+
+COMPETENCES = [
+    ("Art & exposition", ["Production d’œuvres d’art", "Scénographie", "Visites thématiques de musée",
+                          "Ateliers d’arts plastiques", "Logistique événementielle"]),
+    ("Animation & accueil", ["Animation de groupes d’enfants", "Animation de stand", "Street marketing",
+                             "Accueil et placement du public", "Service et gestion du bar"]),
+    ("Vente & magasin", ["Conseil et vente", "Mise en place du magasin", "Gestion des stocks", "Caisse",
+                         "Manutention et mise en carton"]),
+    ("Outils, langues & certifications", ["Canva · Affinity", "Anglais – B1 (CLES B1)", "BAFA", "PSC1",
+                                          "Permis B (2022)"]),
+]
+
+# Expériences professionnelles, dans l'ordre du CV : la plus importante d'abord (musée de La Piscine).
+EXPERIENCES = [
+    dict(date="2024 - 2026", titre="Guide animatrice", precision="", lieu="Musée de La Piscine – Roubaix",
+         missions=["Visites thématiques du musée pour les groupes scolaires", "Animation d’ateliers d’arts plastiques"]),
+    dict(date="2026", titre="Stage", precision="", lieu="Le Couvent – Roubaix",
+         missions=["Logistique, manutention et scénographie", "Gestion du bar",
+                   "Embauches ponctuelles à l’issue du stage pour renforcer les équipes lors de grands événements"]),
+    dict(date="Depuis 2021", titre="Animatrice", precision="Vacances scolaires",
+         lieu="Mairie de Croix, MJC de Croix, Planète aventure…",
+         missions=["Animation en accueils collectifs de mineurs (ACM) et en colonies de vacances"]),
+    dict(date="Depuis 2023", titre="Hôtesse et animation commerciale", precision="Intérim",
+         lieu="Animeo, La belle équipe, Top Action…",
+         missions=["Animation de stand, distribution de produits et street marketing",
+                   "Hôtesse d’accueil, placement et service", "Gestion du bar"]),
+    dict(date="Depuis 2023", titre="Conseillère de vente", precision="", lieu="Fan Avenue – Stade Pierre Mauroy",
+         missions=["Vente de merchandising lors des grands événements", "Mise en place du magasin et conseil",
+                   "Manutention, mise en carton, gestion des stocks et caisse"]),
+    dict(date="2023", titre="Conseillère de vente", precision="Renfort braderie de Lille", lieu="La Fée Maraboutée – Lille",
+         missions=["Mise en place du magasin et conseil",
+                   "Manutention, réalisation de transferts, mise en carton et gestion des stocks"]),
+]
+CENTRES_INTERET = "Arts visuels, spectacle vivant, danse · Activités créatives · Sport · Animation"
 
 # Expositions réalisées pendant la licence : projets d'études, présentés dans la Formation
 # (choix de Julien, 25/10/2026). Source : portfolio V1 de Léa.
@@ -124,25 +171,14 @@ EXPOS_LICENCE = [
          oeuvre="Cliché", oeuvre_id="cliche"),
 ]
 
-# Pratiques et compétences : portfolio V1 et CV de Léa.
+# Pratiques artistiques (site seulement) : portfolio V1 de Léa.
 PRATIQUES = [("2019-2022", "Photographie argentique", "MJC de Croix"),
              ("2008-2023", "Danse contemporaine et modern jazz", "MJC de Croix"),
              ("2019", "Photographe bénévole", "Gala de danse de la MJC de Croix")]
-COMPETENCES = [("Langue", "Anglais, niveau B1", "Certification CLES B1"),
-               ("Permis", "Permis B (2022)", ""),
-               ("Qualités", "Dynamique et responsable, autonome, ponctuelle, bienveillante, à l'écoute, aime le travail en équipe", "")]
 
 # CV PDF d'une page, généré par outils/cv.py
 CV = "assets/cv-lea-rybak.pdf"
 LIEN_CV = f'href="{CV}" target="_blank" rel="noopener" download="CV-Lea-Rybak.pdf"'
-
-# Autres expériences : CV de Léa (février 2024).
-EXPERIENCES = [("Depuis 2021", "Animatrice", "Mairie de Croix, MJC de Croix, Planète Aventure… Accueils collectifs de mineurs et colonies de vacances."),
-               ("2023", "Hôtesse", "Casino Barrière, Lille · placement des spectateurs et organisation de salle lors d'événements et de spectacles."),
-               ("2023", "Comédienne", "Parc Koezio, Villeneuve-d'Ascq · événement d'Halloween, 30 et 31 octobre."),
-               ("2023", "Conseillère de vente", "Coupe du monde de rugby, stade Pierre-Mauroy · mise en place de la boutique, caisse, gestion des stocks."),
-               ("2023", "Conseillère de vente", "La Fée Maraboutée, Lille · renfort pour la braderie."),
-               ("2023", "Service", "Top Action, pour le traiteur Yanka · service, mise en place, gestion du bar.")]
 
 PAGES = [("index.html", "Accueil"), ("parcours.html", "Parcours"), ("experiences.html", "Expériences"),
          ("oeuvres.html", "Œuvres"), ("expositions.html", "Expositions"), ("photographie.html", "Photographie")]
@@ -173,12 +209,13 @@ FICHE_GOOGLE = '<script type="application/ld+json">' + json.dumps({
     "name": "Léa Rybak",
     "url": URL,
     "email": "mailto:" + MAIL,
-    "description": "Master exposition-production des œuvres d'art contemporain et licence arts plastiques et visuels, "
-                   "Université de Lille. À la recherche d'un poste dans le secteur culturel.",
+    "description": "Master Exposition-production des œuvres d’art contemporain (Bac+5) et licence Arts plastiques "
+                   "et visuels, Université de Lille. Guide animatrice au musée de La Piscine à Roubaix. "
+                   "À la recherche d'un poste dans le secteur culturel.",
     "alumniOf": [{"@type": "CollegeOrUniversity", "name": "Université de Lille"},
                  {"@type": "HighSchool", "name": "Lycée Baudelaire, Roubaix"}],
-    "knowsAbout": ["Arts plastiques", "Installation", "Sculpture", "Performance", "Photographie argentique",
-                   "Production d'expositions", "Médiation culturelle"],
+    "knowsAbout": [c for _, liste in COMPETENCES[:1] for c in liste]
+                  + ["Installation", "Sculpture", "Performance", "Photographie argentique"],
 }, ensure_ascii=False) + "</script>\n"
 
 
@@ -238,8 +275,24 @@ def page(fichier, titre, description, corps):
 """
 
 
-def ligne(a, t, d):
-    return f'<li><span class="an">{a}</span><b>{e(t)}</b>{f"<span class=det>{e(d)}</span>" if d else ""}</li>'
+def ligne_formation(f):
+    note = f'<span class="det">{e(f["note"])}</span>' if f["note"] else ""
+    return f'<li><span class="an">{e(f["date"])}</span><b>{e(f["titre"])}</b><span class="det">{e(f["lieu"])}</span>{note}</li>'
+
+
+def titre_poste(x):
+    precision = f' <span class="precision">– {e(x["precision"])}</span>' if x["precision"] else ""
+    return e(x["titre"]) + precision
+
+
+def poste(x, niveau="h3", missions=True):
+    liste = ("<ul>" + "".join(f"<li>{e(m)}</li>" for m in x["missions"]) + "</ul>") if missions else ""
+    return f"""<article class="poste">
+      <p class="an">{e(x["date"])}</p>
+      <{niveau}>{titre_poste(x)}</{niveau}>
+      <p class="lieu">{e(x["lieu"])}</p>
+      {liste}
+    </article>"""
 
 
 def bloc_expos_licence(titre_niveau="h3"):
@@ -267,7 +320,7 @@ def accueil():
   <div class="texte">
     <h1 class="nom">Léa<br>Rybak</h1>
     <p class="recherche">À la recherche d'un poste dans le secteur culturel</p>
-    <p>Master exposition-production des œuvres d'art contemporain et licence arts plastiques et visuels, Université de Lille. Expérience de la conception, de la communication et de la médiation d'expositions, et de l'accueil des publics.</p>
+    <p>Master Exposition-production des œuvres d’art contemporain (Bac+5) et licence Arts plastiques et visuels, Université de Lille. Guide animatrice au musée de La Piscine à Roubaix : visites thématiques et ateliers d’arts plastiques.</p>
     <div class="actions">
       <a class="bouton" href="parcours.html">Voir mon parcours {FLECHE}</a>
       <a class="bouton bouton-second" {LIEN_CV}>Mon CV (PDF)</a>
@@ -276,16 +329,16 @@ def accueil():
   </div>
   <div class="formation-cle" aria-labelledby="titre-formation">
     <h2 id="titre-formation">Formation</h2>
-    <ol>{"".join(ligne(a, t, d) for a, t, d in FORMATIONS)}</ol>
+    <ol>{"".join(ligne_formation(f) for f in DIPLOMES)}</ol>
     <p class="note-licence">Pendant la licence : conception, communication, montage et médiation des expositions STARTER 9 et STARTER 10. <a href="parcours.html#expos-licence">Voir le détail</a></p>
   </div>
 </div></section>
 
 <section class="salle" aria-labelledby="titre-experiences"><div class="g">
   <h2 class="titre-salle" id="titre-experiences">Expériences professionnelles</h2>
-  <div class="chapeau"><p>Animation, accueil, spectacle et vente : une solide expérience de l'accueil des publics.</p></div>
-  <ol class="experiences">{"".join(ligne(a, t, d) for a, t, d in EXPERIENCES)}</ol>
-  <a class="lien-fort" href="experiences.html">Voir les expériences professionnelles {FLECHE}</a>
+  <div class="poste-phare">{poste(EXPERIENCES[0])}</div>
+  <div class="postes">{"".join(poste(x, missions=False) for x in EXPERIENCES[1:])}</div>
+  <a class="lien-fort" href="experiences.html">Voir le détail des expériences {FLECHE}</a>
 </div></section>
 
 <section class="salle" aria-labelledby="titre-selection"><div class="g">
@@ -393,26 +446,37 @@ def page_photographie():
 def page_parcours():
     def liste(items):
         return "".join(f'<li><span class="an">{a}</span><span>{t}{f"<span class=det>{d}</span>" if d else ""}</span></li>' for a, t, d in items)
+
+    def liste_formation(items):
+        lignes = []
+        for f in items:
+            note = f'<span class="det">{e(f["note"])}</span>' if f["note"] else ""
+            lignes.append(f'<li><span class="an">{e(f["date"])}</span><span>{e(f["titre"])}'
+                          f'<span class="det">{e(f["lieu"])}</span>{note}</span></li>')
+        return "".join(lignes)
+    competences = "".join(f'<div class="competence"><h3>{e(t)}</h3><ul>{"".join(f"<li>{e(c)}</li>" for c in liste_c)}</ul></div>'
+                          for t, liste_c in COMPETENCES)
     return f"""<section class="salle" aria-labelledby="titre-parcours"><div class="g">
   <h1 class="titre-salle" id="titre-parcours">Parcours</h1>
   <div class="chapeau"><p>Une formation en arts plastiques puis en production d'expositions d'art contemporain, avec deux expositions réalisées pendant la licence. Voir aussi mes <a href="experiences.html">expériences professionnelles</a>.</p></div>
   <div class="parcours">
-    <div class="large"><h2>Formation</h2><ol>{liste(FORMATIONS + CERTIFICATS)}</ol>
+    <div class="large"><h2>Formation</h2><ol>{liste_formation(DIPLOMES + [BAC] + CERTIFICATS)}</ol>
       <h3 class="groupe" id="expos-licence">Expositions réalisées pendant la licence</h3>
       <div class="cartes-culture">{bloc_expos_licence("h4")}</div></div>
-    <div><h2>Pratiques</h2><ol>{liste(PRATIQUES)}</ol></div>
-    <div><h2>Compétences</h2><ul>{liste(COMPETENCES)}</ul></div>
+    <div class="large"><h2>Compétences</h2><div class="competences">{competences}</div></div>
+    <div><h2>Pratiques artistiques</h2><ol>{liste(PRATIQUES)}</ol></div>
+    <div><h2>Centres d'intérêt</h2><p class="interets">{e(CENTRES_INTERET)}</p></div>
   </div>
 </div></section>
 """
 
 
 def page_experiences():
-    autres = "".join(ligne(a, t, d) for a, t, d in EXPERIENCES)
     return f"""<section class="salle" aria-labelledby="titre-exp"><div class="g">
   <h1 class="titre-salle" id="titre-exp">Expériences professionnelles</h1>
-  <div class="chapeau"><p>Animation, accueil, spectacle et vente : une solide expérience de l'accueil des publics.</p><p>Les expositions STARTER 9 et STARTER 10, réalisées pendant ma licence, sont présentées dans mon <a href="parcours.html#expos-licence">parcours</a>.</p></div>
-  <ol class="experiences">{autres}</ol>
+  <div class="chapeau"><p>Guide animatrice au musée de La Piscine à Roubaix, stage au Couvent, et une solide expérience de l'accueil des publics : animation, accueil et vente.</p><p>Les expositions STARTER 9 et STARTER 10, réalisées pendant ma licence, sont présentées dans mon <a href="parcours.html#expos-licence">parcours</a>.</p></div>
+  <div class="poste-phare">{poste(EXPERIENCES[0], "h2")}</div>
+  <div class="postes">{"".join(poste(x, "h2") for x in EXPERIENCES[1:])}</div>
 </div></section>
 """
 
@@ -427,12 +491,12 @@ def page_404():
 
 
 SORTIES = {
-    "index.html": ("Accueil", "Portfolio de Léa Rybak, artiste plasticienne : installation, sculpture, performance et photographie. Master exposition-production des œuvres d'art contemporain, Université de Lille.", accueil),
+    "index.html": ("Accueil", "Portfolio de Léa Rybak : Master Exposition-production des œuvres d’art contemporain (Bac+5), guide animatrice au musée de La Piscine à Roubaix. Parcours, expériences, œuvres et expositions.", accueil),
     "oeuvres.html": ("Œuvres", "Les œuvres de Léa Rybak de 2022 à 2024 : Signum Cruci, Cliché, Mes trophées de chasse, Poussière d'étoile et d'autres.", page_oeuvres),
     "expositions.html": ("Expositions", "STARTER 10 à La Condition Publique de Roubaix et STARTER 9 à La Chaufferie de La Tossée de Tourcoing : conception, communication et médiation.", page_expositions),
     "photographie.html": ("Photographie", "Photographies argentiques de Léa Rybak.", page_photographie),
-    "parcours.html": ("Parcours", "Formation, pratiques et compétences de Léa Rybak.", page_parcours),
-    "experiences.html": ("Expériences professionnelles", "Expériences professionnelles de Léa Rybak : conception, communication et médiation des expositions STARTER 10 et STARTER 9, animation, accueil, spectacle et vente.", page_experiences),
+    "parcours.html": ("Parcours", "Formation, compétences, pratiques artistiques et centres d'intérêt de Léa Rybak.", page_parcours),
+    "experiences.html": ("Expériences professionnelles", "Expériences professionnelles de Léa Rybak : guide animatrice au musée de La Piscine, stage au Couvent à Roubaix, animation, accueil et vente.", page_experiences),
     "404.html": ("Page introuvable", "Page introuvable.", page_404),
 }
 

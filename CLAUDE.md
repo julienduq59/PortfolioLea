@@ -13,8 +13,10 @@ des commandes, commits.
 
 ## Règles absolues
 
-- **Ne jamais inventer de données.** Tout le contenu vient du CV de Léa (février 2024) ou de son
-  portfolio V1 (PDF Canva, 2026). En cas de doute, poser la question.
+- **Ne jamais inventer de données.** Sources : **le CV de Léa d'octobre 2026** (source principale du
+  parcours : formation, compétences, expériences, centres d'intérêt), son portfolio V1 (PDF Canva, 2026 :
+  œuvres, expositions STARTER, pratiques, baccalauréat) et son CV de février 2024. En cas de doute,
+  poser la question.
 - **Léa valide le contenu avant toute mise en ligne.** Voir `VALIDATION.md`.
 - Pas de téléphone ni d'adresse postale en ligne : ni sur le site, ni dans le CV public, ni dans le dépôt
   (public). Seul l'e-mail est affiché. Le numéro reste dans `prive/` (non versionné).
@@ -50,11 +52,16 @@ ne jamais changer cet ordre sans demande explicite.
   ces fichiers, changer `VERSION` dans `outils/generer.py`, puis régénérer les pages.
 - Visionneuse : tout lien `a.voir` ouvre l'image en grand dans un `<dialog>` (Échap pour fermer).
 - Fiche pour Google : données structurées `Person` (JSON-LD) sur l'accueil, dans `FICHE_GOOGLE`.
-- **CV PDF** (A4, une page, avec QR code vers le portfolio) : `python3 outils/cv.py` depuis la racine
-  (nécessite `pip install segno`, Node et Playwright). Il reprend les données de `outils/generer.py`.
-  - `assets/cv-lea-rybak.pdf` : version publique, liée depuis l'accueil et le bloc contact (sans téléphone).
-  - `prive/cv-lea-rybak-avec-telephone.pdf` : version pour les candidatures, avec le numéro lu dans
-    `prive/telephone.txt`. Jamais versionnée ni publiée.
+- **CV PDF** (A4, une page) : `python3 outils/cv.py` depuis la racine (nécessite `pip install segno`,
+  Node et Playwright). Il **reproduit à l'identique le CV de Léa d'octobre 2026** (Liberation Sans,
+  titres bleus `#2e74b5`, photo ronde) et ajoute le **QR code du portfolio** dans l'en-tête, à gauche
+  de la photo. Les textes viennent des données de `outils/generer.py` (`DIPLOMES`, `CERTIFICATS`,
+  `COMPETENCES`, `EXPERIENCES`, `CENTRES_INTERET`, `TITRE_CV`, `VILLE`) : les garder mot pour mot
+  identiques au CV de Léa.
+  - `prive/CV-Lea-Rybak.pdf` : CV complet pour les candidatures (téléphone `prive/telephone.txt`,
+    photo `prive/photo-lea.jpg`). Jamais versionné ni publié.
+  - `assets/cv-lea-rybak.pdf` : version publique, liée depuis l'accueil et le bloc contact, sans
+    téléphone ni photo (le QR code prend la place de la photo).
   - Le script refuse un CV qui dépasse une page. Après toute modification des données, régénérer
     les pages ET le CV.
 
@@ -67,10 +74,10 @@ ne jamais changer cet ordre sans demande explicite.
 **Expositions STARTER 9 et 10 : projets d'études, rangés dans la Formation** (sous la licence),
 pas dans les expériences professionnelles (choix de Julien, 25/10/2026). Données : `EXPOS_LICENCE`.
 
+**Expérience la plus importante (Julien) : guide animatrice au musée de La Piscine (Roubaix).** Elle reste
+en tête des expériences, mise en avant sur l'accueil et sur la page Expériences.
+
 ## En attente
 
-- **Expérience la plus importante selon Julien : le musée La Piscine (Roubaix).** Elle sera dans
-  le nouveau CV que Julien doit envoyer. Ne rien écrire sur cette expérience avant de l'avoir ;
-  à l'arrivée, la placer en tête des expériences professionnelles (site et CV).
-- De Léa : stages et emplois depuis 2024, master obtenu ou non, compétences métier et logiciels,
-  photo, LinkedIn ou Instagram. Ne rien ajouter sans ses réponses.
+- Accord de Léa pour mettre en ligne sa photo et son téléphone (site, CV public). Sans accord : non.
+- Master obtenu ou non (le CV indique « 2024 - 2026 »), LinkedIn ou Instagram.
