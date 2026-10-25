@@ -180,3 +180,38 @@ p{margin:0}
 .experiences b{font-size:1.15rem;font-weight:700}
 .experiences .det{color:var(--doux);font-size:.92rem}
 .experiences+.lien-fort{margin-top:32px}
+
+/* Accueil orienté recherche d'emploi : formation visible dès le premier écran */
+.entree-cv .g{align-items:start}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.bouton{display:inline-flex;align-items:center;gap:10px;font-weight:700;text-decoration:none;background:var(--encre);color:var(--mur);border:2px solid var(--encre);border-radius:999px;padding:10px 20px}
+.bouton svg{width:18px;height:18px;transition:transform .25s cubic-bezier(.2,.7,.2,1)}
+.bouton:hover{text-decoration:none}
+.bouton:hover svg{transform:translateX(4px)}
+.bouton-second{background:none;color:var(--encre)}
+.formation-cle{background:var(--cartel);border:1px solid var(--trait);padding:clamp(20px,3vw,32px)}
+.formation-cle h2{font-size:.82rem;letter-spacing:.09em;text-transform:uppercase;color:var(--doux);font-weight:500;margin-bottom:8px}
+.formation-cle ol{list-style:none;margin:0;padding:0}
+.formation-cle li{display:flex;flex-direction:column;gap:2px;padding-block:16px;border-top:1px solid var(--trait)}
+.formation-cle li:first-child{border-top:0}
+.formation-cle .an{color:var(--doux);font-size:.88rem;font-variant-numeric:tabular-nums}
+.formation-cle b{font-size:clamp(1.15rem,2vw,1.4rem);line-height:1.25;font-weight:800;letter-spacing:-.01em}
+.formation-cle .det{color:var(--doux);font-size:.92rem}
+.groupe{font-size:.82rem;letter-spacing:.09em;text-transform:uppercase;color:var(--doux);font-weight:500;margin:clamp(28px,4vw,40px) 0 16px}
+.titre-salle+.groupe{margin-top:8px}
+.cartes-culture{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:20px}
+.carte-culture{border:1px solid var(--trait);border-top:3px solid var(--encre);background:var(--cartel);padding:20px 22px;display:flex;flex-direction:column;gap:6px}
+.carte-culture .an{color:var(--doux);font-size:.88rem}
+.carte-culture h3,.carte-culture h4{margin:0;font-size:clamp(1.3rem,2.4vw,1.6rem);font-weight:800;letter-spacing:-.015em;line-height:1.15}
+.carte-culture .lieu{color:var(--doux);margin-bottom:6px}
+.carte-culture ul{margin:0;padding-left:1.1em}
+.carte-culture li+li{margin-top:4px}
+.carte-culture .det{color:var(--doux);font-size:.92rem;margin-top:8px}
+.experiences b{font-size:1.2rem}
+.parcours .large{grid-column:1/-1}
+.parcours .large ol{grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:16px clamp(24px,4vw,56px)}
+.parcours .groupe{font-size:.78rem;margin:20px 0 12px}
+.parcours h2+.groupe{margin-top:0}
+.parcours .carte-culture ul{display:block;padding-left:1.1em;list-style:disc}
+.parcours .carte-culture li{display:list-item}
+.parcours .large>h2{font-size:clamp(1.7rem,3.6vw,2.5rem);text-transform:none;letter-spacing:-.025em;color:var(--encre);font-weight:900;margin-bottom:20px}

@@ -8,7 +8,7 @@ import json
 import os
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "20261025-3"  # à changer à chaque modification de styles.css ou site.js
+VERSION = "20261025-4"  # à changer à chaque modification de styles.css ou site.js
 MAIL = "lea.rybak@outlook.fr"
 URL = "https://julienduq59.github.io/PortfolioLea/"
 
@@ -111,7 +111,19 @@ FORMATIONS = [("2024-2026", "Master exposition-production des œuvres d'art cont
               ("2021", "BAFA", "Cemea"),
               ("2018", "PSC1", "")]
 
-# Expériences : CV de Léa (février 2024).
+# Expériences dans le secteur culturel : portfolio V1 de Léa.
+CULTURE = [
+    dict(date="2024", titre="Exposition STARTER 10", lieu="La Condition Publique, Roubaix",
+         roles=["Conception de l'exposition", "Communication : dossier de presse, communiqué de presse, réseaux sociaux",
+                "Montage de l'exposition", "Médiation : accueil du public et visites"],
+         oeuvre="Signum Cruci", oeuvre_id="signum-cruci"),
+    dict(date="Mars 2023", titre="Exposition STARTER 9", lieu="La Chaufferie de La Tossée, Tourcoing",
+         roles=["Conception de l'exposition", "Communication : dossier de presse, communiqué de presse, réseaux sociaux",
+                "Montage de l'exposition", "Médiation : accueil du public et visites"],
+         oeuvre="Cliché", oeuvre_id="cliche"),
+]
+
+# Autres expériences : CV de Léa (février 2024).
 EXPERIENCES = [("Depuis 2021", "Animatrice", "Mairie de Croix, MJC de Croix, Planète Aventure… Accueils collectifs de mineurs et colonies de vacances."),
                ("2023", "Hôtesse", "Casino Barrière, Lille · placement des spectateurs et organisation de salle lors d'événements et de spectacles."),
                ("2023", "Comédienne", "Parc Koezio, Villeneuve-d'Ascq · événement d'Halloween, 30 et 31 octobre."),
@@ -198,51 +210,61 @@ def page(fichier, titre, description, corps):
 """
 
 
+def ligne(a, t, d):
+    return f'<li><span class="an">{a}</span><b>{e(t)}</b>{f"<span class=det>{e(d)}</span>" if d else ""}</li>'
+
+
+def bloc_culture(titre_niveau="h3"):
+    cartes = []
+    for c in CULTURE:
+        roles = "".join(f"<li>{e(r)}</li>" for r in c["roles"])
+        cartes.append(f"""<article class="carte-culture">
+      <p class="an">{c["date"]}</p>
+      <{titre_niveau}>{e(c["titre"])}</{titre_niveau}>
+      <p class="lieu">{e(c["lieu"])}</p>
+      <ul>{roles}</ul>
+      <p class="det">Œuvre exposée : <a href="oeuvres.html#{c["oeuvre_id"]}"><i>{e(c["oeuvre"])}</i></a></p>
+    </article>""")
+    return "".join(cartes)
+
+
 def accueil():
-    sc = PAR_ID["signum-cruci"]
-    selection = ["corail", "trophees", "chevelure", "poussiere"]
+    selection = ["signum-cruci", "corail", "trophees", "chevelure"]
     fig = []
-    for i in selection:
+    for k, i in enumerate(selection):
         o = PAR_ID[i]
         n, alt = o["images"][0]
         fig.append(f'<figure class="oeuvre">{voir(n, alt, legende(o), taille="(max-width: 820px) 100vw, 45vw")}{cartel(o)}</figure>')
-    n, alt = sc["images"][0]
-    return f"""<section class="entree"><div class="g">
+    return f"""<section class="entree entree-cv"><div class="g">
   <div class="texte">
     <h1 class="nom">Léa<br>Rybak</h1>
     <p class="recherche">À la recherche d'un poste dans le secteur culturel</p>
-    <p>Détentrice d'une licence arts plastiques et visuels, je travaille avec différents médiums et procédés techniques : installation, sculpture, performance, photographie.</p>
-    <p class="doux">Dans une pluralité de médiums, on trouve une pluralité de sujets et de sources d'inspiration. Féminisme, mythologie, religion ou faits de société : autant de situations qui donnent naissance à des œuvres variées.</p>
-    <p class="doux">Master exposition-production des œuvres d'art contemporain, Université de Lille (2024-2026).</p>
-    <a class="lien-fort" href="parcours.html">Voir mon parcours {FLECHE}</a>
+    <p>Master exposition-production des œuvres d'art contemporain et licence arts plastiques et visuels, Université de Lille. Expérience de la conception, de la communication et de la médiation d'expositions, et de l'accueil des publics.</p>
+    <div class="actions">
+      <a class="bouton" href="parcours.html">Voir mon parcours {FLECHE}</a>
+      <a class="bouton bouton-second" href="#contact">Me contacter</a>
+    </div>
   </div>
-  <figure class="oeuvre">{voir(n, alt, legende(sc), taille="(max-width: 820px) 100vw, 45vw", charge="eager")}{cartel(sc)}</figure>
-</div></section>
-
-<section class="salle" aria-labelledby="titre-formation"><div class="g">
-  <h2 class="titre-salle" id="titre-formation">Parcours</h2>
-  <div class="chapeau"><p>Une formation en arts plastiques puis en production d'expositions d'art contemporain.</p></div>
-  <ol class="experiences">{"".join(f'<li><span class="an">{a}</span><b>{e(t)}</b><span class="det">{e(d)}</span></li>' for a, t, d in FORMATIONS[:3])}</ol>
+  <div class="formation-cle" aria-labelledby="titre-formation">
+    <h2 id="titre-formation">Formation</h2>
+    <ol>{"".join(ligne(a, t, d) for a, t, d in FORMATIONS[:3])}</ol>
+  </div>
 </div></section>
 
 <section class="salle" aria-labelledby="titre-experiences"><div class="g">
   <h2 class="titre-salle" id="titre-experiences">Expériences professionnelles</h2>
-  <div class="chapeau"><p>Animation, accueil, spectacle et vente : une solide expérience des publics.</p></div>
-  <ol class="experiences">{"".join(f'<li><span class="an">{a}</span><b>{e(t)}</b><span class="det">{e(d)}</span></li>' for a, t, d in EXPERIENCES)}</ol>
+  <h3 class="groupe">Dans le secteur culturel</h3>
+  <div class="cartes-culture">{bloc_culture("h4")}</div>
+  <h3 class="groupe">Accueil, animation, spectacle et vente</h3>
+  <ol class="experiences">{"".join(ligne(a, t, d) for a, t, d in EXPERIENCES)}</ol>
   <a class="lien-fort" href="parcours.html">Voir tout le parcours {FLECHE}</a>
 </div></section>
 
 <section class="salle" aria-labelledby="titre-selection"><div class="g">
-  <h2 class="titre-salle" id="titre-selection">Sélection</h2>
-  <div class="chapeau"><p>Sculpture, installation et matière : quatre œuvres de 2024.</p></div>
+  <h2 class="titre-salle" id="titre-selection">Œuvres</h2>
+  <div class="chapeau"><p>Installation, sculpture, performance et photographie. Quatre œuvres de 2024.</p></div>
   <div class="accrochage">{"".join(fig)}</div>
   <a class="lien-fort" href="oeuvres.html">Voir les treize œuvres {FLECHE}</a>
-</div></section>
-
-<section class="salle" aria-labelledby="titre-expos"><div class="g">
-  <h2 class="titre-salle" id="titre-expos">Expositions</h2>
-  <div class="chapeau"><p>Conception, communication, montage et médiation de STARTER 10 à La Condition Publique de Roubaix (2024) et de STARTER 9 à La Chaufferie de La Tossée de Tourcoing (2023).</p></div>
-  <a class="lien-fort" href="expositions.html">Voir les expositions {FLECHE}</a>
 </div></section>
 """
 
@@ -350,8 +372,12 @@ def page_parcours():
   <h1 class="titre-salle" id="titre-parcours">Parcours</h1>
   <div class="chapeau"><p>Une formation en arts plastiques et en production d'expositions, et une solide expérience de l'accueil des publics.</p></div>
   <div class="parcours">
-    <div><h2>Formation</h2><ol>{liste(FORMATIONS)}</ol></div>
-    <div id="experiences"><h2>Expériences professionnelles</h2><ol>{liste(EXPERIENCES)}</ol></div>
+    <div class="large"><h2>Formation</h2><ol>{liste(FORMATIONS)}</ol></div>
+    <div id="experiences" class="large"><h2>Expériences professionnelles</h2>
+      <h3 class="groupe">Dans le secteur culturel</h3>
+      <div class="cartes-culture">{bloc_culture()}</div>
+      <h3 class="groupe">Accueil, animation, spectacle et vente</h3>
+      <ol>{liste(EXPERIENCES)}</ol></div>
     <div><h2>Pratiques</h2><ol>{liste(pratiques)}</ol></div>
     <div><h2>Compétences</h2><ul>
       <li><span class="an">Langue</span><span>Anglais, niveau B1<span class="det">Certification CLES B1</span></span></li>
