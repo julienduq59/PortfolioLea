@@ -1,6 +1,7 @@
 # Portfolio de Léa Rybak
 
-Site statique (HTML/CSS/JS) prévu pour GitHub Pages, sur le compte GitHub de Léa (à créer).
+Site statique (HTML/CSS/JS) publié avec GitHub Pages depuis la branche `main` du dépôt julienduq59/PortfolioLea (choix de Julien, 25/10/2026) :
+https://julienduq59.github.io/PortfolioLea/
 Projet mené avec Julien Duquesne (julienduq59@gmail.com). Le site de Julien sert de référence
 technique (julienduq59/PortfolioDuquesneJulien), mais ce site a son propre design.
 Ne jamais publier ce site dans le dépôt de Julien.
@@ -37,6 +38,5 @@ des commandes, commits.
 
 ## À faire
 
-- Créer le dépôt sur le compte GitHub de Léa et activer GitHub Pages.
-- Ajouter l'adresse finale : balises `og:url` et `og:image`, `sitemap.xml`, `robots.txt`, QR code du CV.
+- QR code du CV vers https://julienduq59.github.io/PortfolioLea/
 - En option : CV PDF A4 avec QR code, GoatCounter, alertes ntfy (comme sur le site de Julien).

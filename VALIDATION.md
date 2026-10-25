@@ -32,4 +32,4 @@ Les textes viennent du portfolio V1. Les corrections suivantes ont été faites,
 
 ## 3. Publication
 
-- Créer un compte GitHub à son nom, puis donner son identifiant : l'adresse du site et le QR code en dépendent.
+- Validé par Léa selon Julien (25/10/2026). Le site est publié sur le compte GitHub de Julien.

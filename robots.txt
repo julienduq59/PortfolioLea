@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://julienduq59.github.io/PortfolioLea/sitemap.xml

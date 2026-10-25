@@ -10,6 +10,7 @@ import os
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VERSION = "20261025"  # à changer à chaque modification de styles.css ou site.js
 MAIL = "lea.rybak@outlook.fr"
+URL = "https://julienduq59.github.io/PortfolioLea/"
 
 e = html.escape
 
@@ -145,6 +146,10 @@ def page(fichier, titre, description, corps):
 <meta property="og:site_name" content="Léa Rybak">
 <meta property="og:title" content="{e(titre_complet)}">
 <meta property="og:description" content="{e(description)}">
+<meta property="og:url" content="{URL}{"" if fichier == "index.html" else fichier}">
+<meta property="og:image" content="{URL}assets/og-banner.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="{URL}{"" if fichier == "index.html" else fichier}">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preload" href="assets/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/styles.css?v={VERSION}">

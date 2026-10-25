@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Site statique HTML/CSS/JS, sans étape de build, publié avec GitHub Pages. C'est la même méthode que pour le portfolio de Julien Duquesne (référence technique : julienduq59/PortfolioDuquesneJulien). Le dépôt sera sur le compte GitHub de Léa, qui reste à créer. Son nom et l'adresse finale ne sont pas encore décidés.
+Site statique HTML/CSS/JS, sans étape de build, publié avec GitHub Pages. C'est la même méthode que pour le portfolio de Julien Duquesne (référence technique : julienduq59/PortfolioDuquesneJulien). Dépôt julienduq59/PortfolioLea, séparé du site de Julien. Adresse : https://julienduq59.github.io/PortfolioLea/
 
 ## Users
 
