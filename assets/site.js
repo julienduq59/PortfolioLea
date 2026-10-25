@@ -29,7 +29,9 @@
   /* ---------- Visionneuse : s'approcher de l'œuvre ---------- */
   var dialogue = document.querySelector(".visionneuse");
   if (dialogue && typeof dialogue.showModal === "function") {
-    var image = dialogue.querySelector("img");
+    var image = document.createElement("img");
+    image.alt = "";
+    dialogue.querySelector(".scene").appendChild(image);
     var legende = dialogue.querySelector("p");
     var origine = null;
     document.addEventListener("click", function (ev) {

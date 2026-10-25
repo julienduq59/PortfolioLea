@@ -16,7 +16,10 @@ des commandes, commits.
 - **Ne jamais inventer de données.** Tout le contenu vient du CV de Léa (février 2024) ou de son
   portfolio V1 (PDF Canva, 2026). En cas de doute, poser la question.
 - **Léa valide le contenu avant toute mise en ligne.** Voir `VALIDATION.md`.
-- Pas de téléphone ni d'adresse postale en ligne. Seul l'e-mail est affiché (à confirmer par Léa).
+- Pas de téléphone ni d'adresse postale en ligne : ni sur le site, ni dans le CV public, ni dans le dépôt
+  (public). Seul l'e-mail est affiché. Le numéro reste dans `prive/` (non versionné).
+- **Pas de statistiques ni de suivi des visites** (choix de Julien, 25/10/2026) : ni GoatCounter,
+  ni alertes ntfy, ni liens `?ref=`. Le site de Julien en a, celui de Léa non.
 - Aucun document d'identité, aucune donnée sensible.
 - Pas de photos d'enfants (gala de danse de la MJC de Croix) sans l'accord des familles.
 - Toujours montrer un aperçu avant de publier une modification de design.
@@ -46,8 +49,22 @@ ne jamais changer cet ordre sans demande explicite.
 - Cache : `styles.css` et `site.js` sont chargés avec `?v=AAAAMMJJ`. À chaque modification de
   ces fichiers, changer `VERSION` dans `outils/generer.py`, puis régénérer les pages.
 - Visionneuse : tout lien `a.voir` ouvre l'image en grand dans un `<dialog>` (Échap pour fermer).
+- Fiche pour Google : données structurées `Person` (JSON-LD) sur l'accueil, dans `FICHE_GOOGLE`.
+- **CV PDF** (A4, une page, avec QR code vers le portfolio) : `python3 outils/cv.py` depuis la racine
+  (nécessite `pip install segno`, Node et Playwright). Il reprend les données de `outils/generer.py`.
+  - `assets/cv-lea-rybak.pdf` : version publique, liée depuis l'accueil et le bloc contact (sans téléphone).
+  - `prive/cv-lea-rybak-avec-telephone.pdf` : version pour les candidatures, avec le numéro lu dans
+    `prive/telephone.txt`. Jamais versionnée ni publiée.
+  - Le script refuse un CV qui dépasse une page. Après toute modification des données, régénérer
+    les pages ET le CV.
 
-## À faire
+## Si l'adresse du site change
 
-- QR code du CV vers https://julienduq59.github.io/PortfolioLea/
-- En option : CV PDF A4 avec QR code, GoatCounter, alertes ntfy (comme sur le site de Julien).
+(transfert du dépôt vers un compte GitHub de Léa, ou nom de domaine) : changer `URL` dans
+`outils/generer.py`, régénérer les pages et le CV (le QR code change), puis mettre à jour
+`sitemap.xml` et `robots.txt`. Les CV déjà imprimés pointeront vers l'ancienne adresse.
+
+## En attente de Léa
+
+Stages et emplois depuis 2024, master obtenu ou non, compétences métier et logiciels, photo,
+LinkedIn ou Instagram. Ne rien ajouter sans ses réponses.

@@ -8,7 +8,7 @@ import json
 import os
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "20261025-5"  # à changer à chaque modification de styles.css ou site.js
+VERSION = "20261025-6"  # à changer à chaque modification de styles.css ou site.js
 MAIL = "lea.rybak@outlook.fr"
 URL = "https://julienduq59.github.io/PortfolioLea/"
 
@@ -123,6 +123,18 @@ CULTURE = [
          oeuvre="Cliché", oeuvre_id="cliche"),
 ]
 
+# Pratiques et compétences : portfolio V1 et CV de Léa.
+PRATIQUES = [("2019-2022", "Photographie argentique", "MJC de Croix"),
+             ("2008-2023", "Danse contemporaine et modern jazz", "MJC de Croix"),
+             ("2019", "Photographe bénévole", "Gala de danse de la MJC de Croix")]
+COMPETENCES = [("Langue", "Anglais, niveau B1", "Certification CLES B1"),
+               ("Permis", "Permis B (2022)", ""),
+               ("Qualités", "Dynamique et responsable, autonome, ponctuelle, bienveillante, à l'écoute, aime le travail en équipe", "")]
+
+# CV PDF d'une page, généré par outils/cv.py
+CV = "assets/cv-lea-rybak.pdf"
+LIEN_CV = f'href="{CV}" target="_blank" rel="noopener" download="CV-Lea-Rybak.pdf"'
+
 # Autres expériences : CV de Léa (février 2024).
 EXPERIENCES = [("Depuis 2021", "Animatrice", "Mairie de Croix, MJC de Croix, Planète Aventure… Accueils collectifs de mineurs et colonies de vacances."),
                ("2023", "Hôtesse", "Casino Barrière, Lille · placement des spectateurs et organisation de salle lors d'événements et de spectacles."),
@@ -154,6 +166,21 @@ def legende(o):
     return f'{o["titre"]}, {o["annee"]}. {o["matiere"]}.'
 
 
+FICHE_GOOGLE = '<script type="application/ld+json">' + json.dumps({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Léa Rybak",
+    "url": URL,
+    "email": "mailto:" + MAIL,
+    "description": "Master exposition-production des œuvres d'art contemporain et licence arts plastiques et visuels, "
+                   "Université de Lille. À la recherche d'un poste dans le secteur culturel.",
+    "alumniOf": [{"@type": "CollegeOrUniversity", "name": "Université de Lille"},
+                 {"@type": "HighSchool", "name": "Lycée Baudelaire, Roubaix"}],
+    "knowsAbout": ["Arts plastiques", "Installation", "Sculpture", "Performance", "Photographie argentique",
+                   "Production d'expositions", "Médiation culturelle"],
+}, ensure_ascii=False) + "</script>\n"
+
+
 def page(fichier, titre, description, corps):
     nav = []
     for f, nom in PAGES[1:]:
@@ -167,6 +194,7 @@ def page(fichier, titre, description, corps):
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{e(titre_complet)}</title>
 <meta name="description" content="{e(description)}">
+<meta name="author" content="Léa Rybak">
 <meta name="theme-color" content="#0b1320">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
@@ -180,7 +208,7 @@ def page(fichier, titre, description, corps):
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preload" href="assets/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/styles.css?v={VERSION}">
-<script>try{{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}}catch(e){{}}</script>
+{FICHE_GOOGLE if fichier == "index.html" else ""}<script>try{{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}}catch(e){{}}</script>
 </head>
 <body>
 <a class="saut" href="#contenu">Aller au contenu</a>
@@ -195,11 +223,12 @@ def page(fichier, titre, description, corps):
 <section class="contact" id="contact" aria-labelledby="titre-contact"><div class="g">
   <h2 id="titre-contact">Me contacter</h2>
   <p class="mail"><a href="mailto:{MAIL}">{MAIL}</a><button class="copier" type="button" data-copier="{MAIL}">Copier</button></p>
+  <a class="lien-fort" {LIEN_CV}>Télécharger mon CV (PDF, une page) {FLECHE}</a>
 </div></section>
 <footer class="pied"><div class="g"><span>Léa Rybak · Arts plastiques et visuels</span><span>Portfolio 2026</span></div></footer>
 <dialog class="visionneuse" aria-label="Œuvre agrandie">
   <div class="barre"><button class="fermer" type="button">Fermer</button></div>
-  <div class="scene"><img alt=""></div>
+  <div class="scene"></div>
   <p></p>
 </dialog>
 <script src="assets/site.js?v={VERSION}" defer></script>
@@ -240,6 +269,7 @@ def accueil():
     <p>Master exposition-production des œuvres d'art contemporain et licence arts plastiques et visuels, Université de Lille. Expérience de la conception, de la communication et de la médiation d'expositions, et de l'accueil des publics.</p>
     <div class="actions">
       <a class="bouton" href="parcours.html">Voir mon parcours {FLECHE}</a>
+      <a class="bouton bouton-second" {LIEN_CV}>Mon CV (PDF)</a>
       <a class="bouton bouton-second" href="#contact">Me contacter</a>
     </div>
   </div>
@@ -363,20 +393,13 @@ def page_photographie():
 def page_parcours():
     def liste(items):
         return "".join(f'<li><span class="an">{a}</span><span>{t}{f"<span class=det>{d}</span>" if d else ""}</span></li>' for a, t, d in items)
-    pratiques = [("2019-2022", "Photographie argentique", "MJC de Croix"),
-                 ("2008-2023", "Danse contemporaine et modern jazz", "MJC de Croix"),
-                 ("2019", "Photographe bénévole", "Gala de danse de la MJC de Croix")]
     return f"""<section class="salle" aria-labelledby="titre-parcours"><div class="g">
   <h1 class="titre-salle" id="titre-parcours">Parcours</h1>
   <div class="chapeau"><p>Une formation en arts plastiques puis en production d'expositions d'art contemporain. Voir aussi mes <a href="experiences.html">expériences professionnelles</a>.</p></div>
   <div class="parcours">
     <div class="large"><h2>Formation</h2><ol>{liste(FORMATIONS)}</ol></div>
-    <div><h2>Pratiques</h2><ol>{liste(pratiques)}</ol></div>
-    <div><h2>Compétences</h2><ul>
-      <li><span class="an">Langue</span><span>Anglais, niveau B1<span class="det">Certification CLES B1</span></span></li>
-      <li><span class="an">Permis</span><span>Permis B (2022)</span></li>
-      <li><span class="an">Qualités</span><span>Dynamique et responsable, autonome, ponctuelle, bienveillante, à l'écoute, aime le travail en équipe</span></li>
-    </ul></div>
+    <div><h2>Pratiques</h2><ol>{liste(PRATIQUES)}</ol></div>
+    <div><h2>Compétences</h2><ul>{liste(COMPETENCES)}</ul></div>
   </div>
 </div></section>
 """
