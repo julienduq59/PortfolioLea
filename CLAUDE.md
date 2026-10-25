@@ -64,7 +64,13 @@ ne jamais changer cet ordre sans demande explicite.
 `outils/generer.py`, régénérer les pages et le CV (le QR code change), puis mettre à jour
 `sitemap.xml` et `robots.txt`. Les CV déjà imprimés pointeront vers l'ancienne adresse.
 
-## En attente de Léa
+**Expositions STARTER 9 et 10 : projets d'études, rangés dans la Formation** (sous la licence),
+pas dans les expériences professionnelles (choix de Julien, 25/10/2026). Données : `EXPOS_LICENCE`.
 
-Stages et emplois depuis 2024, master obtenu ou non, compétences métier et logiciels, photo,
-LinkedIn ou Instagram. Ne rien ajouter sans ses réponses.
+## En attente
+
+- **Expérience la plus importante selon Julien : le musée La Piscine (Roubaix).** Elle sera dans
+  le nouveau CV que Julien doit envoyer. Ne rien écrire sur cette expérience avant de l'avoir ;
+  à l'arrivée, la placer en tête des expériences professionnelles (site et CV).
+- De Léa : stages et emplois depuis 2024, master obtenu ou non, compétences métier et logiciels,
+  photo, LinkedIn ou Instagram. Ne rien ajouter sans ses réponses.

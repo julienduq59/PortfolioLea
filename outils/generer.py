@@ -8,7 +8,7 @@ import json
 import os
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "20261025-6"  # à changer à chaque modification de styles.css ou site.js
+VERSION = "20261025-7"  # à changer à chaque modification de styles.css ou site.js
 MAIL = "lea.rybak@outlook.fr"
 URL = "https://julienduq59.github.io/PortfolioLea/"
 
@@ -107,12 +107,13 @@ PAR_ID = {o["id"]: o for o in OEUVRES}
 # Formation : portfolio V1 et CV de Léa.
 FORMATIONS = [("2024-2026", "Master exposition-production des œuvres d'art contemporain", "Université de Lille"),
               ("2021-2024", "Licence arts plastiques et visuels", "Université de Lille, pôle arts plastiques de Tourcoing"),
-              ("2021", "Baccalauréat, mention très bien", "Lycée Baudelaire, Roubaix · spécialité humanités, philosophie, littérature et théâtre"),
-              ("2021", "BAFA", "Cemea"),
-              ("2018", "PSC1", "")]
+              ("2021", "Baccalauréat, mention très bien", "Lycée Baudelaire, Roubaix · spécialité humanités, philosophie, littérature et théâtre")]
+CERTIFICATS = [("2021", "BAFA", "Cemea"),
+               ("2018", "PSC1", "")]
 
-# Expériences dans le secteur culturel : portfolio V1 de Léa.
-CULTURE = [
+# Expositions réalisées pendant la licence : projets d'études, présentés dans la Formation
+# (choix de Julien, 25/10/2026). Source : portfolio V1 de Léa.
+EXPOS_LICENCE = [
     dict(date="2024", titre="Exposition STARTER 10", lieu="La Condition Publique, Roubaix",
          roles=["Conception de l'exposition", "Communication : dossier de presse, communiqué de presse, réseaux sociaux",
                 "Montage de l'exposition", "Médiation : accueil du public et visites"],
@@ -241,9 +242,9 @@ def ligne(a, t, d):
     return f'<li><span class="an">{a}</span><b>{e(t)}</b>{f"<span class=det>{e(d)}</span>" if d else ""}</li>'
 
 
-def bloc_culture(titre_niveau="h3"):
+def bloc_expos_licence(titre_niveau="h3"):
     cartes = []
-    for c in CULTURE:
+    for c in EXPOS_LICENCE:
         roles = "".join(f"<li>{e(r)}</li>" for r in c["roles"])
         cartes.append(f"""<article class="carte-culture">
       <p class="an">{c["date"]}</p>
@@ -275,15 +276,14 @@ def accueil():
   </div>
   <div class="formation-cle" aria-labelledby="titre-formation">
     <h2 id="titre-formation">Formation</h2>
-    <ol>{"".join(ligne(a, t, d) for a, t, d in FORMATIONS[:3])}</ol>
+    <ol>{"".join(ligne(a, t, d) for a, t, d in FORMATIONS)}</ol>
+    <p class="note-licence">Pendant la licence : conception, communication, montage et médiation des expositions STARTER 9 et STARTER 10. <a href="parcours.html#expos-licence">Voir le détail</a></p>
   </div>
 </div></section>
 
 <section class="salle" aria-labelledby="titre-experiences"><div class="g">
   <h2 class="titre-salle" id="titre-experiences">Expériences professionnelles</h2>
-  <h3 class="groupe">Dans le secteur culturel</h3>
-  <div class="cartes-culture">{bloc_culture("h4")}</div>
-  <h3 class="groupe">Accueil, animation, spectacle et vente</h3>
+  <div class="chapeau"><p>Animation, accueil, spectacle et vente : une solide expérience de l'accueil des publics.</p></div>
   <ol class="experiences">{"".join(ligne(a, t, d) for a, t, d in EXPERIENCES)}</ol>
   <a class="lien-fort" href="experiences.html">Voir les expériences professionnelles {FLECHE}</a>
 </div></section>
@@ -333,7 +333,7 @@ def page_oeuvres():
 def page_expositions():
     return f"""<section class="salle" aria-labelledby="titre-expositions"><div class="g">
   <h1 class="titre-salle" id="titre-expositions">Expositions</h1>
-  <div class="chapeau"><p>Deux éditions de STARTER, l'exposition des étudiantes et étudiants en licence d'arts plastiques de l'Université de Lille. J'en ai assuré la conception, la communication, le montage et la médiation, tout en y exposant une œuvre.</p></div>
+  <div class="chapeau"><p>Deux éditions de STARTER, l'exposition des étudiantes et étudiants en licence d'arts plastiques de l'Université de Lille, réalisées pendant ma licence. J'en ai assuré la conception, la communication, le montage et la médiation, tout en y exposant une œuvre.</p></div>
   <div class="expos">
     <article class="expo">
       <div>
@@ -395,9 +395,11 @@ def page_parcours():
         return "".join(f'<li><span class="an">{a}</span><span>{t}{f"<span class=det>{d}</span>" if d else ""}</span></li>' for a, t, d in items)
     return f"""<section class="salle" aria-labelledby="titre-parcours"><div class="g">
   <h1 class="titre-salle" id="titre-parcours">Parcours</h1>
-  <div class="chapeau"><p>Une formation en arts plastiques puis en production d'expositions d'art contemporain. Voir aussi mes <a href="experiences.html">expériences professionnelles</a>.</p></div>
+  <div class="chapeau"><p>Une formation en arts plastiques puis en production d'expositions d'art contemporain, avec deux expositions réalisées pendant la licence. Voir aussi mes <a href="experiences.html">expériences professionnelles</a>.</p></div>
   <div class="parcours">
-    <div class="large"><h2>Formation</h2><ol>{liste(FORMATIONS)}</ol></div>
+    <div class="large"><h2>Formation</h2><ol>{liste(FORMATIONS + CERTIFICATS)}</ol>
+      <h3 class="groupe" id="expos-licence">Expositions réalisées pendant la licence</h3>
+      <div class="cartes-culture">{bloc_expos_licence("h4")}</div></div>
     <div><h2>Pratiques</h2><ol>{liste(PRATIQUES)}</ol></div>
     <div><h2>Compétences</h2><ul>{liste(COMPETENCES)}</ul></div>
   </div>
@@ -409,10 +411,7 @@ def page_experiences():
     autres = "".join(ligne(a, t, d) for a, t, d in EXPERIENCES)
     return f"""<section class="salle" aria-labelledby="titre-exp"><div class="g">
   <h1 class="titre-salle" id="titre-exp">Expériences professionnelles</h1>
-  <div class="chapeau"><p>Conception, communication et médiation d'expositions, et une solide expérience de l'accueil des publics : animation, accueil, spectacle et vente.</p></div>
-  <h2 class="groupe">Dans le secteur culturel</h2>
-  <div class="cartes-culture">{bloc_culture()}</div>
-  <h2 class="groupe">Accueil, animation, spectacle et vente</h2>
+  <div class="chapeau"><p>Animation, accueil, spectacle et vente : une solide expérience de l'accueil des publics.</p><p>Les expositions STARTER 9 et STARTER 10, réalisées pendant ma licence, sont présentées dans mon <a href="parcours.html#expos-licence">parcours</a>.</p></div>
   <ol class="experiences">{autres}</ol>
 </div></section>
 """

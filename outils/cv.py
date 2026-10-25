@@ -49,25 +49,18 @@ def cv_html(telephone=""):
     coord.append(f'<a href="{g.URL}">{url_courte}</a>')
     coord.append("Permis B")
 
-    culture = []
-    if all(c["roles"] == g.CULTURE[0]["roles"] for c in g.CULTURE):
+    expos = g.EXPOS_LICENCE
+    editions = "".join(
+        f'<li><span class="date">{e(c["date"])}</span><span><b>{e(c["titre"])}</b>'
+        f'<span class="det">{e(c["lieu"])} · œuvre exposée : <i>{e(c["oeuvre"])}</i></span></span></li>'
+        for c in expos)
+    if all(c["roles"] == expos[0]["roles"] for c in expos):
         # Mêmes missions pour chaque édition : on les écrit une seule fois.
-        editions = "".join(
-            f'<li><span class="date">{e(c["date"])}</span><span><b>{e(c["titre"])}</b>'
-            f'<span class="det">{e(c["lieu"])} · œuvre exposée : <i>{e(c["oeuvre"])}</i></span></span></li>'
-            for c in g.CULTURE)
-        roles = "".join(f"<li>{e(r)}</li>" for r in g.CULTURE[0]["roles"])
-        culture.append(f"""<ul class="liste">{editions}</ul>
-        <div class="poste"><h3>Missions sur chaque édition</h3><ul>{roles}</ul></div>""")
+        missions = ('<p class="missions-titre">Missions sur chaque édition</p><ul class="missions">'
+                    + "".join(f"<li>{e(r)}</li>" for r in expos[0]["roles"]) + "</ul>")
     else:
-        for c in g.CULTURE:
-            roles = "".join(f"<li>{e(r)}</li>" for r in c["roles"])
-            culture.append(f"""<div class="poste">
-        <p class="date">{e(c["date"])}</p>
-        <h3>{e(c["titre"])} <span class="lieu">· {e(c["lieu"])}</span></h3>
-        <ul>{roles}</ul>
-        <p class="oeuvre">Œuvre exposée : <i>{e(c["oeuvre"])}</i></p>
-      </div>""")
+        missions = "".join(f'<p class="missions-titre">{e(c["titre"])}</p><ul class="missions">'
+                           + "".join(f"<li>{e(r)}</li>" for r in c["roles"]) + "</ul>" for c in expos)
 
     return f"""<!DOCTYPE html>
 <html lang="fr">
@@ -93,20 +86,18 @@ h1{{font-size:30pt;font-weight:900;letter-spacing:-.03em;line-height:1}}
 .qr svg{{display:block;width:27mm;height:27mm}}
 .qr p{{font-size:9pt;line-height:1.3;font-weight:800}}
 .qr p span{{display:block;font-weight:400;color:#4b5468;font-size:8pt;margin-top:1mm}}
-.corps{{display:grid;grid-template-columns:minmax(0,1.62fr) minmax(0,1fr);gap:9mm;padding:7mm 13mm 8mm;min-height:0}}
+.corps{{display:grid;grid-template-columns:minmax(0,1.72fr) minmax(0,1fr);gap:8.5mm;padding:7mm 13mm 8mm;min-height:0}}
 .colonne{{display:flex;flex-direction:column;justify-content:space-between;gap:5mm;min-height:0;overflow:hidden}}
 h2{{font-size:11.5pt;font-weight:800;color:#0b1320;border-bottom:1.4pt solid #0b1320;padding-bottom:1.2mm;margin-bottom:3mm;letter-spacing:-.005em}}
-.note{{color:#4b5468;font-size:8.6pt;margin:-1mm 0 3mm}}
+.note{{color:#4b5468;font-size:8.6pt}}
 .profil p{{font-size:9.4pt}}
-.poste+.poste{{margin-top:3.5mm}}
-.liste+.poste{{margin-top:3mm}}
-.poste .date{{font-size:8.4pt;color:#4b5468}}
-.poste h3{{font-size:10.6pt;font-weight:800;line-height:1.3}}
-.poste h3 .lieu{{font-weight:500;color:#4b5468}}
-.poste ul{{margin:1.2mm 0 0 4.2mm}}
-.poste ul li+li{{margin-top:.6mm}}
-.poste .oeuvre{{margin-top:1.2mm;color:#4b5468;font-size:8.6pt}}
-.liste{{list-style:none;display:flex;flex-direction:column;gap:1.9mm}}
+.projets{{margin-top:3.6mm;padding-top:3mm;border-top:.6pt solid #cfd4dd}}
+.projets h3{{font-size:10.4pt;font-weight:800;line-height:1.3;color:#0b1320;margin-bottom:.6mm}}
+.projets .note{{margin:0 0 2.2mm}}
+.missions-titre{{font-weight:700;margin-top:2.4mm}}
+.missions{{margin:1mm 0 0 4.2mm}}
+.missions li+li{{margin-top:.5mm}}
+.liste{{list-style:none;display:flex;flex-direction:column;gap:1.7mm}}
 .liste li{{display:grid;grid-template-columns:19mm minmax(0,1fr);gap:3mm}}
 .colonne-cote .liste li{{grid-template-columns:minmax(0,1fr);gap:.2mm}}
 .liste .date{{color:#4b5468;font-size:8.4pt;padding-top:.35mm;font-variant-numeric:tabular-nums}}
@@ -127,24 +118,29 @@ h2{{font-size:11.5pt;font-weight:800;color:#0b1320;border-bottom:1.4pt solid #0b
   </header>
   <div class="corps">
     <div class="colonne">
-      <section class="profil">
-        <h2>Profil</h2>
-        <p>Expérience de la conception, de la communication, du montage et de la médiation d'expositions, et de l'accueil des publics. Pratique artistique : installation, sculpture, performance, photographie.</p>
+      <section>
+        <h2>Formation</h2>
+        <ul class="liste">{"".join(bloc(a, t, d) for a, t, d in g.FORMATIONS)}</ul>
+        <div class="projets">
+          <h3>Expositions réalisées pendant la licence</h3>
+          <p class="note">STARTER : l'exposition des étudiantes et étudiants en licence d'arts plastiques de l'Université de Lille.</p>
+          <ul class="liste">{editions}</ul>
+          {missions}
+        </div>
       </section>
       <section>
-        <h2>Expériences dans le secteur culturel</h2>
-        <p class="note">STARTER : l'exposition des étudiantes et étudiants en licence d'arts plastiques de l'Université de Lille.</p>
-        {"".join(culture)}
-      </section>
-      <section>
-        <h2>Accueil, animation, spectacle et vente</h2>
+        <h2>Expériences professionnelles</h2>
         <ul class="liste">{"".join(bloc(a, t, d) for a, t, d in g.EXPERIENCES)}</ul>
       </section>
     </div>
     <div class="colonne colonne-cote">
+      <section class="profil">
+        <h2>Profil</h2>
+        <p>Formée à la conception, à la communication, au montage et à la médiation d'expositions. Solide expérience de l'accueil des publics. Pratique artistique : installation, sculpture, performance, photographie.</p>
+      </section>
       <section>
-        <h2>Formation</h2>
-        <ul class="liste">{"".join(bloc(a, t, d) for a, t, d in g.FORMATIONS)}</ul>
+        <h2>Brevets et certificats</h2>
+        <ul class="liste">{"".join(bloc(a, t, d) for a, t, d in g.CERTIFICATS)}</ul>
       </section>
       <section>
         <h2>Compétences</h2>
