@@ -58,10 +58,11 @@ ne jamais changer cet ordre sans demande explicite.
   de la photo. Les textes viennent des données de `outils/generer.py` (`DIPLOMES`, `CERTIFICATS`,
   `COMPETENCES`, `EXPERIENCES`, `CENTRES_INTERET`, `TITRE_CV`, `VILLE`) : les garder mot pour mot
   identiques au CV de Léa.
-  - `prive/CV-Lea-Rybak.pdf` : CV complet pour les candidatures (téléphone `prive/telephone.txt`,
-    photo `prive/photo-lea.jpg`). Jamais versionné ni publié.
-  - `assets/cv-lea-rybak.pdf` : version publique, liée depuis l'accueil et le bloc contact, sans
-    téléphone ni photo (le QR code prend la place de la photo).
+  - Photo de Léa sur les deux versions (demande de Julien, 25/10/2026) : `outils/photo-lea.jpg`.
+  - `assets/cv-lea-rybak.pdf` : version publique, liée depuis l'accueil et le bloc contact, avec la
+    photo, **sans téléphone**.
+  - `prive/CV-Lea-Rybak.pdf` : CV complet pour les candidatures, avec le téléphone lu dans
+    `prive/telephone.txt`. Jamais versionné ni publié.
   - Le script refuse un CV qui dépasse une page. Après toute modification des données, régénérer
     les pages ET le CV.
 
@@ -79,5 +80,6 @@ en tête des expériences, mise en avant sur l'accueil et sur la page Expérienc
 
 ## En attente
 
-- Accord de Léa pour mettre en ligne sa photo et son téléphone (site, CV public). Sans accord : non.
+- Téléphone en ligne (site, CV public) : non, sauf accord de Léa. Photo sur les pages du site :
+  non demandée (elle est seulement sur le CV).
 - Master obtenu ou non (le CV indique « 2024 - 2026 »), LinkedIn ou Instagram.

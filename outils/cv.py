@@ -7,11 +7,10 @@ La mise en page reproduit le CV de Léa d'octobre 2026 (Liberation Sans, titres 
 photo ronde en haut à droite). Le QR code vers le portfolio est placé dans l'en-tête, à gauche
 de la photo. Les données (formation, compétences, expériences…) viennent de outils/generer.py.
 
-Deux versions :
-- prive/CV-Lea-Rybak.pdf : le CV complet pour les candidatures (téléphone lu dans
-  prive/telephone.txt, photo prive/photo-lea.jpg). Le dossier prive/ n'est pas versionné :
-  rien de ce qu'il contient n'est publié.
-- assets/cv-lea-rybak.pdf : la version publique, liée depuis le site, sans téléphone ni photo.
+Deux versions, toutes deux avec la photo de Léa (outils/photo-lea.jpg) :
+- assets/cv-lea-rybak.pdf : la version publique, liée depuis le site, sans téléphone.
+- prive/CV-Lea-Rybak.pdf : le CV complet pour les candidatures, avec le téléphone lu dans
+  prive/telephone.txt. Le dossier prive/ n'est pas versionné : rien de ce qu'il contient n'est publié.
 """
 import base64
 import html
@@ -26,6 +25,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import generer as g  # noqa: E402
 
 RACINE = g.RACINE
+PHOTO = os.path.join(RACINE, "outils/photo-lea.jpg")
 POLICES = "/usr/share/fonts/truetype/liberation"
 e = html.escape
 
@@ -175,10 +175,9 @@ def imprimer(contenu, sortie):
 
 
 if __name__ == "__main__":
-    imprimer(cv_html(), os.path.join(RACINE, g.CV))
+    imprimer(cv_html(photo=PHOTO), os.path.join(RACINE, g.CV))
     fichier_tel = os.path.join(RACINE, "prive/telephone.txt")
-    photo = os.path.join(RACINE, "prive/photo-lea.jpg")
-    if os.path.exists(fichier_tel) and os.path.exists(photo):
+    if os.path.exists(fichier_tel):
         with open(fichier_tel, encoding="utf-8") as f:
             tel = f.read().strip()
-        imprimer(cv_html(tel, photo), os.path.join(RACINE, "prive/CV-Lea-Rybak.pdf"))
+        imprimer(cv_html(tel, PHOTO), os.path.join(RACINE, "prive/CV-Lea-Rybak.pdf"))
