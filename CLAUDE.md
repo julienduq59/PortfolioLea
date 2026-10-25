@@ -31,7 +31,8 @@ puis les œuvres, les expositions et le reste. Le menu suit cet ordre.
 
 - Les pages HTML sont **générées** par `outils/generer.py` (`python3 outils/generer.py` depuis
   la racine). Modifier les textes et la liste des œuvres dans ce script, pas dans les fichiers HTML.
-- Pages : `index.html`, `oeuvres.html`, `expositions.html`, `photographie.html`, `parcours.html`, `404.html`.
+- Pages, dans l'ordre du menu : `index.html`, `parcours.html`, `experiences.html`, `oeuvres.html`,
+  `expositions.html`, `photographie.html`, plus `404.html`.
 - Design : direction « L'exposition », choisie par Julien sur aperçu. Une œuvre accrochée en grand
   par salle, un cartel de musée sous chaque œuvre. Couleurs reprises du portfolio V1 : bleu nuit
   `#0b1320` et blanc. Thème sombre par défaut, thème clair selon l'appareil ou via le bouton.

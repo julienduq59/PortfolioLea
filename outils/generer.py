@@ -8,7 +8,7 @@ import json
 import os
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "20261025-4"  # à changer à chaque modification de styles.css ou site.js
+VERSION = "20261025-5"  # à changer à chaque modification de styles.css ou site.js
 MAIL = "lea.rybak@outlook.fr"
 URL = "https://julienduq59.github.io/PortfolioLea/"
 
@@ -131,8 +131,8 @@ EXPERIENCES = [("Depuis 2021", "Animatrice", "Mairie de Croix, MJC de Croix, Pla
                ("2023", "Conseillère de vente", "La Fée Maraboutée, Lille · renfort pour la braderie."),
                ("2023", "Service", "Top Action, pour le traiteur Yanka · service, mise en place, gestion du bar.")]
 
-PAGES = [("index.html", "Accueil"), ("parcours.html", "Parcours"), ("oeuvres.html", "Œuvres"),
-         ("expositions.html", "Expositions"), ("photographie.html", "Photographie")]
+PAGES = [("index.html", "Accueil"), ("parcours.html", "Parcours"), ("experiences.html", "Expériences"),
+         ("oeuvres.html", "Œuvres"), ("expositions.html", "Expositions"), ("photographie.html", "Photographie")]
 
 FLECHE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
 SOLEIL = '<svg class="soleil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>'
@@ -186,10 +186,8 @@ def page(fichier, titre, description, corps):
 <a class="saut" href="#contenu">Aller au contenu</a>
 <header class="entete"><div class="g">
   <a class="signature" href="./"{' aria-current="page"' if fichier == "index.html" else ""}>Léa Rybak</a>
-  <nav class="plan" aria-label="Navigation principale">
-    {"".join(nav)}
-    <button class="theme" type="button" aria-label="Changer de thème">{SOLEIL}{LUNE}</button>
-  </nav>
+  <nav class="plan" aria-label="Navigation principale">{"".join(nav)}</nav>
+  <button class="theme" type="button" aria-label="Changer de thème">{SOLEIL}{LUNE}</button>
 </div></header>
 <main id="contenu">
 {corps}
@@ -257,7 +255,7 @@ def accueil():
   <div class="cartes-culture">{bloc_culture("h4")}</div>
   <h3 class="groupe">Accueil, animation, spectacle et vente</h3>
   <ol class="experiences">{"".join(ligne(a, t, d) for a, t, d in EXPERIENCES)}</ol>
-  <a class="lien-fort" href="parcours.html">Voir tout le parcours {FLECHE}</a>
+  <a class="lien-fort" href="experiences.html">Voir les expériences professionnelles {FLECHE}</a>
 </div></section>
 
 <section class="salle" aria-labelledby="titre-selection"><div class="g">
@@ -370,14 +368,9 @@ def page_parcours():
                  ("2019", "Photographe bénévole", "Gala de danse de la MJC de Croix")]
     return f"""<section class="salle" aria-labelledby="titre-parcours"><div class="g">
   <h1 class="titre-salle" id="titre-parcours">Parcours</h1>
-  <div class="chapeau"><p>Une formation en arts plastiques et en production d'expositions, et une solide expérience de l'accueil des publics.</p></div>
+  <div class="chapeau"><p>Une formation en arts plastiques puis en production d'expositions d'art contemporain. Voir aussi mes <a href="experiences.html">expériences professionnelles</a>.</p></div>
   <div class="parcours">
     <div class="large"><h2>Formation</h2><ol>{liste(FORMATIONS)}</ol></div>
-    <div id="experiences" class="large"><h2>Expériences professionnelles</h2>
-      <h3 class="groupe">Dans le secteur culturel</h3>
-      <div class="cartes-culture">{bloc_culture()}</div>
-      <h3 class="groupe">Accueil, animation, spectacle et vente</h3>
-      <ol>{liste(EXPERIENCES)}</ol></div>
     <div><h2>Pratiques</h2><ol>{liste(pratiques)}</ol></div>
     <div><h2>Compétences</h2><ul>
       <li><span class="an">Langue</span><span>Anglais, niveau B1<span class="det">Certification CLES B1</span></span></li>
@@ -385,6 +378,19 @@ def page_parcours():
       <li><span class="an">Qualités</span><span>Dynamique et responsable, autonome, ponctuelle, bienveillante, à l'écoute, aime le travail en équipe</span></li>
     </ul></div>
   </div>
+</div></section>
+"""
+
+
+def page_experiences():
+    autres = "".join(ligne(a, t, d) for a, t, d in EXPERIENCES)
+    return f"""<section class="salle" aria-labelledby="titre-exp"><div class="g">
+  <h1 class="titre-salle" id="titre-exp">Expériences professionnelles</h1>
+  <div class="chapeau"><p>Conception, communication et médiation d'expositions, et une solide expérience de l'accueil des publics : animation, accueil, spectacle et vente.</p></div>
+  <h2 class="groupe">Dans le secteur culturel</h2>
+  <div class="cartes-culture">{bloc_culture()}</div>
+  <h2 class="groupe">Accueil, animation, spectacle et vente</h2>
+  <ol class="experiences">{autres}</ol>
 </div></section>
 """
 
@@ -403,7 +409,8 @@ SORTIES = {
     "oeuvres.html": ("Œuvres", "Les œuvres de Léa Rybak de 2022 à 2024 : Signum Cruci, Cliché, Mes trophées de chasse, Poussière d'étoile et d'autres.", page_oeuvres),
     "expositions.html": ("Expositions", "STARTER 10 à La Condition Publique de Roubaix et STARTER 9 à La Chaufferie de La Tossée de Tourcoing : conception, communication et médiation.", page_expositions),
     "photographie.html": ("Photographie", "Photographies argentiques de Léa Rybak.", page_photographie),
-    "parcours.html": ("Parcours", "Formation, expériences et compétences de Léa Rybak.", page_parcours),
+    "parcours.html": ("Parcours", "Formation, pratiques et compétences de Léa Rybak.", page_parcours),
+    "experiences.html": ("Expériences professionnelles", "Expériences professionnelles de Léa Rybak : conception, communication et médiation des expositions STARTER 10 et STARTER 9, animation, accueil, spectacle et vente.", page_experiences),
     "404.html": ("Page introuvable", "Page introuvable.", page_404),
 }
 
