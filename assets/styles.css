@@ -59,6 +59,8 @@ p{margin:0}
 .entree .texte p{max-width:46ch}
 .entree .texte p+p{margin-top:14px}
 .entree .texte .doux{color:var(--doux)}
+.recherche{display:inline-block;font-weight:700;font-size:1.05rem;border:1px solid var(--encre);border-radius:999px;padding:6px 16px;margin:-8px 0 26px}
+.entree .texte .recherche+p{margin-top:0}
 .entree .oeuvre{justify-self:end}
 .entree .oeuvre img{max-height:min(74vh,760px);width:auto}
 .lien-fort{display:inline-flex;align-items:center;gap:10px;margin-top:28px;font-weight:700;text-decoration:none;border-bottom:2px solid var(--encre);padding-bottom:4px}
@@ -153,7 +155,7 @@ p{margin:0}
 
 @media (max-width:820px){
   .entree .g{grid-template-columns:minmax(0,1fr)}
-  .entree .oeuvre{order:-1;justify-self:stretch}
+  .entree .oeuvre{justify-self:stretch}
   .entree .oeuvre img{max-height:62vh;margin-inline:auto}
   .accrochage .oeuvre:nth-child(n){grid-column:1/-1;margin-top:0}
   .fiche,.expo{grid-template-columns:minmax(0,1fr)}
@@ -163,8 +165,10 @@ p{margin:0}
 @media (max-width:520px){
   body{font-size:16px}
   .entete .g{padding-block:12px}
-  .plan{width:100%;justify-content:space-between;gap:10px}
-  .plan a{font-size:.9rem}
+  .plan{width:100%;justify-content:space-between;gap:8px;flex-wrap:nowrap}
+  .plan a{font-size:.86rem}
+  .theme{width:32px;height:32px;flex:none}
+  .recherche{border-radius:14px;font-size:1rem}
   .parcours li{grid-template-columns:minmax(0,1fr);gap:2px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}

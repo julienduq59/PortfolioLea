@@ -8,7 +8,7 @@ import json
 import os
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "20261025-2"  # à changer à chaque modification de styles.css ou site.js
+VERSION = "20261025-3"  # à changer à chaque modification de styles.css ou site.js
 MAIL = "lea.rybak@outlook.fr"
 URL = "https://julienduq59.github.io/PortfolioLea/"
 
@@ -210,6 +210,7 @@ def accueil():
     return f"""<section class="entree"><div class="g">
   <div class="texte">
     <h1 class="nom">Léa<br>Rybak</h1>
+    <p class="recherche">À la recherche d'un poste dans le secteur culturel</p>
     <p>Détentrice d'une licence arts plastiques et visuels, je travaille avec différents médiums et procédés techniques : installation, sculpture, performance, photographie.</p>
     <p class="doux">Dans une pluralité de médiums, on trouve une pluralité de sujets et de sources d'inspiration. Féminisme, mythologie, religion ou faits de société : autant de situations qui donnent naissance à des œuvres variées.</p>
     <p class="doux">Master exposition-production des œuvres d'art contemporain, Université de Lille (2024-2026).</p>
