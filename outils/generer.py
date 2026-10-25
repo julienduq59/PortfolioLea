@@ -104,6 +104,13 @@ OEUVRES = [
 ]
 PAR_ID = {o["id"]: o for o in OEUVRES}
 
+# Formation : portfolio V1 et CV de Léa.
+FORMATIONS = [("2024-2026", "Master exposition-production des œuvres d'art contemporain", "Université de Lille"),
+              ("2021-2024", "Licence arts plastiques et visuels", "Université de Lille, pôle arts plastiques de Tourcoing"),
+              ("2021", "Baccalauréat, mention très bien", "Lycée Baudelaire, Roubaix · spécialité humanités, philosophie, littérature et théâtre"),
+              ("2021", "BAFA", "Cemea"),
+              ("2018", "PSC1", "")]
+
 # Expériences : CV de Léa (février 2024).
 EXPERIENCES = [("Depuis 2021", "Animatrice", "Mairie de Croix, MJC de Croix, Planète Aventure… Accueils collectifs de mineurs et colonies de vacances."),
                ("2023", "Hôtesse", "Casino Barrière, Lille · placement des spectateurs et organisation de salle lors d'événements et de spectacles."),
@@ -112,8 +119,8 @@ EXPERIENCES = [("Depuis 2021", "Animatrice", "Mairie de Croix, MJC de Croix, Pla
                ("2023", "Conseillère de vente", "La Fée Maraboutée, Lille · renfort pour la braderie."),
                ("2023", "Service", "Top Action, pour le traiteur Yanka · service, mise en place, gestion du bar.")]
 
-PAGES = [("index.html", "Accueil"), ("oeuvres.html", "Œuvres"), ("expositions.html", "Expositions"),
-         ("photographie.html", "Photographie"), ("parcours.html", "Parcours")]
+PAGES = [("index.html", "Accueil"), ("parcours.html", "Parcours"), ("oeuvres.html", "Œuvres"),
+         ("expositions.html", "Expositions"), ("photographie.html", "Photographie")]
 
 FLECHE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
 SOLEIL = '<svg class="soleil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>'
@@ -206,9 +213,22 @@ def accueil():
     <p>Détentrice d'une licence arts plastiques et visuels, je travaille avec différents médiums et procédés techniques : installation, sculpture, performance, photographie.</p>
     <p class="doux">Dans une pluralité de médiums, on trouve une pluralité de sujets et de sources d'inspiration. Féminisme, mythologie, religion ou faits de société : autant de situations qui donnent naissance à des œuvres variées.</p>
     <p class="doux">Master exposition-production des œuvres d'art contemporain, Université de Lille (2024-2026).</p>
-    <a class="lien-fort" href="oeuvres.html">Voir toutes les œuvres {FLECHE}</a>
+    <a class="lien-fort" href="parcours.html">Voir mon parcours {FLECHE}</a>
   </div>
   <figure class="oeuvre">{voir(n, alt, legende(sc), taille="(max-width: 820px) 100vw, 45vw", charge="eager")}{cartel(sc)}</figure>
+</div></section>
+
+<section class="salle" aria-labelledby="titre-formation"><div class="g">
+  <h2 class="titre-salle" id="titre-formation">Parcours</h2>
+  <div class="chapeau"><p>Une formation en arts plastiques puis en production d'expositions d'art contemporain.</p></div>
+  <ol class="experiences">{"".join(f'<li><span class="an">{a}</span><b>{e(t)}</b><span class="det">{e(d)}</span></li>' for a, t, d in FORMATIONS[:3])}</ol>
+</div></section>
+
+<section class="salle" aria-labelledby="titre-experiences"><div class="g">
+  <h2 class="titre-salle" id="titre-experiences">Expériences professionnelles</h2>
+  <div class="chapeau"><p>Animation, accueil, spectacle et vente : une solide expérience des publics.</p></div>
+  <ol class="experiences">{"".join(f'<li><span class="an">{a}</span><b>{e(t)}</b><span class="det">{e(d)}</span></li>' for a, t, d in EXPERIENCES)}</ol>
+  <a class="lien-fort" href="parcours.html">Voir tout le parcours {FLECHE}</a>
 </div></section>
 
 <section class="salle" aria-labelledby="titre-selection"><div class="g">
@@ -222,13 +242,6 @@ def accueil():
   <h2 class="titre-salle" id="titre-expos">Expositions</h2>
   <div class="chapeau"><p>Conception, communication, montage et médiation de STARTER 10 à La Condition Publique de Roubaix (2024) et de STARTER 9 à La Chaufferie de La Tossée de Tourcoing (2023).</p></div>
   <a class="lien-fort" href="expositions.html">Voir les expositions {FLECHE}</a>
-</div></section>
-
-<section class="salle" aria-labelledby="titre-experiences"><div class="g">
-  <h2 class="titre-salle" id="titre-experiences">Expériences</h2>
-  <div class="chapeau"><p>Animation, accueil, spectacle et vente : une solide expérience des publics.</p></div>
-  <ol class="experiences">{"".join(f'<li><span class="an">{a}</span><b>{e(t)}</b><span class="det">{e(d)}</span></li>' for a, t, d in EXPERIENCES)}</ol>
-  <a class="lien-fort" href="parcours.html">Voir tout le parcours {FLECHE}</a>
 </div></section>
 """
 
@@ -329,11 +342,6 @@ def page_photographie():
 def page_parcours():
     def liste(items):
         return "".join(f'<li><span class="an">{a}</span><span>{t}{f"<span class=det>{d}</span>" if d else ""}</span></li>' for a, t, d in items)
-    formations = [("2024-2026", "Master exposition-production des œuvres d'art contemporain", "Université de Lille"),
-                  ("2021-2024", "Licence arts plastiques et visuels", "Université de Lille, pôle arts plastiques de Tourcoing"),
-                  ("2021", "Baccalauréat, mention très bien", "Lycée Baudelaire, Roubaix · spécialité humanités, philosophie, littérature et théâtre"),
-                  ("2021", "BAFA", "Cemea"),
-                  ("2018", "PSC1", "")]
     pratiques = [("2019-2022", "Photographie argentique", "MJC de Croix"),
                  ("2008-2023", "Danse contemporaine et modern jazz", "MJC de Croix"),
                  ("2019", "Photographe bénévole", "Gala de danse de la MJC de Croix")]
@@ -341,8 +349,8 @@ def page_parcours():
   <h1 class="titre-salle" id="titre-parcours">Parcours</h1>
   <div class="chapeau"><p>Une formation en arts plastiques et en production d'expositions, et une solide expérience de l'accueil des publics.</p></div>
   <div class="parcours">
-    <div id="experiences"><h2>Expériences</h2><ol>{liste(EXPERIENCES)}</ol></div>
-    <div><h2>Formation</h2><ol>{liste(formations)}</ol></div>
+    <div><h2>Formation</h2><ol>{liste(FORMATIONS)}</ol></div>
+    <div id="experiences"><h2>Expériences professionnelles</h2><ol>{liste(EXPERIENCES)}</ol></div>
     <div><h2>Pratiques</h2><ol>{liste(pratiques)}</ol></div>
     <div><h2>Compétences</h2><ul>
       <li><span class="an">Langue</span><span>Anglais, niveau B1<span class="det">Certification CLES B1</span></span></li>

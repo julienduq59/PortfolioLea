@@ -21,6 +21,12 @@ des commandes, commits.
 - Pas de photos d'enfants (gala de danse de la MJC de Croix) sans l'accord des familles.
 - Toujours montrer un aperçu avant de publier une modification de design.
 
+## Objectif
+
+Le site sert à trouver un travail (secteur arts et culture). Ordre voulu par Julien
+(25/10/2026) : d'abord le parcours (formation), puis les expériences professionnelles,
+puis les œuvres, les expositions et le reste. Le menu suit cet ordre.
+
 ## Fonctionnement
 
 - Les pages HTML sont **générées** par `outils/generer.py` (`python3 outils/generer.py` depuis
