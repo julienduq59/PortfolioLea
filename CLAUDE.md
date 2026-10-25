@@ -25,7 +25,11 @@ des commandes, commits.
 
 Le site sert à trouver un travail (secteur arts et culture). Ordre voulu par Julien
 (25/10/2026) : d'abord le parcours (formation), puis les expériences professionnelles,
-puis les œuvres, les expositions et le reste. Le menu suit cet ordre.
+puis les œuvres, les expositions et le reste.
+
+**Menu fixe, identique sur toutes les pages (demande de Julien) : Parcours, Expériences, Œuvres,
+Expositions, Photographie.** Il est défini une seule fois (`PAGES` dans `outils/generer.py`) :
+ne jamais changer cet ordre sans demande explicite.
 
 ## Fonctionnement
 
