@@ -241,3 +241,8 @@ p{margin:0}
 .parcours .competence li{display:list-item}
 .parcours .competence li+li{margin-top:4px}
 .interets{max-width:52ch}
+
+/* Portrait de Léa, à côté de son nom (accueil) */
+.identite{display:flex;align-items:center;gap:clamp(16px,3vw,32px);margin-bottom:28px}
+.identite .nom{margin-bottom:0}
+.portrait{width:clamp(96px,13vw,168px);height:auto;aspect-ratio:1;border-radius:50%;object-fit:cover;flex:none;box-shadow:0 0 0 1px var(--trait),0 18px 30px -16px var(--ombre)}

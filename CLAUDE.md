@@ -52,6 +52,8 @@ ne jamais changer cet ordre sans demande explicite.
   ces fichiers, changer `VERSION` dans `outils/generer.py`, puis régénérer les pages.
 - Visionneuse : tout lien `a.voir` ouvre l'image en grand dans un `<dialog>` (Échap pour fermer).
 - Fiche pour Google : données structurées `Person` (JSON-LD) sur l'accueil, dans `FICHE_GOOGLE`.
+- Portrait de Léa : en rond à côté de son nom sur l'accueil (`assets/portrait-lea.webp`, demande et
+  validation de Julien sur aperçu, 25/10/2026). Même photo que sur son CV.
 - **CV PDF** (A4, une page) : `python3 outils/cv.py` depuis la racine (nécessite `pip install segno`,
   Node et Playwright). Il **reproduit à l'identique le CV de Léa d'octobre 2026** (Liberation Sans,
   titres bleus `#2e74b5`, photo ronde) et ajoute le **QR code du portfolio** dans l'en-tête, à gauche
@@ -80,6 +82,5 @@ en tête des expériences, mise en avant sur l'accueil et sur la page Expérienc
 
 ## En attente
 
-- Téléphone en ligne (site, CV public) : non, sauf accord de Léa. Photo sur les pages du site :
-  non demandée (elle est seulement sur le CV).
+- Téléphone en ligne (site, CV public) : non, sauf accord de Léa.
 - Master obtenu ou non (le CV indique « 2024 - 2026 »), LinkedIn ou Instagram.

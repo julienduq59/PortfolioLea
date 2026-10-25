@@ -26,7 +26,7 @@ Les textes viennent du portfolio V1. Les corrections suivantes ont été faites,
   (hôtesse au Casino Barrière, comédienne au Parc Koezio) ont été retirées du site.
 - Le baccalauréat (mention très bien) reste sur la page Parcours du site, bien qu'absent du CV
   d'octobre 2026 : le garder ?
-- Photo : sur le CV, y compris la version téléchargeable sur le site (demande de Julien, 25/10/2026).
+- Photo : sur le CV (versions privée et en ligne) et sur l'accueil du site (demande de Julien, 25/10/2026).
   Téléphone : seulement dans le CV privé, pas en ligne, sauf accord de Léa.
 - Les dimensions ne sont connues que pour Signum Cruci. Peut-elle donner celles des autres œuvres ?
 - La performance (marche collective) et une photo argentique montrent des personnes : sont-elles

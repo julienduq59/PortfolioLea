@@ -8,7 +8,7 @@ import json
 import os
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "20261025-8"  # à changer à chaque modification de styles.css ou site.js
+VERSION = "20261025-9"  # à changer à chaque modification de styles.css ou site.js
 MAIL = "lea.rybak@outlook.fr"
 URL = "https://julienduq59.github.io/PortfolioLea/"
 
@@ -208,6 +208,7 @@ FICHE_GOOGLE = '<script type="application/ld+json">' + json.dumps({
     "@type": "Person",
     "name": "Léa Rybak",
     "url": URL,
+    "image": URL + "assets/portrait-lea.webp",
     "email": "mailto:" + MAIL,
     "description": "Master Exposition-production des œuvres d’art contemporain (Bac+5) et licence Arts plastiques "
                    "et visuels, Université de Lille. Guide animatrice au musée de La Piscine à Roubaix. "
@@ -318,7 +319,10 @@ def accueil():
         fig.append(f'<figure class="oeuvre">{voir(n, alt, legende(o), taille="(max-width: 820px) 100vw, 45vw")}{cartel(o)}</figure>')
     return f"""<section class="entree entree-cv"><div class="g">
   <div class="texte">
-    <h1 class="nom">Léa<br>Rybak</h1>
+    <div class="identite">
+      <h1 class="nom">Léa<br>Rybak</h1>
+      <img class="portrait" src="assets/portrait-lea.webp" width="284" height="284" alt="Portrait de Léa Rybak" fetchpriority="high">
+    </div>
     <p class="recherche">À la recherche d'un poste dans le secteur culturel</p>
     <p>Master Exposition-production des œuvres d’art contemporain (Bac+5) et licence Arts plastiques et visuels, Université de Lille. Guide animatrice au musée de La Piscine à Roubaix : visites thématiques et ateliers d’arts plastiques.</p>
     <div class="actions">
