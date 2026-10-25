@@ -153,7 +153,7 @@ def page(fichier, titre, description, corps):
 <body>
 <a class="saut" href="#contenu">Aller au contenu</a>
 <header class="entete"><div class="g">
-  <a class="signature" href="index.html"{' aria-current="page"' if fichier == "index.html" else ""}>Léa Rybak</a>
+  <a class="signature" href="./"{' aria-current="page"' if fichier == "index.html" else ""}>Léa Rybak</a>
   <nav class="plan" aria-label="Navigation principale">
     {"".join(nav)}
     <button class="theme" type="button" aria-label="Changer de thème">{SOLEIL}{LUNE}</button>
@@ -344,7 +344,7 @@ def page_404():
     return f"""<section class="salle perdu"><div class="g">
   <h1 class="titre-salle">Cette salle n'existe pas</h1>
   <div class="chapeau"><p>La page demandée est introuvable. Elle a peut-être été déplacée.</p></div>
-  <a class="lien-fort" href="index.html">Revenir à l'accueil {FLECHE}</a>
+  <a class="lien-fort" href="./">Revenir à l'accueil {FLECHE}</a>
 </div></section>
 """
 
