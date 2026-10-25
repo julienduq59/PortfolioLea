@@ -8,7 +8,7 @@ import json
 import os
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "20261025"  # à changer à chaque modification de styles.css ou site.js
+VERSION = "20261025-2"  # à changer à chaque modification de styles.css ou site.js
 MAIL = "lea.rybak@outlook.fr"
 URL = "https://julienduq59.github.io/PortfolioLea/"
 
@@ -103,6 +103,14 @@ OEUVRES = [
                 "Le bois est ici transformé en une matière nouvelle. De cette matière naît une sculpture organique et sensible."]),
 ]
 PAR_ID = {o["id"]: o for o in OEUVRES}
+
+# Expériences : CV de Léa (février 2024).
+EXPERIENCES = [("Depuis 2021", "Animatrice", "Mairie de Croix, MJC de Croix, Planète Aventure… Accueils collectifs de mineurs et colonies de vacances."),
+               ("2023", "Hôtesse", "Casino Barrière, Lille · placement des spectateurs et organisation de salle lors d'événements et de spectacles."),
+               ("2023", "Comédienne", "Parc Koezio, Villeneuve-d'Ascq · événement d'Halloween, 30 et 31 octobre."),
+               ("2023", "Conseillère de vente", "Coupe du monde de rugby, stade Pierre-Mauroy · mise en place de la boutique, caisse, gestion des stocks."),
+               ("2023", "Conseillère de vente", "La Fée Maraboutée, Lille · renfort pour la braderie."),
+               ("2023", "Service", "Top Action, pour le traiteur Yanka · service, mise en place, gestion du bar.")]
 
 PAGES = [("index.html", "Accueil"), ("oeuvres.html", "Œuvres"), ("expositions.html", "Expositions"),
          ("photographie.html", "Photographie"), ("parcours.html", "Parcours")]
@@ -215,6 +223,13 @@ def accueil():
   <div class="chapeau"><p>Conception, communication, montage et médiation de STARTER 10 à La Condition Publique de Roubaix (2024) et de STARTER 9 à La Chaufferie de La Tossée de Tourcoing (2023).</p></div>
   <a class="lien-fort" href="expositions.html">Voir les expositions {FLECHE}</a>
 </div></section>
+
+<section class="salle" aria-labelledby="titre-experiences"><div class="g">
+  <h2 class="titre-salle" id="titre-experiences">Expériences</h2>
+  <div class="chapeau"><p>Animation, accueil, spectacle et vente : une solide expérience des publics.</p></div>
+  <ol class="experiences">{"".join(f'<li><span class="an">{a}</span><b>{e(t)}</b><span class="det">{e(d)}</span></li>' for a, t, d in EXPERIENCES)}</ol>
+  <a class="lien-fort" href="parcours.html">Voir tout le parcours {FLECHE}</a>
+</div></section>
 """
 
 
@@ -322,18 +337,12 @@ def page_parcours():
     pratiques = [("2019-2022", "Photographie argentique", "MJC de Croix"),
                  ("2008-2023", "Danse contemporaine et modern jazz", "MJC de Croix"),
                  ("2019", "Photographe bénévole", "Gala de danse de la MJC de Croix")]
-    experiences = [("Depuis 2021", "Animatrice", "Mairie de Croix, MJC de Croix, Planète Aventure… Accueils collectifs de mineurs et colonies de vacances."),
-                   ("2023", "Hôtesse", "Casino Barrière, Lille · placement des spectateurs et organisation de salle lors d'événements et de spectacles."),
-                   ("2023", "Comédienne", "Parc Koezio, Villeneuve-d'Ascq · événement d'Halloween, 30 et 31 octobre."),
-                   ("2023", "Conseillère de vente", "Coupe du monde de rugby, stade Pierre-Mauroy · mise en place de la boutique, caisse, gestion des stocks."),
-                   ("2023", "Conseillère de vente", "La Fée Maraboutée, Lille · renfort pour la braderie."),
-                   ("2023", "Service", "Top Action, pour le traiteur Yanka · service, mise en place, gestion du bar.")]
     return f"""<section class="salle" aria-labelledby="titre-parcours"><div class="g">
   <h1 class="titre-salle" id="titre-parcours">Parcours</h1>
   <div class="chapeau"><p>Une formation en arts plastiques et en production d'expositions, et une solide expérience de l'accueil des publics.</p></div>
   <div class="parcours">
+    <div id="experiences"><h2>Expériences</h2><ol>{liste(EXPERIENCES)}</ol></div>
     <div><h2>Formation</h2><ol>{liste(formations)}</ol></div>
-    <div><h2>Expériences</h2><ol>{liste(experiences)}</ol></div>
     <div><h2>Pratiques</h2><ol>{liste(pratiques)}</ol></div>
     <div><h2>Compétences</h2><ul>
       <li><span class="an">Langue</span><span>Anglais, niveau B1<span class="det">Certification CLES B1</span></span></li>

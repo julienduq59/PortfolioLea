@@ -168,3 +168,11 @@ p{margin:0}
   .parcours li{grid-template-columns:minmax(0,1fr);gap:2px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* Expériences (accueil) */
+.experiences{list-style:none;margin:0 0 8px;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:0 clamp(24px,4vw,56px)}
+.experiences li{display:flex;flex-direction:column;gap:2px;padding-block:16px;border-top:1px solid var(--trait)}
+.experiences .an{color:var(--doux);font-size:.88rem;font-variant-numeric:tabular-nums}
+.experiences b{font-size:1.15rem;font-weight:700}
+.experiences .det{color:var(--doux);font-size:.92rem}
+.experiences+.lien-fort{margin-top:32px}
