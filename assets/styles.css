@@ -230,7 +230,7 @@ p{margin:0}
 .poste-phare .poste{border:1px solid var(--trait);border-top:3px solid var(--encre);background:var(--cartel);padding:24px 26px}
 .poste-phare .poste h2,.poste-phare .poste h3{font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-.02em;line-height:1.15}
 .poste-phare .poste .lieu{font-size:1.05rem}
-.postes{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:0 clamp(24px,4vw,56px);margin-top:clamp(20px,3vw,32px)}
+.postes{display:grid;grid-template-columns:minmax(0,1fr);margin-top:clamp(20px,3vw,32px)}
 .postes .poste{padding-top:16px;padding-bottom:16px;border-top:1px solid var(--trait)}
 .postes+.lien-fort{margin-top:32px}
 
@@ -250,3 +250,12 @@ p{margin:0}
 .poste-photos img{aspect-ratio:3/4;object-fit:cover;width:100%;box-shadow:0 12px 24px -14px var(--ombre)}
 .poste-photos.paysage{grid-template-columns:minmax(0,1fr)}
 .poste-photos.paysage img{aspect-ratio:4/3}
+
+/* Expériences l'une sous l'autre ; les photos à droite du texte sur grand écran */
+.postes .poste{padding-top:22px;padding-bottom:22px}
+.postes .poste>*{max-width:70ch}
+@media (min-width:821px){
+  .poste:has(.poste-photos){display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(32px,5vw,64px);align-content:start}
+  .poste:has(.poste-photos)>*{grid-column:1}
+  .poste:has(.poste-photos)>.poste-photos{grid-column:2;grid-row:1 / span 6;margin-top:0;max-width:none}
+}
