@@ -8,7 +8,7 @@ import json
 import os
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "20261025-9"  # à changer à chaque modification de styles.css ou site.js
+VERSION = "20261026"  # à changer à chaque modification de styles.css ou site.js
 MAIL = "lea.rybak@outlook.fr"
 URL = "https://julienduq59.github.io/PortfolioLea/"
 
@@ -144,7 +144,10 @@ EXPERIENCES = [
                    "Embauches ponctuelles à l’issue du stage pour renforcer les équipes lors de grands événements"]),
     dict(date="Depuis 2021", titre="Animatrice", precision="Vacances scolaires",
          lieu="Mairie de Croix, MJC de Croix, Planète aventure…",
-         missions=["Animation en accueils collectifs de mineurs (ACM) et en colonies de vacances"]),
+         missions=["Animation en accueils collectifs de mineurs (ACM) et en colonies de vacances"],
+         # Photos envoyées par Julien (26/10/2026), visages des enfants floutés.
+         photos=[("animation-1", "Jeu en plein air avec un groupe d'enfants assis en deux rangées à l'ombre des pins (visages floutés)."),
+                 ("animation-2", "Jeu collectif avec des enfants sur un terrain de sport couvert (visages floutés).")]),
     dict(date="Depuis 2023", titre="Hôtesse et animation commerciale", precision="Intérim",
          lieu="Animeo, La belle équipe, Top Action…",
          missions=["Animation de stand, distribution de produits et street marketing",
@@ -288,6 +291,10 @@ def titre_poste(x):
 
 def poste(x, niveau="h3", missions=True):
     liste = ("<ul>" + "".join(f"<li>{e(m)}</li>" for m in x["missions"]) + "</ul>") if missions else ""
+    if missions and x.get("photos"):
+        liste += '<div class="poste-photos">' + "".join(
+            voir(n, alt, f'{x["titre"]} – {x["precision"]}. {alt}', taille="(max-width: 820px) 50vw, 15vw")
+            for n, alt in x["photos"]) + "</div>"
     return f"""<article class="poste">
       <p class="an">{e(x["date"])}</p>
       <{niveau}>{titre_poste(x)}</{niveau}>

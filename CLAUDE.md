@@ -23,7 +23,9 @@ des commandes, commits.
 - **Pas de statistiques ni de suivi des visites** (choix de Julien, 25/10/2026) : ni GoatCounter,
   ni alertes ntfy, ni liens `?ref=`. Le site de Julien en a, celui de Léa non.
 - Aucun document d'identité, aucune donnée sensible.
-- Pas de photos d'enfants (gala de danse de la MJC de Croix) sans l'accord des familles.
+- Photos d'enfants : jamais de visage reconnaissable. Les deux photos d'animation (expérience
+  « Animatrice », `assets/oeuvres/animation-*.webp`) ont les visages floutés et sans métadonnées.
+  Pas de photos du gala de danse de la MJC de Croix sans l'accord des familles.
 - Toujours montrer un aperçu avant de publier une modification de design.
 
 ## Objectif
