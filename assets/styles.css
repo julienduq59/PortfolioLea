@@ -259,3 +259,37 @@ p{margin:0}
   .poste:has(.poste-photos)>*{grid-column:1}
   .poste:has(.poste-photos)>.poste-photos{grid-column:2;grid-row:1 / span 6;margin-top:0;max-width:none}
 }
+
+/* ---------- Page Parcours ---------- */
+.bloc-parcours{margin-top:clamp(56px,8vw,96px)}
+.bloc-parcours>h2{font-size:clamp(1.7rem,3.6vw,2.5rem);font-weight:900;letter-spacing:-.025em;line-height:1.1;margin-bottom:clamp(20px,3vw,32px)}
+.frise{list-style:none;margin:0;padding:0}
+.etape{display:grid;grid-template-columns:clamp(120px,16vw,200px) minmax(0,1fr);gap:clamp(16px,3vw,40px);padding-top:clamp(24px,3vw,36px);padding-bottom:clamp(24px,3vw,36px);border-top:1px solid var(--trait)}
+.etape:first-child{border-top:2px solid var(--encre)}
+.periode{font-size:clamp(1.05rem,1.8vw,1.35rem);font-weight:800;color:var(--doux);font-variant-numeric:tabular-nums;line-height:1.3}
+.etape h3{font-size:clamp(1.35rem,2.6vw,1.9rem);font-weight:900;letter-spacing:-.02em;line-height:1.15}
+.etape .lieu{color:var(--doux);margin-top:6px}
+.distinction{display:inline-block;margin-top:14px;border:1px solid var(--encre);border-radius:14px;padding:5px 14px;font-size:.92rem;font-weight:600}
+.sous-bloc{margin-top:28px}
+.sous-bloc h4{font-size:1.1rem;font-weight:800;margin-bottom:14px}
+.sous-bloc .carte-culture h5{margin:0;font-size:clamp(1.2rem,2vw,1.45rem);font-weight:800;letter-spacing:-.015em;line-height:1.15}
+.certificats{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:12px}
+.certificats li{display:flex;flex-direction:column;gap:2px;background:var(--cartel);border:1px solid var(--trait);padding:14px 18px}
+.certificats b{font-size:1.1rem}
+.certificats span{color:var(--doux);font-size:.92rem}
+.competences{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:16px}
+.competence{background:var(--cartel);border:1px solid var(--trait);border-top:3px solid var(--encre);padding:20px 20px 22px}
+.competence h3{font-size:1.1rem;font-weight:800;line-height:1.3;margin-bottom:14px}
+.etiquettes{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.etiquettes li{border:1px solid var(--trait);border-radius:14px;padding:5px 12px;font-size:.92rem;line-height:1.3;background:var(--mur)}
+.duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:0 clamp(32px,6vw,80px)}
+.pratiques{list-style:none;margin:0;padding:0}
+.pratiques li{display:grid;grid-template-columns:7.5em minmax(0,1fr);column-gap:16px;padding-top:14px;padding-bottom:14px;border-top:1px solid var(--trait)}
+.pratiques .an{color:var(--doux);font-variant-numeric:tabular-nums;grid-row:span 2}
+.pratiques .det{color:var(--doux);font-size:.92rem}
+.duo .etiquettes li{font-size:1rem;padding:8px 16px}
+@media (max-width:640px){
+  .etape{grid-template-columns:minmax(0,1fr);gap:6px}
+  .pratiques li{grid-template-columns:minmax(0,1fr)}
+  .pratiques .an{grid-row:auto}
+}

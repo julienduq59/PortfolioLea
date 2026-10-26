@@ -8,7 +8,7 @@ import json
 import os
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "20261026-4"  # à changer à chaque modification de styles.css ou site.js
+VERSION = "20261026-5"  # à changer à chaque modification de styles.css ou site.js
 MAIL = "lea.rybak@outlook.fr"
 URL = "https://julienduq59.github.io/PortfolioLea/"
 
@@ -471,28 +471,50 @@ def page_photographie():
 
 
 def page_parcours():
-    def liste(items):
-        return "".join(f'<li><span class="an">{a}</span><span>{t}{f"<span class=det>{d}</span>" if d else ""}</span></li>' for a, t, d in items)
+    def periode(date):
+        return e(date.replace(" - ", " – ").replace("-", " – ") if " - " not in date else date.replace(" - ", " – "))
 
-    def liste_formation(items):
-        lignes = []
-        for f in items:
-            note = f'<span class="det">{e(f["note"])}</span>' if f["note"] else ""
-            lignes.append(f'<li><span class="an">{e(f["date"])}</span><span>{e(f["titre"])}'
-                          f'<span class="det">{e(f["lieu"])}</span>{note}</span></li>')
-        return "".join(lignes)
-    competences = "".join(f'<div class="competence"><h3>{e(t)}</h3><ul>{"".join(f"<li>{e(c)}</li>" for c in liste_c)}</ul></div>'
-                          for t, liste_c in COMPETENCES)
+    def etape(f, extra=""):
+        note = f'<p class="distinction">{e(f["note"])}</p>' if f["note"] else ""
+        return (f'<li class="etape"><p class="periode">{periode(f["date"])}</p><div class="etape-corps">'
+                f'<h3>{e(f["titre"])}</h3><p class="lieu">{e(f["lieu"])}</p>{note}{extra}</div></li>')
+
+    licence = DIPLOMES[1]
+    expos = (f'<div class="sous-bloc"><h4 id="expos-licence">Expositions réalisées pendant la licence</h4>'
+             f'<div class="cartes-culture">{bloc_expos_licence("h5")}</div></div>')
+    frise = "".join(etape(f, expos if f is licence else "") for f in DIPLOMES + [BAC])
+    certificats = "".join(f'<li><b>{e(c["titre"])}</b><span>{e(c["lieu"])}</span><span class="an">{e(c["date"])}</span></li>'
+                          for c in CERTIFICATS)
+    competences = "".join(
+        f'<article class="competence"><h3>{e(t)}</h3><ul class="etiquettes">{"".join(f"<li>{e(c)}</li>" for c in liste_c)}</ul></article>'
+        for t, liste_c in COMPETENCES)
+    pratiques = "".join(f'<li><span class="an">{periode(a)}</span><b>{e(t)}</b><span class="det">{e(d)}</span></li>'
+                        for a, t, d in PRATIQUES)
+    interets = "".join(f"<li>{e(i)}</li>" for i in CENTRES_INTERET.split(" · "))
     return f"""<section class="salle" aria-labelledby="titre-parcours"><div class="g">
   <h1 class="titre-salle" id="titre-parcours">Parcours</h1>
   <div class="chapeau"><p>Une formation en arts plastiques puis en production d'expositions d'art contemporain, avec deux expositions réalisées pendant la licence. Voir aussi mes <a href="experiences.html">expériences professionnelles</a>.</p></div>
-  <div class="parcours">
-    <div class="large"><h2>Formation</h2><ol>{liste_formation(DIPLOMES + [BAC] + CERTIFICATS)}</ol>
-      <h3 class="groupe" id="expos-licence">Expositions réalisées pendant la licence</h3>
-      <div class="cartes-culture">{bloc_expos_licence("h4")}</div></div>
-    <div class="large"><h2>Compétences</h2><div class="competences">{competences}</div></div>
-    <div><h2>Pratiques artistiques</h2><ol>{liste(PRATIQUES)}</ol></div>
-    <div><h2>Centres d'intérêt</h2><p class="interets">{e(CENTRES_INTERET)}</p></div>
+
+  <section class="bloc-parcours" aria-labelledby="titre-formation-p">
+    <h2 id="titre-formation-p">Formation</h2>
+    <ol class="frise">{frise}</ol>
+    <ul class="certificats" aria-label="Brevets et certificats">{certificats}</ul>
+  </section>
+
+  <section class="bloc-parcours" aria-labelledby="titre-competences">
+    <h2 id="titre-competences">Compétences</h2>
+    <div class="competences">{competences}</div>
+  </section>
+
+  <div class="duo">
+    <section class="bloc-parcours" aria-labelledby="titre-pratiques">
+      <h2 id="titre-pratiques">Pratiques artistiques</h2>
+      <ol class="pratiques">{pratiques}</ol>
+    </section>
+    <section class="bloc-parcours" aria-labelledby="titre-interets">
+      <h2 id="titre-interets">Centres d'intérêt</h2>
+      <ul class="etiquettes">{interets}</ul>
+    </section>
   </div>
 </div></section>
 """
