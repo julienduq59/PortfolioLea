@@ -8,7 +8,7 @@ import json
 import os
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "20261026"  # à changer à chaque modification de styles.css ou site.js
+VERSION = "20261026-2"  # à changer à chaque modification de styles.css ou site.js
 MAIL = "lea.rybak@outlook.fr"
 URL = "https://julienduq59.github.io/PortfolioLea/"
 
@@ -141,7 +141,10 @@ EXPERIENCES = [
          missions=["Visites thématiques du musée pour les groupes scolaires", "Animation d’ateliers d’arts plastiques"]),
     dict(date="2026", titre="Stage", precision="", lieu="Le Couvent – Roubaix",
          missions=["Logistique, manutention et scénographie", "Gestion du bar",
-                   "Embauches ponctuelles à l’issue du stage pour renforcer les équipes lors de grands événements"]),
+                   "Embauches ponctuelles à l’issue du stage pour renforcer les équipes lors de grands événements"],
+         # Photos envoyées par Julien (26/10/2026).
+         photos=[("couvent-1", "Affiches encadrées accrochées sur un mur brut, d'autres posées au sol, au Couvent à Roubaix."),
+                 ("couvent-2", "Salle aux murs roses du Couvent à Roubaix, couverte d'affiches encadrées, avec fauteuils et guirlande de fanions.")]),
     dict(date="Depuis 2021", titre="Animatrice", precision="Vacances scolaires",
          lieu="Mairie de Croix, MJC de Croix, Planète aventure…",
          missions=["Animation en accueils collectifs de mineurs (ACM) et en colonies de vacances"],
@@ -284,6 +287,10 @@ def ligne_formation(f):
     return f'<li><span class="an">{e(f["date"])}</span><b>{e(f["titre"])}</b><span class="det">{e(f["lieu"])}</span>{note}</li>'
 
 
+def titre_texte(x):
+    return x["titre"] + (f' – {x["precision"]}' if x["precision"] else "")
+
+
 def titre_poste(x):
     precision = f' <span class="precision">– {e(x["precision"])}</span>' if x["precision"] else ""
     return e(x["titre"]) + precision
@@ -292,8 +299,9 @@ def titre_poste(x):
 def poste(x, niveau="h3", missions=True):
     liste = ("<ul>" + "".join(f"<li>{e(m)}</li>" for m in x["missions"]) + "</ul>") if missions else ""
     if missions and x.get("photos"):
-        liste += '<div class="poste-photos">' + "".join(
-            voir(n, alt, f'{x["titre"]} – {x["precision"]}. {alt}', taille="(max-width: 820px) 50vw, 15vw")
+        w, h = dims(x["photos"][0][0])
+        liste += f'<div class="poste-photos{" paysage" if w > h else ""}">' + "".join(
+            voir(n, alt, f'{titre_texte(x)}. {alt}', taille="(max-width: 820px) 100vw, 30vw")
             for n, alt in x["photos"]) + "</div>"
     return f"""<article class="poste">
       <p class="an">{e(x["date"])}</p>
