@@ -159,7 +159,10 @@ EXPERIENCES = [
     dict(date="Depuis 2023", titre="Hôtesse et animation commerciale", precision="Intérim",
          lieu="Animeo, La belle équipe, Top Action…",
          missions=["Animation de stand, distribution de produits et street marketing",
-                   "Hôtesse d’accueil, placement et service", "Gestion du bar"]),
+                   "Hôtesse d’accueil, placement et service", "Gestion du bar"],
+         # Photos envoyées par Julien (26/10/2026), visages des collègues floutés.
+         photos=[("animation-commerciale-1", "Animation commerciale Zespri : Léa, à gauche, avec l'équipe en tee-shirt vert et la mascotte kiwi (visages des collègues floutés)."),
+                 ("animation-commerciale-2", "Animation « Mission sauvetage de jouets » d'Ecomaison : Léa, à droite, en cape devant le camion (visage de sa collègue flouté).")]),
     dict(date="Depuis 2023", titre="Conseillère de vente", precision="", lieu="Fan Avenue – Stade Pierre Mauroy",
          missions=["Vente de merchandising lors des grands événements", "Mise en place du magasin et conseil",
                    "Manutention, mise en carton, gestion des stocks et caisse"]),

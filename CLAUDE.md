@@ -25,7 +25,8 @@ des commandes, commits.
 - Aucun document d'identité, aucune donnée sensible.
 - Photos d'enfants : jamais de visage reconnaissable. Les deux photos d'animation (expérience
   « Animatrice », `assets/oeuvres/animation-*.webp`) et celles de La Piscine (`piscine-*.webp`) ont
-  les visages floutés et sans métadonnées.
+  les visages floutés et sans métadonnées. Photos d'animation commerciale : seul le visage de Léa reste
+  visible, ceux des collègues sont floutés (choix de Julien, 26/10/2026).
   Pas de photos du gala de danse de la MJC de Croix sans l'accord des familles.
 - Toujours montrer un aperçu avant de publier une modification de design.
 
