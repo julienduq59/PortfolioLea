@@ -165,7 +165,10 @@ EXPERIENCES = [
                  ("animation-commerciale-2", "Animation « Mission sauvetage de jouets » d'Ecomaison : Léa, à droite, en cape devant le camion (visage de sa collègue flouté).")]),
     dict(date="Depuis 2023", titre="Conseillère de vente", precision="", lieu="Fan Avenue – Stade Pierre Mauroy",
          missions=["Vente de merchandising lors des grands événements", "Mise en place du magasin et conseil",
-                   "Manutention, mise en carton, gestion des stocks et caisse"]),
+                   "Manutention, mise en carton, gestion des stocks et caisse"],
+         # Photos envoyées par Julien (27/10/2026).
+         photos=[("fan-avenue-1", "Le stade vu des tribunes, pendant le montage d'une scène de concert."),
+                 ("fan-avenue-2", "Stand de vente mobile, fermé, sur le parvis.")]),
     dict(date="2023", titre="Conseillère de vente", precision="Renfort braderie de Lille", lieu="La Fée Maraboutée – Lille",
          missions=["Mise en place du magasin et conseil",
                    "Manutention, réalisation de transferts, mise en carton et gestion des stocks"]),
