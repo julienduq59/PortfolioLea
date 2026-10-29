@@ -4,8 +4,7 @@ Usage : python3 outils/cv.py   (depuis la racine du dépôt)
 Nécessite segno (pip install segno), Node et Playwright.
 
 La mise en page reproduit le CV de Léa d'octobre 2026 (Liberation Sans, titres bleus #2e74b5,
-photo ronde en haut à droite). Le QR code vers le portfolio est placé dans l'en-tête, à gauche
-de la photo. Les données (formation, compétences, expériences…) viennent de outils/generer.py.
+photo ronde en haut à droite). En bas de page : le lien cliquable et le QR code vers le portfolio. Les données (formation, compétences, expériences…) viennent de outils/generer.py.
 
 Deux versions, toutes deux avec la photo de Léa (outils/photo-lea.jpg) :
 - assets/cv-lea-rybak.pdf : la version publique, liée depuis le site, sans téléphone.
@@ -102,22 +101,23 @@ def cv_html(telephone="", photo=""):
 html,body{{width:210mm;height:297mm}}
 body{{font-family:"CV",Arial,sans-serif;color:#000;font-size:11px;line-height:1.3;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 a{{color:inherit;text-decoration:none}}
-.page{{position:relative;width:210mm;height:297mm;overflow:hidden;padding:26px 40px 0}}
+.page{{position:relative;width:210mm;height:297mm;overflow:hidden;padding:26px 40px 16px;display:flex;flex-direction:column}}
+.page>*{{flex:none}}
 .tete{{position:relative;height:144px}}
 h1{{font-size:23px;font-weight:700;line-height:1.15}}
 .coord{{list-style:none;margin-top:7px}}
 .coord li{{display:flex;align-items:center;font-size:11.5px;line-height:17px}}
 .coord svg{{width:12px;height:12px;flex:none;margin-right:10px;fill:#000}}
 .photo{{position:absolute;top:0;right:0;width:136px;height:136px;border-radius:50%;object-fit:cover}}
-.qr{{position:absolute;top:24px;right:{"154" if photo else "0"}px;display:flex;align-items:center;gap:12px;text-align:right}}
-.qr svg{{display:block;width:92px;height:92px}}
-.qr p{{font-size:10.5px;line-height:1.4}}
-.qr b{{display:block;color:#2e74b5;font-size:11.5px}}
-.qr .url{{display:block;font-size:9.5px}}
+.portfolio{{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid #2e74b5;padding-top:8px}}
+.portfolio p{{font-size:11px;line-height:1.45}}
+.portfolio b{{color:#2e74b5;font-size:12px}}
+.portfolio .url{{color:#2e74b5;text-decoration:underline;text-underline-offset:2px;font-weight:700}}
+.portfolio svg{{display:block;width:74px;height:74px;flex:none}}
 .accroche{{text-align:right;font-size:13px;font-weight:700;line-height:1.15}}
-h2{{font-size:13px;font-weight:400;color:#2e74b5;line-height:1.15;border-bottom:1px solid #2e74b5;padding-bottom:1px;margin:13px 0 7px}}
+h2{{font-size:13px;font-weight:400;color:#2e74b5;line-height:1.15;border-bottom:1px solid #2e74b5;padding-bottom:1px;margin:10px 0 7px}}
 .ligne{{display:grid;grid-template-columns:84px minmax(0,1fr)}}
-.ligne+.ligne{{margin-top:8px}}
+.ligne+.ligne{{margin-top:5px}}
 .date{{font-size:9px;line-height:1.15;padding-top:3px}}
 .titre{{font-size:12.5px;line-height:17px}}
 .lieu{{font-style:italic;font-size:11px;line-height:15px}}
@@ -125,7 +125,7 @@ h2{{font-size:13px;font-weight:400;color:#2e74b5;line-height:1.15;border-bottom:
 .puces{{list-style:none}}
 .puces li::before{{content:"•";display:inline-block;width:13px}}
 .contenu .puces{{padding-left:22px}}
-.contenu .puces li{{line-height:14.67px}}
+.contenu .puces li{{line-height:14px}}
 .competences{{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:14px;padding:1px 0 2px}}
 .competences h3{{font-size:11.5px;font-weight:700;line-height:15px}}
 .competences .puces{{padding-left:4px}}
@@ -138,7 +138,6 @@ h2{{font-size:13px;font-weight:400;color:#2e74b5;line-height:1.15;border-bottom:
   <header class="tete">
     <h1>Léa RYBAK</h1>
     <ul class="coord">{"".join(coord)}</ul>
-    <div class="qr"><p><b>Mon portfolio</b>Œuvres, expositions et parcours<a class="url" href="{g.URL}">{url_courte}</a></p>{qr_svg()}</div>
     {image}
   </header>
   <p class="accroche">{e(g.TITRE_CV)}</p>
@@ -158,6 +157,12 @@ h2{{font-size:13px;font-weight:400;color:#2e74b5;line-height:1.15;border-bottom:
     <h2>Centres d’intérêt</h2>
     <p class="interets">{e(g.CENTRES_INTERET)}</p>
   </section>
+  <footer class="portfolio">
+    <p><b>Mon portfolio en ligne</b> : œuvres, expositions, expériences et parcours<br>
+    <a class="url" href="{g.URL}">{url_courte}</a><br>
+    Cliquez sur le lien ou scannez le code.</p>
+    {qr_svg()}
+  </footer>
 </div>
 </body>
 </html>

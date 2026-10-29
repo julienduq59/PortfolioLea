@@ -60,8 +60,8 @@ ne jamais changer cet ordre sans demande explicite.
   validation de Julien sur aperçu, 25/10/2026). Même photo que sur son CV.
 - **CV PDF** (A4, une page) : `python3 outils/cv.py` depuis la racine (nécessite `pip install segno`,
   Node et Playwright). Il **reproduit à l'identique le CV de Léa d'octobre 2026** (Liberation Sans,
-  titres bleus `#2e74b5`, photo ronde) et ajoute le **QR code du portfolio** dans l'en-tête, à gauche
-  de la photo. Les textes viennent des données de `outils/generer.py` (`DIPLOMES`, `CERTIFICATS`,
+  titres bleus `#2e74b5`, photo ronde) et ajoute **en bas de page** le lien cliquable et le **QR code
+  du portfolio** (demande de Julien, 29/10/2026 ; espacements légèrement resserrés pour tenir sur une page). Les textes viennent des données de `outils/generer.py` (`DIPLOMES`, `CERTIFICATS`,
   `COMPETENCES`, `EXPERIENCES`, `CENTRES_INTERET`, `TITRE_CV`, `VILLE`) : les garder mot pour mot
   identiques au CV de Léa.
   - Photo de Léa sur les deux versions (demande de Julien, 25/10/2026) : `outils/photo-lea.jpg`.
