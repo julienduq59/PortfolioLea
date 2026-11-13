@@ -18,8 +18,8 @@ des commandes, commits.
   œuvres, expositions STARTER, pratiques, baccalauréat) et son CV de février 2024. En cas de doute,
   poser la question.
 - **Léa valide le contenu avant toute mise en ligne.** Voir `VALIDATION.md`.
-- Pas de téléphone ni d'adresse postale en ligne : ni sur le site, ni dans le CV public, ni dans le dépôt
-  (public). Seul l'e-mail est affiché. Le numéro reste dans `prive/` (non versionné).
+- Téléphone : affiché **uniquement sur la page « Mes infos »**, à la demande de Léa (13/11/2026,
+  constante `TELEPHONE`). Il reste absent du CV public et des autres pages. Pas d'adresse postale en ligne.
 - **Pas de statistiques ni de suivi des visites** (choix de Julien, 25/10/2026) : ni GoatCounter,
   ni alertes ntfy, ni liens `?ref=`. Le site de Julien en a, celui de Léa non.
 - Aucun document d'identité, aucune donnée sensible.
@@ -36,15 +36,15 @@ Le site sert à trouver un travail (secteur arts et culture). Ordre voulu par Ju
 (25/10/2026) : d'abord le parcours (formation), puis les expériences professionnelles,
 puis les œuvres, les expositions et le reste.
 
-**Menu fixe, identique sur toutes les pages (demande de Julien) : Parcours, Expériences, Œuvres,
-Expositions, Photographie.** Il est défini une seule fois (`PAGES` dans `outils/generer.py`) :
+**Menu fixe, identique sur toutes les pages : Mes infos, Parcours, Expériences, Œuvres,
+Expositions, Photographie.** (« Mes infos » ajouté en tête à la demande de Léa, 13/11/2026.) Il est défini une seule fois (`PAGES` dans `outils/generer.py`) :
 ne jamais changer cet ordre sans demande explicite.
 
 ## Fonctionnement
 
 - Les pages HTML sont **générées** par `outils/generer.py` (`python3 outils/generer.py` depuis
   la racine). Modifier les textes et la liste des œuvres dans ce script, pas dans les fichiers HTML.
-- Pages, dans l'ordre du menu : `index.html`, `parcours.html`, `experiences.html`, `oeuvres.html`,
+- Pages, dans l'ordre du menu : `index.html`, `mes-infos.html`, `parcours.html`, `experiences.html`, `oeuvres.html`,
   `expositions.html`, `photographie.html`, plus `404.html`.
 - Design : direction « L'exposition », choisie par Julien sur aperçu. Une œuvre accrochée en grand
   par salle, un cartel de musée sous chaque œuvre. Couleurs reprises du portfolio V1 : bleu nuit
@@ -100,5 +100,8 @@ italique sous les missions.
 
 ## En attente
 
-- Téléphone en ligne (site, CV public) : non, sauf accord de Léa.
-- Master obtenu ou non (le CV indique « 2024 - 2026 »), LinkedIn ou Instagram.
+- Page « Mes infos » (`page_infos()`) : présentation validée par Léa (recherche d'un CDI à temps plein dans le
+  secteur culturel), e-mail, téléphone, Instagram @lea_rbk_ et CV. **LinkedIn : adresse du profil à demander à
+  Léa** (constante `LINKEDIN`, vide = carte non affichée). Pas de bloc « Me contacter » en bas de cette page.
+- Téléphone dans le CV public : non, sauf demande de Léa.
+- Master obtenu ou non (le CV indique « 2024 - 2026 »).

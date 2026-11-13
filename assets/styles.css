@@ -278,6 +278,16 @@ p{margin:0}
 .certificats b{font-size:1.1rem}
 .certificats span{color:var(--doux);font-size:.92rem}
 .certificats .renouvele{color:var(--encre);font-weight:600;margin-top:4px}
+/* Page Mes infos */
+.presentation{max-width:60ch;font-size:clamp(1.1rem,2vw,1.3rem);line-height:1.6}
+.presentation p+p{margin-top:14px}
+.presentation .objectif{font-weight:700}
+.coordonnees{list-style:none;margin:0 0 clamp(28px,4vw,40px);padding:clamp(24px,3vw,36px) 0 0;border-top:2px solid var(--encre);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:12px}
+.coordonnees li{display:flex;flex-direction:column;align-items:flex-start;gap:6px;background:var(--cartel);border:1px solid var(--trait);padding:18px 20px}
+.coord-titre{color:var(--doux);font-size:.92rem}
+.coord-valeur{font-size:clamp(1.1rem,2vw,1.3rem);font-weight:700;overflow-wrap:anywhere}
+.coord-det{color:var(--doux);font-size:.92rem}
+.coordonnees .copier{margin-top:4px}
 .competences{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:16px}
 .competence{background:var(--cartel);border:1px solid var(--trait);border-top:3px solid var(--encre);padding:20px 20px 22px}
 .competence h3{font-size:1.1rem;font-weight:800;line-height:1.3;margin-bottom:14px}

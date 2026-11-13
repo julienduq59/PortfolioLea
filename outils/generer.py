@@ -8,9 +8,14 @@ import json
 import os
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "20261113c"  # à changer à chaque modification de styles.css ou site.js
+VERSION = "20261113d"  # à changer à chaque modification de styles.css ou site.js
 MAIL = "lea.rybak@outlook.fr"
 URL = "https://julienduq59.github.io/PortfolioLea/"
+# Page « Mes infos » (demande de Léa, 13/11/2026) : téléphone affiché sur cette page seulement,
+# à sa demande. Il reste absent du CV public.
+TELEPHONE = "06 58 47 30 60"
+INSTAGRAM = "lea_rbk_"
+LINKEDIN = ""  # adresse du profil à demander à Léa ; vide = carte non affichée
 
 e = html.escape
 
@@ -210,7 +215,7 @@ PRATIQUES = [("2019-2022", "Photographie argentique", "MJC de Croix"),
 CV = "assets/cv-lea-rybak.pdf"
 LIEN_CV = f'href="{CV}" target="_blank" rel="noopener" download="CV-Lea-Rybak.pdf"'
 
-PAGES = [("index.html", "Accueil"), ("parcours.html", "Parcours"), ("experiences.html", "Expériences"),
+PAGES = [("index.html", "Accueil"), ("mes-infos.html", "Mes infos"), ("parcours.html", "Parcours"), ("experiences.html", "Expériences"),
          ("oeuvres.html", "Œuvres"), ("expositions.html", "Expositions"), ("photographie.html", "Photographie")]
 
 FLECHE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
@@ -240,6 +245,7 @@ FICHE_GOOGLE = '<script type="application/ld+json">' + json.dumps({
     "url": URL,
     "image": URL + "assets/portrait-lea.webp",
     "email": "mailto:" + MAIL,
+    "sameAs": [f"https://www.instagram.com/{INSTAGRAM}/"] + ([LINKEDIN] if LINKEDIN else []),
     "description": "Master Exposition-production des œuvres d’art contemporain (Bac+5) et licence Arts plastiques "
                    "et visuels, Université de Lille. Guide animatrice au musée de La Piscine à Roubaix. "
                    "À la recherche d'un poste dans le secteur culturel.",
@@ -248,6 +254,14 @@ FICHE_GOOGLE = '<script type="application/ld+json">' + json.dumps({
     "knowsAbout": [c for _, liste in COMPETENCES[:1] for c in liste]
                   + ["Installation", "Sculpture", "Performance", "Photographie argentique"],
 }, ensure_ascii=False) + "</script>\n"
+
+
+CONTACT = f"""<section class="contact" id="contact" aria-labelledby="titre-contact"><div class="g">
+  <h2 id="titre-contact">Me contacter</h2>
+  <p class="mail"><a href="mailto:{MAIL}">{MAIL}</a><button class="copier" type="button" data-copier="{MAIL}">Copier</button></p>
+  <a class="lien-fort" {LIEN_CV}>Télécharger mon CV (PDF, une page) {FLECHE}</a>
+</div></section>
+"""
 
 
 def page(fichier, titre, description, corps):
@@ -289,12 +303,7 @@ def page(fichier, titre, description, corps):
 <main id="contenu">
 {corps}
 </main>
-<section class="contact" id="contact" aria-labelledby="titre-contact"><div class="g">
-  <h2 id="titre-contact">Me contacter</h2>
-  <p class="mail"><a href="mailto:{MAIL}">{MAIL}</a><button class="copier" type="button" data-copier="{MAIL}">Copier</button></p>
-  <a class="lien-fort" {LIEN_CV}>Télécharger mon CV (PDF, une page) {FLECHE}</a>
-</div></section>
-<footer class="pied"><div class="g"><span>Léa Rybak · Arts plastiques et visuels</span><span>Portfolio 2026</span></div></footer>
+{"" if fichier == "mes-infos.html" else CONTACT}<footer class="pied"><div class="g"><span>Léa Rybak · Arts plastiques et visuels</span><span>Portfolio 2026</span></div></footer>
 <dialog class="visionneuse" aria-label="Œuvre agrandie">
   <div class="barre"><button class="fermer" type="button">Fermer</button></div>
   <div class="scene"></div>
@@ -553,6 +562,33 @@ def page_experiences():
 """
 
 
+def page_infos():
+    tel = TELEPHONE.replace(" ", "")
+    cartes = [
+        ("E-mail", f'<a href="mailto:{MAIL}">{MAIL}</a>', f'<button class="copier" type="button" data-copier="{MAIL}">Copier</button>'),
+        ("Téléphone", f'<a href="tel:+33{tel[1:]}">{TELEPHONE}</a>', f'<button class="copier" type="button" data-copier="{TELEPHONE}">Copier</button>'),
+    ]
+    if LINKEDIN:
+        cartes.append(("LinkedIn", f'<a href="{LINKEDIN}" target="_blank" rel="noopener">Mon profil LinkedIn</a>', ""))
+    cartes.append(("Instagram", f'<a href="https://www.instagram.com/{INSTAGRAM}/" target="_blank" rel="noopener">@{INSTAGRAM}</a>',
+                   '<p class="coord-det">Pour voir ce que je fais au musée de La Piscine.</p>'))
+    liste = "".join(f'<li><span class="coord-titre">{t}</span><span class="coord-valeur">{v}</span>{x}</li>' for t, v, x in cartes)
+    return f"""<section class="salle" aria-labelledby="titre-infos"><div class="g">
+  <h1 class="titre-salle" id="titre-infos">Mes infos</h1>
+  <div class="presentation">
+    <p>Formée à l'Université de Lille, en licence Arts plastiques et visuels puis en master Exposition-production des œuvres d'art contemporain, je suis motivée et passionnée par la culture.</p>
+    <p>Je suis guide animatrice au musée de La Piscine à Roubaix et j'occupe un poste d'agent de billetterie, de surveillance et de médiation à la Villa Cavrois, à Croix.</p>
+    <p class="objectif">Je recherche un poste en CDI à temps plein dans le secteur culturel.</p>
+  </div>
+  <section class="bloc-parcours" aria-labelledby="titre-coordonnees">
+    <h2 id="titre-coordonnees">Me contacter</h2>
+    <ul class="coordonnees">{liste}</ul>
+    <a class="lien-fort" {LIEN_CV}>Télécharger mon CV (PDF, une page) {FLECHE}</a>
+  </section>
+</div></section>
+"""
+
+
 def page_404():
     return f"""<section class="salle perdu"><div class="g">
   <h1 class="titre-salle">Cette salle n'existe pas</h1>
@@ -567,6 +603,7 @@ SORTIES = {
     "oeuvres.html": ("Œuvres", "Les œuvres de Léa Rybak de 2022 à 2024 : Signum Cruci, Cliché, Mes trophées de chasse, Poussière d'étoile et d'autres.", page_oeuvres),
     "expositions.html": ("Expositions", "STARTER 10 à La Condition Publique de Roubaix et STARTER 9 à La Chaufferie de La Tossée de Tourcoing : conception, communication et médiation.", page_expositions),
     "photographie.html": ("Photographie", "Photographies argentiques de Léa Rybak.", page_photographie),
+    "mes-infos.html": ("Mes infos", "Léa Rybak recherche un poste en CDI à temps plein dans le secteur culturel : présentation, e-mail, téléphone et Instagram.", page_infos),
     "parcours.html": ("Parcours", "Formation, compétences, pratiques artistiques et centres d'intérêt de Léa Rybak.", page_parcours),
     "experiences.html": ("Expériences professionnelles", "Expériences professionnelles de Léa Rybak : guide animatrice au musée de La Piscine, stage au Couvent à Roubaix, animation, accueil et vente.", page_experiences),
     "404.html": ("Page introuvable", "Page introuvable.", page_404),
