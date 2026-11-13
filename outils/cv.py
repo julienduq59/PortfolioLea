@@ -101,9 +101,9 @@ def cv_html(telephone="", photo=""):
 html,body{{width:210mm;height:297mm}}
 body{{font-family:"CV",Arial,sans-serif;color:#000;font-size:11px;line-height:1.3;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 a{{color:inherit;text-decoration:none}}
-.page{{position:relative;width:210mm;height:297mm;overflow:hidden;padding:26px 40px 16px;display:flex;flex-direction:column}}
+.page{{position:relative;width:210mm;height:297mm;overflow:hidden;padding:22px 40px 12px;display:flex;flex-direction:column}}
 .page>*{{flex:none}}
-.tete{{position:relative;height:144px}}
+.tete{{position:relative;height:140px}}
 h1{{font-size:23px;font-weight:700;line-height:1.15}}
 .coord{{list-style:none;margin-top:7px}}
 .coord li{{display:flex;align-items:center;font-size:11.5px;line-height:17px}}
@@ -115,9 +115,9 @@ h1{{font-size:23px;font-weight:700;line-height:1.15}}
 .portfolio .url{{color:#2e74b5;text-decoration:underline;text-underline-offset:2px;font-weight:700}}
 .portfolio svg{{display:block;width:74px;height:74px;flex:none}}
 .accroche{{text-align:right;font-size:13px;font-weight:700;line-height:1.15}}
-h2{{font-size:13px;font-weight:400;color:#2e74b5;line-height:1.15;border-bottom:1px solid #2e74b5;padding-bottom:1px;margin:10px 0 7px}}
+h2{{font-size:13px;font-weight:400;color:#2e74b5;line-height:1.15;border-bottom:1px solid #2e74b5;padding-bottom:1px;margin:9px 0 6px}}
 .ligne{{display:grid;grid-template-columns:84px minmax(0,1fr)}}
-.ligne+.ligne{{margin-top:5px}}
+.ligne+.ligne{{margin-top:4px}}
 .date{{font-size:9px;line-height:1.15;padding-top:3px}}
 .titre{{font-size:12.5px;line-height:17px}}
 .lieu{{font-style:italic;font-size:11px;line-height:15px}}

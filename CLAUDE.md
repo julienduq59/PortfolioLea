@@ -87,7 +87,9 @@ en tête des expériences, mise en avant sur l'accueil et sur la page Expérienc
 Ajouts et retraits demandés par Léa le 13/11/2026 (le CV PDF n'est donc plus identique à celui d'octobre) :
 - **CDD à temps partiel à la Villa Cavrois (Croix), nov. 2026 - juin 2027** : agent de billetterie et
   agent de surveillance et de médiation. Il est juste sous La Piscine, **sur le portfolio et dans le CV**.
-  Léa n'a pas encore donné de missions, donc la liste est vide (`missions=[]`, aucune puce affichée).
+  Missions données par Léa : gestion de la caisse, vente de billets, organisation de la boutique,
+  surveillance, médiation. Pour les faire tenir, les espacements du CV ont encore été un peu resserrés.
+  Le CV est maintenant presque plein : avant d'ajouter une ligne, regarder ce qui peut en sortir.
 - **Service civique au Crous Lille Nord-Pas-de-Calais (sept. - nov. 2026)** : sous la Villa Cavrois,
   **sur le portfolio seulement**.
 - **Stage au Couvent** : retiré du CV PDF, il reste sur le portfolio.

@@ -145,9 +145,10 @@ EXPERIENCES = [
                  ("piscine-3", "Atelier d'arts plastiques : des enfants dessinent sur de grandes bandes de papier (visages floutés)."),
                  ("piscine-4", "Peintures d'enfants représentant des nageurs, posées sur les tables de l'atelier.")]),
     # Ajout de Léa (13/11/2026), sur le portfolio et dans le CV. Fin écrite « juin 2026 » par Léa,
-    # corrigée en juin 2027 (le CDD commence en novembre 2026). Missions pas encore données.
+    # corrigée en juin 2027 (le CDD commence en novembre 2026), confirmé par Léa. Missions données par Léa.
     dict(date="Nov.\u00a02026 - juin\u00a02027", titre="Agent de billetterie et agent de surveillance et de médiation",
-         precision="CDD à temps partiel", lieu="Villa Cavrois – Croix", missions=[]),
+         precision="CDD à temps partiel", lieu="Villa Cavrois – Croix",
+         missions=["Gestion de la caisse", "Vente de billets", "Organisation de la boutique", "Surveillance", "Médiation"]),
     # Ajout de Léa (13/11/2026) : sur le portfolio seulement, pas dans le CV PDF (cv=False).
     dict(date="Sept. - nov. 2026", titre="Animatrice", precision="Service civique, 2 mois",
          lieu="Crous Lille Nord-Pas-de-Calais – Pôle animation et vie de campus",
