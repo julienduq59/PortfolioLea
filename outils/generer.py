@@ -166,7 +166,10 @@ EXPERIENCES = [
     dict(date="Sept. - nov. 2026", titre="Animatrice", precision="Service civique, 2 mois",
          lieu="Crous Lille Nord-Pas-de-Calais – Pôle animation et vie de campus",
          missions=["Programmation des animations", "Création d’animations", "Animation pour des étudiants", "Réalisation de devis"],
-         note="Le service civique a été interrompu en raison d’une embauche à temps partiel dans un autre établissement.", cv=False),
+         note="Le service civique a été interrompu en raison d’une embauche à temps partiel dans un autre établissement.", cv=False,
+         # Photos envoyées le 13/11/2026 (aucune personne visible).
+         photos=[("crous-1", "Planche d'aquarelles sur le thème de l'automne : théière en forme de citrouille, pull, tasse, bougie et feuilles, à côté d'une boîte d'aquarelle."),
+                 ("crous-2", "Matériel d'aquarelle sur une table : boîte de couleurs, palette, pots d'eau et croquis de minéraux à peindre (béryl, grenat, dolomite, haüyne…).")]),
     # Retiré du CV PDF à la demande de Léa (13/11/2026), reste sur le portfolio.
     dict(date="2026", titre="Stage", precision="", lieu="Le Couvent – Roubaix", cv=False,
          missions=["Logistique, manutention et scénographie", "Gestion du bar",
@@ -337,17 +340,19 @@ def titre_poste(x):
 
 def poste(x, niveau="h3", missions=True):
     liste = ("<ul>" + "".join(f"<li>{e(m)}</li>" for m in x["missions"]) + "</ul>") if missions and x["missions"] else ""
+    # La note (ligne en italique) vient juste sous les missions, avant les photos.
+    if missions and x.get("note"):
+        liste += f'<p class="poste-note">{e(x["note"])}</p>'
     if missions and x.get("photos"):
         w, h = dims(x["photos"][0][0])
         liste += f'<div class="poste-photos{" paysage" if w > h else ""}">' + "".join(
             voir(n, alt, f'{titre_texte(x)}. {alt}', taille="(max-width: 820px) 100vw, 30vw")
             for n, alt in x["photos"]) + "</div>"
-    note = f'<p class="poste-note">{e(x["note"])}</p>' if missions and x.get("note") else ""
     return f"""<article class="poste">
       <p class="an">{e(x["date"])}</p>
       <{niveau}>{titre_poste(x)}</{niveau}>
       <p class="lieu">{e(x["lieu"])}</p>
-      {liste}{note}
+      {liste}
     </article>"""
 
 
