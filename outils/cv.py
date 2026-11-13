@@ -71,7 +71,7 @@ def formation(f):
 
 def experience(x):
     titre = f'<b>{e(x["titre"])}</b>' + (f' – {e(x["precision"])}' if x["precision"] else "")
-    missions = '<ul class="puces">' + "".join(f"<li>{e(m)}</li>" for m in x["missions"]) + "</ul>"
+    missions = ('<ul class="puces">' + "".join(f"<li>{e(m)}</li>" for m in x["missions"]) + "</ul>") if x["missions"] else ""
     return ligne(x["date"], titre, x["lieu"], missions)
 
 

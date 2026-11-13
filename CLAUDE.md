@@ -84,9 +84,15 @@ pas dans les expériences professionnelles (choix de Julien, 25/10/2026). Donné
 **Expérience la plus importante (Julien) : guide animatrice au musée de La Piscine (Roubaix).** Elle reste
 en tête des expériences, mise en avant sur l'accueil et sur la page Expériences.
 
-**Service civique au Crous Lille Nord-Pas-de-Calais (sept. - nov. 2026)** : juste sous La Piscine,
-**sur le portfolio seulement, pas dans le CV PDF** (demande du 13/11/2026). Dans `EXPERIENCES`, la clé
-`cv=False` l'exclut du CV, et la clé `note` affiche une ligne en italique sous les missions.
+Ajouts et retraits demandés par Léa le 13/11/2026 (le CV PDF n'est donc plus identique à celui d'octobre) :
+- **CDD à temps partiel à la Villa Cavrois (Croix), nov. 2026 - juin 2027** : agent de billetterie et
+  agent de surveillance et de médiation. Il est juste sous La Piscine, **sur le portfolio et dans le CV**.
+  Léa n'a pas encore donné de missions, donc la liste est vide (`missions=[]`, aucune puce affichée).
+- **Service civique au Crous Lille Nord-Pas-de-Calais (sept. - nov. 2026)** : sous la Villa Cavrois,
+  **sur le portfolio seulement**.
+- **Stage au Couvent** : retiré du CV PDF, il reste sur le portfolio.
+Dans `EXPERIENCES`, la clé `cv=False` exclut une expérience du CV, et la clé `note` affiche une ligne en
+italique sous les missions.
 
 ## En attente
 

@@ -144,12 +144,17 @@ EXPERIENCES = [
                  ("piscine-2", "Visite avec un groupe d'enfants dans une salle de peintures du musée : un enfant montre ses dessins (visages floutés)."),
                  ("piscine-3", "Atelier d'arts plastiques : des enfants dessinent sur de grandes bandes de papier (visages floutés)."),
                  ("piscine-4", "Peintures d'enfants représentant des nageurs, posées sur les tables de l'atelier.")]),
+    # Ajout de Léa (13/11/2026), sur le portfolio et dans le CV. Fin écrite « juin 2026 » par Léa,
+    # corrigée en juin 2027 (le CDD commence en novembre 2026). Missions pas encore données.
+    dict(date="Nov.\u00a02026 - juin\u00a02027", titre="Agent de billetterie et agent de surveillance et de médiation",
+         precision="CDD à temps partiel", lieu="Villa Cavrois – Croix", missions=[]),
     # Ajout de Léa (13/11/2026) : sur le portfolio seulement, pas dans le CV PDF (cv=False).
     dict(date="Sept. - nov. 2026", titre="Animatrice", precision="Service civique, 2 mois",
          lieu="Crous Lille Nord-Pas-de-Calais – Pôle animation et vie de campus",
          missions=["Programmation des animations", "Création d’animations", "Animation pour des étudiants", "Réalisation de devis"],
          note="Le service civique a été interrompu en raison d’une embauche à temps partiel dans un autre établissement.", cv=False),
-    dict(date="2026", titre="Stage", precision="", lieu="Le Couvent – Roubaix",
+    # Retiré du CV PDF à la demande de Léa (13/11/2026), reste sur le portfolio.
+    dict(date="2026", titre="Stage", precision="", lieu="Le Couvent – Roubaix", cv=False,
          missions=["Logistique, manutention et scénographie", "Gestion du bar",
                    "Embauches ponctuelles à l’issue du stage pour renforcer les équipes lors de grands événements"],
          # Photos envoyées par Julien (26/10/2026).
@@ -313,7 +318,7 @@ def titre_poste(x):
 
 
 def poste(x, niveau="h3", missions=True):
-    liste = ("<ul>" + "".join(f"<li>{e(m)}</li>" for m in x["missions"]) + "</ul>") if missions else ""
+    liste = ("<ul>" + "".join(f"<li>{e(m)}</li>" for m in x["missions"]) + "</ul>") if missions and x["missions"] else ""
     if missions and x.get("photos"):
         w, h = dims(x["photos"][0][0])
         liste += f'<div class="poste-photos{" paysage" if w > h else ""}">' + "".join(
