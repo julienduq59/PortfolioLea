@@ -273,7 +273,7 @@ p{margin:0}
 .sous-bloc{margin-top:28px}
 .sous-bloc h4{font-size:1.1rem;font-weight:800;margin-bottom:14px}
 .sous-bloc .carte-culture h5{margin:0;font-size:clamp(1.2rem,2vw,1.45rem);font-weight:800;letter-spacing:-.015em;line-height:1.15}
-.certificats{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:12px}
+.certificats{list-style:none;margin:0;padding:clamp(24px,3vw,36px) 0 0;border-top:2px solid var(--encre);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:12px}
 .certificats li{display:flex;flex-direction:column;gap:2px;background:var(--cartel);border:1px solid var(--trait);padding:14px 18px}
 .certificats b{font-size:1.1rem}
 .certificats span{color:var(--doux);font-size:.92rem}
