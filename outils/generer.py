@@ -137,7 +137,7 @@ COMPETENCES = [
 
 # Expériences professionnelles, dans l'ordre du CV : la plus importante d'abord (musée de La Piscine).
 EXPERIENCES = [
-    dict(date="2024 - 2026", titre="Guide animatrice", precision="", lieu="Musée de La Piscine – Roubaix",
+    dict(date="2024 - 2026", titre="Guide animatrice", precision="Vacation", lieu="Musée de La Piscine – Roubaix",
          missions=["Visites thématiques du musée pour les groupes scolaires", "Animation d’ateliers d’arts plastiques"],
          # Photos envoyées par Julien (26/10/2026), visages des enfants floutés.
          photos=[("piscine-1", "Le grand bassin du musée de La Piscine à Roubaix, sous son vitrail en demi-soleil."),
