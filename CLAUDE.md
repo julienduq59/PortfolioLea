@@ -101,7 +101,7 @@ italique sous les missions.
 ## En attente
 
 - Page « Mes infos » (`page_infos()`) : présentation validée par Léa (recherche d'un CDI à temps plein dans le
-  secteur culturel), e-mail, téléphone, Instagram @lea_rbk_ et CV. **LinkedIn : adresse du profil à demander à
-  Léa** (constante `LINKEDIN`, vide = carte non affichée). Pas de bloc « Me contacter » en bas de cette page.
+  secteur culturel), e-mail, téléphone, Instagram @lea_rbk_ et CV. LinkedIn (constante `LINKEDIN`, adresse donnée
+  par Léa le 13/11/2026). Pas de bloc « Me contacter » en bas de cette page.
 - Téléphone dans le CV public : non, sauf demande de Léa.
 - Master obtenu ou non (le CV indique « 2024 - 2026 »).

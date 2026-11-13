@@ -8,14 +8,14 @@ import json
 import os
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "20261113d"  # à changer à chaque modification de styles.css ou site.js
+VERSION = "20261113e"  # à changer à chaque modification de styles.css ou site.js
 MAIL = "lea.rybak@outlook.fr"
 URL = "https://julienduq59.github.io/PortfolioLea/"
 # Page « Mes infos » (demande de Léa, 13/11/2026) : téléphone affiché sur cette page seulement,
 # à sa demande. Il reste absent du CV public.
 TELEPHONE = "06 58 47 30 60"
 INSTAGRAM = "lea_rbk_"
-LINKEDIN = ""  # adresse du profil à demander à Léa ; vide = carte non affichée
+LINKEDIN = "https://www.linkedin.com/in/l%C3%A9a-rybak-bb04a2251/"  # donnée par Léa (13/11/2026) ; vide = carte non affichée
 
 e = html.escape
 
