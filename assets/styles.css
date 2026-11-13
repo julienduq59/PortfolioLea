@@ -338,3 +338,31 @@ main p a:not(.bouton):not(.lien-fort),.mail a,.coord-valeur a,.cartel a{text-dec
 .coord-titre{color:var(--accent);font-weight:600}
 .portrait{box-shadow:0 0 0 4px var(--mur),0 0 0 6px var(--accent),0 18px 30px -16px var(--ombre)}
 .copier:hover{border-color:var(--accent)}
+
+/* ---------- Finitions ----------
+   Petits détails, sans changer la mise en page : survols, texte mieux coupé, version imprimable. */
+p,li,dd{text-wrap:pretty}
+.plus-contact{color:var(--doux);margin-top:12px}
+.voir:hover img{filter:brightness(1.07)}
+.voir:focus-visible{outline-offset:4px}
+.bouton:hover{filter:brightness(1.08)}
+.bouton-second:hover{filter:none;background:var(--accent-fond)}
+.coordonnees li:hover,.certificats li:hover{border-color:var(--accent)}
+@media (prefers-reduced-motion:no-preference){
+  html{scroll-behavior:smooth}
+  .voir img{transition:transform .4s cubic-bezier(.2,.7,.2,1),filter .3s}
+  .voir:hover img{transform:scale(1.012)}
+  .bouton{transition:transform .2s,filter .2s,background-color .2s,border-color .2s}
+  .bouton:hover{transform:translateY(-1px)}
+  .plan a,.coordonnees li,.certificats li,.copier,.theme{transition:color .15s,border-color .2s}
+}
+@media print{
+  :root,:root[data-theme]{--mur:#fff;--encre:#000;--doux:#333;--cartel:#fff;--trait:#bbb;--accent:#0b6b6f;--accent-fond:transparent;--sur-accent:#fff;--ombre:transparent;color-scheme:light}
+  .entete,.saut,.theme,.copier,.actions,.visionneuse,.plus-contact{display:none!important}
+  body{font-size:11pt}
+  .salle>.g,.entree .g,.contact .g{padding-top:14pt;padding-bottom:14pt}
+  .poste,.etape,.carte-culture,.competence,.certificats li,.coordonnees li,figure{break-inside:avoid}
+  h1,h2,h3{break-after:avoid}
+  img{box-shadow:none!important}
+  .coord-valeur a[href^="http"]::after{content:" : " attr(href);font-weight:400;font-size:.8em}
+}

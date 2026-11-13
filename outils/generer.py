@@ -8,7 +8,7 @@ import json
 import os
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "20261113g"  # à changer à chaque modification de styles.css ou site.js
+VERSION = "20261113h"  # à changer à chaque modification de styles.css ou site.js
 MAIL = "lea.rybak@outlook.fr"
 URL = "https://julienduq59.github.io/PortfolioLea/"
 # Page « Mes infos » (demande de Léa, 13/11/2026) : téléphone affiché sur cette page seulement,
@@ -256,8 +256,10 @@ FICHE_GOOGLE = '<script type="application/ld+json">' + json.dumps({
     "email": "mailto:" + MAIL,
     "sameAs": [f"https://www.instagram.com/{INSTAGRAM}/"] + ([LINKEDIN] if LINKEDIN else []),
     "description": "Master Exposition-production des œuvres d’art contemporain (Bac+5) et licence Arts plastiques "
-                   "et visuels, Université de Lille. Guide animatrice au musée de La Piscine à Roubaix. "
-                   "À la recherche d'un poste dans le secteur culturel.",
+                   "et visuels, Université de Lille. Guide animatrice au musée de La Piscine à Roubaix, agent de "
+                   "billetterie, de surveillance et de médiation à la Villa Cavrois à Croix. "
+                   "À la recherche d'un CDI à temps plein dans le secteur culturel.",
+    "address": {"@type": "PostalAddress", "addressLocality": "Croix", "addressRegion": "Hauts-de-France", "addressCountry": "FR"},
     "alumniOf": [{"@type": "CollegeOrUniversity", "name": "Université de Lille"},
                  {"@type": "HighSchool", "name": "Lycée Baudelaire, Roubaix"}],
     "knowsAbout": [c for _, liste in COMPETENCES[:1] for c in liste]
@@ -268,6 +270,7 @@ FICHE_GOOGLE = '<script type="application/ld+json">' + json.dumps({
 CONTACT = f"""<section class="contact" id="contact" aria-labelledby="titre-contact"><div class="g">
   <h2 id="titre-contact">Me contacter</h2>
   <p class="mail"><a href="mailto:{MAIL}">{MAIL}</a><button class="copier" type="button" data-copier="{MAIL}">Copier</button></p>
+  <p class="plus-contact">Téléphone, LinkedIn et Instagram : <a href="mes-infos.html">voir mes infos</a>.</p>
   <a class="lien-fort" {LIEN_CV}>Télécharger mon CV (PDF, une page) {FLECHE}</a>
 </div></section>
 """
@@ -287,17 +290,22 @@ def page(fichier, titre, description, corps):
 <title>{e(titre_complet)}</title>
 <meta name="description" content="{e(description)}">
 <meta name="author" content="Léa Rybak">
-<meta name="theme-color" content="#0b1320">
+<meta name="theme-color" content="#0b1320" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Léa Rybak">
 <meta property="og:title" content="{e(titre_complet)}">
 <meta property="og:description" content="{e(description)}">
 <meta property="og:url" content="{URL}{"" if fichier == "index.html" else fichier}">
-<meta property="og:image" content="{URL}assets/og-banner.jpg">
+<meta property="og:image" content="{URL}assets/og-banner.jpg?v={VERSION}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Léa Rybak, portfolio : exposition-production d'art contemporain. À droite, son œuvre Signum Cruci.">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="{URL}{"" if fichier == "index.html" else fichier}">
-<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v={VERSION}">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/styles.css?v={VERSION}">
 {FICHE_GOOGLE if fichier == "index.html" else ""}<script>try{{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}}catch(e){{}}</script>
@@ -383,12 +391,12 @@ def accueil():
       <h1 class="nom">Léa<br>Rybak</h1>
       <img class="portrait" src="assets/portrait-lea.webp" width="284" height="284" alt="Portrait de Léa Rybak" fetchpriority="high">
     </div>
-    <p class="recherche">À la recherche d'un poste dans le secteur culturel</p>
-    <p>Master Exposition-production des œuvres d’art contemporain (Bac+5) et licence Arts plastiques et visuels, Université de Lille. Guide animatrice au musée de La Piscine à Roubaix : visites thématiques et ateliers d’arts plastiques.</p>
+    <p class="recherche">À la recherche d'un CDI à temps plein dans le secteur culturel</p>
+    <p>Master Exposition-production des œuvres d’art contemporain (Bac+5) et licence Arts plastiques et visuels, Université de Lille. Guide animatrice au musée de La Piscine à Roubaix (visites thématiques et ateliers d’arts plastiques) et agent de billetterie, de surveillance et de médiation à la Villa Cavrois, à Croix.</p>
     <div class="actions">
       <a class="bouton" href="parcours.html">Voir mon parcours {FLECHE}</a>
       <a class="bouton bouton-second" {LIEN_CV}>Mon CV (PDF)</a>
-      <a class="bouton bouton-second" href="#contact">Me contacter</a>
+      <a class="bouton bouton-second" href="mes-infos.html">Me contacter</a>
     </div>
   </div>
   <div class="formation-cle" aria-labelledby="titre-formation">
@@ -568,7 +576,7 @@ def page_parcours():
 def page_experiences():
     return f"""<section class="salle" aria-labelledby="titre-exp"><div class="g">
   <h1 class="titre-salle" id="titre-exp">Expériences professionnelles</h1>
-  <div class="chapeau"><p>Guide animatrice au musée de La Piscine à Roubaix, stage au Couvent, et une solide expérience de l'accueil des publics : animation, accueil et vente.</p><p>Les expositions STARTER 9 et STARTER 10, réalisées pendant ma licence, sont présentées dans mon <a href="parcours.html#expos-licence">parcours</a>.</p></div>
+  <div class="chapeau"><p>Guide animatrice au musée de La Piscine à Roubaix, agent de billetterie, de surveillance et de médiation à la Villa Cavrois à Croix, et une solide expérience de l'accueil des publics : animation, accueil et vente.</p><p>Les expositions STARTER 9 et STARTER 10, réalisées pendant ma licence, sont présentées dans mon <a href="parcours.html#expos-licence">parcours</a>.</p></div>
   <div class="poste-phare">{poste(EXPERIENCES[0], "h2")}</div>
   <div class="postes">{"".join(poste(x, "h2") for x in EXPERIENCES[1:])}</div>
 </div></section>
@@ -612,13 +620,13 @@ def page_404():
 
 
 SORTIES = {
-    "index.html": ("Accueil", "Portfolio de Léa Rybak : Master Exposition-production des œuvres d’art contemporain (Bac+5), guide animatrice au musée de La Piscine à Roubaix. Parcours, expériences, œuvres et expositions.", accueil),
+    "index.html": ("Accueil", "Portfolio de Léa Rybak, à la recherche d'un CDI à temps plein dans le secteur culturel : Master Exposition-production des œuvres d’art contemporain (Bac+5), guide animatrice au musée de La Piscine à Roubaix.", accueil),
     "oeuvres.html": ("Œuvres", "Les œuvres de Léa Rybak de 2022 à 2024 : Signum Cruci, Cliché, Mes trophées de chasse, Poussière d'étoile et d'autres.", page_oeuvres),
     "expositions.html": ("Expositions", "STARTER 10 à La Condition Publique de Roubaix et STARTER 9 à La Chaufferie de La Tossée de Tourcoing : conception, communication et médiation.", page_expositions),
     "photographie.html": ("Photographie", "Photographies argentiques de Léa Rybak.", page_photographie),
-    "mes-infos.html": ("Mes infos", "Léa Rybak recherche un poste en CDI à temps plein dans le secteur culturel : présentation, e-mail, téléphone et Instagram.", page_infos),
+    "mes-infos.html": ("Mes infos", "Léa Rybak recherche un poste en CDI à temps plein dans le secteur culturel : présentation, e-mail, téléphone, LinkedIn et Instagram.", page_infos),
     "parcours.html": ("Parcours", "Formation, compétences, pratiques artistiques et centres d'intérêt de Léa Rybak.", page_parcours),
-    "experiences.html": ("Expériences professionnelles", "Expériences professionnelles de Léa Rybak : guide animatrice au musée de La Piscine, stage au Couvent à Roubaix, animation, accueil et vente.", page_experiences),
+    "experiences.html": ("Expériences professionnelles", "Expériences professionnelles de Léa Rybak : guide animatrice au musée de La Piscine à Roubaix, agent de billetterie, de surveillance et de médiation à la Villa Cavrois, animation, accueil et vente.", page_experiences),
     "404.html": ("Page introuvable", "Page introuvable.", page_404),
 }
 
@@ -627,3 +635,10 @@ if __name__ == "__main__":
         with open(os.path.join(RACINE, fichier), "w", encoding="utf-8") as f:
             f.write(page(fichier, titre, desc, fn()))
         print("écrit", fichier)
+    # Plan du site pour les moteurs de recherche, dans l'ordre du menu, avec la date du jour.
+    import datetime
+    jour = datetime.date.today().isoformat()
+    urls = "".join(f"  <url><loc>{URL}{'' if f == 'index.html' else f}</loc><lastmod>{jour}</lastmod></url>\n" for f, _ in PAGES)
+    with open(os.path.join(RACINE, "sitemap.xml"), "w", encoding="utf-8") as f:
+        f.write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n')
+    print("écrit sitemap.xml")

@@ -61,6 +61,14 @@ ne jamais changer cet ordre sans demande explicite.
 - Cache : `styles.css` et `site.js` sont chargés avec `?v=AAAAMMJJ`. À chaque modification de
   ces fichiers, changer `VERSION` dans `outils/generer.py`, puis régénérer les pages.
 - Visionneuse : tout lien `a.voir` ouvre l'image en grand dans un `<dialog>` (Échap pour fermer).
+- Carte de partage (image affichée quand on partage le lien) et icône pour téléphone : `python3 outils/carte.py`
+  écrit `assets/og-banner.jpg` (nom, « Portfolio », `TITRE_CV`, adresse du site, œuvre Signum Cruci) et
+  `assets/apple-touch-icon.png`. À relancer si le titre du CV ou l'adresse du site change.
+- `sitemap.xml` est réécrit par `outils/generer.py` à chaque génération (ordre du menu, date du jour).
+- Bloc « Me contacter » en bas des pages : e-mail, lien vers « Mes infos » (téléphone, LinkedIn, Instagram)
+  et CV. Le bouton « Me contacter » de l'accueil mène à `mes-infos.html`.
+- Finitions (13/11/2026, bloc « Finitions » à la fin de `styles.css`) : survols des photos et des boutons,
+  défilement doux, feuille de style pour l'impression. Aucune modification de la mise en page.
 - Fiche pour Google : données structurées `Person` (JSON-LD) sur l'accueil, dans `FICHE_GOOGLE`.
 - Portrait de Léa : en rond à côté de son nom sur l'accueil (`assets/portrait-lea.webp`, demande et
   validation de Julien sur aperçu, 25/10/2026). Même photo que sur son CV.
@@ -81,8 +89,8 @@ ne jamais changer cet ordre sans demande explicite.
 ## Si l'adresse du site change
 
 (transfert du dépôt vers un compte GitHub de Léa, ou nom de domaine) : changer `URL` dans
-`outils/generer.py`, régénérer les pages et le CV (le QR code change), puis mettre à jour
-`sitemap.xml` et `robots.txt`. Les CV déjà imprimés pointeront vers l'ancienne adresse.
+`outils/generer.py`, régénérer les pages (le `sitemap.xml` suit), le CV (le QR code change) et la carte de partage
+(`outils/carte.py`), puis mettre à jour `robots.txt`. Les CV déjà imprimés pointeront vers l'ancienne adresse.
 
 **Page Parcours : rubrique « Diplômes » sous la Formation**, avec le BAFA et le PSC1 (`CERTIFICATS`). Le PSC1 porte la mention « Renouvelé en octobre 2026 » (clé `renouvellement`, sur le site seulement). Demande de Léa, validée sur aperçu le 13/11/2026.
 

@@ -56,11 +56,11 @@
     });
   }
 
-  /* ---------- Copier l'adresse e-mail ---------- */
+  /* ---------- Copier l'adresse e-mail ou le téléphone ---------- */
   document.querySelectorAll(".copier").forEach(function (b) {
     b.addEventListener("click", function () {
       var texte = b.getAttribute("data-copier");
-      function ok() { b.textContent = "Adresse copiée"; setTimeout(function () { b.textContent = "Copier"; }, 2200); }
+      function ok() { b.textContent = "Copié"; setTimeout(function () { b.textContent = "Copier"; }, 2200); }
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(texte).then(ok, function () {});
       }
