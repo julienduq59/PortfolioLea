@@ -308,3 +308,33 @@ p{margin:0}
   .pratiques .an{grid-row:auto}
 }
 .poste-note{margin-top:10px;font-size:.92rem;font-style:italic;color:var(--doux)}
+
+/* ---------- Touches de couleur (accent) ----------
+   Une seule couleur d'accent, le bleu piscine (choix de Léa, 13/11/2026), pour les traits, les dates, les puces et les boutons.
+   Deux valeurs : claire sur le fond sombre, foncée sur le fond clair (contraste AA). */
+:root{--accent:#5fc9c4;--accent-fond:rgba(95,201,196,.12);--sur-accent:#0b1320}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--accent:#0b6b6f;--accent-fond:rgba(11,107,111,.08);--sur-accent:#ffffff}}
+:root[data-theme="light"]{--accent:#0b6b6f;--accent-fond:rgba(11,107,111,.08);--sur-accent:#ffffff}
+::selection{background:var(--accent);color:var(--sur-accent)}
+:focus-visible{outline-color:var(--accent)}
+.signature::after{content:"";display:inline-block;width:.36em;height:.36em;border-radius:50%;background:var(--accent);margin-left:.28em;vertical-align:.08em}
+.plan a:hover,.plan a[aria-current="page"]{text-decoration-color:var(--accent)}
+.theme:hover{border-color:var(--accent)}
+.titre-salle::after{content:"";display:block;width:56px;height:4px;background:var(--accent);margin-top:clamp(14px,2vw,20px)}
+main p a:not(.bouton):not(.lien-fort),.mail a,.coord-valeur a,.cartel a{text-decoration-color:var(--accent)}
+.recherche{border-color:var(--accent);background:var(--accent-fond)}
+.distinction{border-color:var(--accent)}
+.bouton{background:var(--accent);border-color:var(--accent);color:var(--sur-accent)}
+.bouton-second{background:none;color:var(--encre);border-color:var(--encre)}
+.bouton-second:hover{border-color:var(--accent)}
+.lien-fort{border-bottom-color:var(--accent)}
+.lien-fort svg{color:var(--accent)}
+.periode,.poste .an,.experiences .an,.formation-cle .an,.carte-culture .an,.parcours .an,.pratiques .an,.certificats .an{color:var(--accent)}
+.etape:first-child,.certificats,.coordonnees,.expo{border-top-color:var(--accent)}
+.poste-phare .poste,.competence,.carte-culture,.formation-cle{border-top:3px solid var(--accent)}
+.poste li::marker,.carte-culture li::marker,.expo li::marker{color:var(--accent)}
+.memoires{border-left-color:var(--accent)}
+.cartel{border-left:3px solid var(--accent)}
+.coord-titre{color:var(--accent);font-weight:600}
+.portrait{box-shadow:0 0 0 4px var(--mur),0 0 0 6px var(--accent),0 18px 30px -16px var(--ombre)}
+.copier:hover{border-color:var(--accent)}

@@ -51,6 +51,11 @@ ne jamais changer cet ordre sans demande explicite.
   par salle, un cartel de musée sous chaque œuvre. Couleurs reprises du portfolio V1 : bleu nuit
   `#0b1320` et blanc. Thème sombre par défaut, thème clair selon l'appareil ou via le bouton.
   Police Schibsted Grotesk auto-hébergée (`assets/fonts/`).
+- Couleur d'accent : **bleu piscine**, choisie par Léa sur aperçu (13/11/2026), parmi ocre, bleu piscine et
+  terracotta. Variables `--accent`, `--accent-fond` et `--sur-accent` (bloc « Touches de couleur » à la fin de
+  `styles.css`) : `#5fc9c4` sur fond sombre, `#0b6b6f` sur fond clair (contraste AA). Elle s'applique seulement
+  aux touches de couleur (traits, dates, puces, bouton principal, contour du portrait). Léa ne veut pas que
+  l'interface change : pas de refonte de la mise en page.
 - Images : WebP dans `assets/oeuvres/`, en deux tailles (`nom.webp`, jusqu'à 1400 px, et
   `nom-640.webp`), avec leur origine dans `nom.webp.json`.
 - Cache : `styles.css` et `site.js` sont chargés avec `?v=AAAAMMJJ`. À chaque modification de

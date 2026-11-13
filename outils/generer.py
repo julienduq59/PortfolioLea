@@ -8,7 +8,7 @@ import json
 import os
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "20261113f"  # à changer à chaque modification de styles.css ou site.js
+VERSION = "20261113g"  # à changer à chaque modification de styles.css ou site.js
 MAIL = "lea.rybak@outlook.fr"
 URL = "https://julienduq59.github.io/PortfolioLea/"
 # Page « Mes infos » (demande de Léa, 13/11/2026) : téléphone affiché sur cette page seulement,
