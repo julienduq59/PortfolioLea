@@ -27,6 +27,7 @@ des commandes, commits.
   « Animatrice », `assets/oeuvres/animation-*.webp`) et celles de La Piscine (`piscine-*.webp`) ont
   les visages floutés et sans métadonnées. Photos d'animation commerciale : seul le visage de Léa reste
   visible, ceux des collègues sont floutés (choix de Julien, 26/10/2026).
+  Photos de la Villa Cavrois (`villa-cavrois-*.webp`, 13/11/2026) : visages des visiteurs floutés.
   Pas de photos du gala de danse de la MJC de Croix sans l'accord des familles.
 - Toujours montrer un aperçu avant de publier une modification de design.
 

@@ -158,7 +158,10 @@ EXPERIENCES = [
     # corrigée en juin 2027 (le CDD commence en novembre 2026), confirmé par Léa. Missions données par Léa.
     dict(date="Nov.\u00a02026 - juin\u00a02027", titre="Agent de billetterie et agent de surveillance et de médiation",
          precision="CDD à temps partiel", lieu="Villa Cavrois – Croix",
-         missions=["Gestion de la caisse", "Vente de billets", "Organisation de la boutique", "Surveillance", "Médiation"]),
+         missions=["Gestion de la caisse", "Vente de billets", "Organisation de la boutique", "Surveillance", "Médiation"],
+         # Photos envoyées le 13/11/2026, visages des visiteurs floutés.
+         photos=[("villa-cavrois-1", "Entrée de la Villa Cavrois à Croix : un groupe de visiteurs attend sous l'auvent de briques jaunes (visages floutés)."),
+                 ("villa-cavrois-2", "Le jardin de la Villa Cavrois et son miroir d'eau, vus depuis une grande fenêtre arrondie de la villa.")]),
     # Ajout de Léa (13/11/2026) : sur le portfolio seulement, pas dans le CV PDF (cv=False).
     dict(date="Sept. - nov. 2026", titre="Animatrice", precision="Service civique, 2 mois",
          lieu="Crous Lille Nord-Pas-de-Calais – Pôle animation et vie de campus",
