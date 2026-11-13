@@ -148,7 +148,7 @@ EXPERIENCES = [
     dict(date="Sept. - nov. 2026", titre="Animatrice", precision="Service civique, 2 mois",
          lieu="Crous Lille Nord-Pas-de-Calais – Pôle animation et vie de campus",
          missions=["Programmation des animations", "Création d’animations", "Animation", "Réalisation de devis"],
-         note="Service civique arrêté pour un contrat à temps partiel qui m’a été proposé.", cv=False),
+         note="Le service civique a été interrompu en raison d’une embauche à temps partiel dans un autre établissement.", cv=False),
     dict(date="2026", titre="Stage", precision="", lieu="Le Couvent – Roubaix",
          missions=["Logistique, manutention et scénographie", "Gestion du bar",
                    "Embauches ponctuelles à l’issue du stage pour renforcer les équipes lors de grands événements"],
