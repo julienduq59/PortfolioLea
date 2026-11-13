@@ -147,7 +147,7 @@ EXPERIENCES = [
     # Ajout de Léa (13/11/2026) : sur le portfolio seulement, pas dans le CV PDF (cv=False).
     dict(date="Sept. - nov. 2026", titre="Animatrice", precision="Service civique, 2 mois",
          lieu="Crous Lille Nord-Pas-de-Calais – Pôle animation et vie de campus",
-         missions=["Programmation des animations", "Création d’animations", "Animation", "Réalisation de devis"],
+         missions=["Programmation des animations", "Création d’animations", "Animation pour des étudiants", "Réalisation de devis"],
          note="Le service civique a été interrompu en raison d’une embauche à temps partiel dans un autre établissement.", cv=False),
     dict(date="2026", titre="Stage", precision="", lieu="Le Couvent – Roubaix",
          missions=["Logistique, manutention et scénographie", "Gestion du bar",
