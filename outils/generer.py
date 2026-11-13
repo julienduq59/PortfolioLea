@@ -160,7 +160,7 @@ EXPERIENCES = [
          # Photos envoyées par Julien (26/10/2026).
          photos=[("couvent-1", "Affiches encadrées accrochées sur un mur brut, d'autres posées au sol, au Couvent à Roubaix."),
                  ("couvent-2", "Salle aux murs roses du Couvent à Roubaix, couverte d'affiches encadrées, avec fauteuils et guirlande de fanions.")]),
-    dict(date="Depuis 2021", titre="Animatrice", precision="Vacances scolaires",
+    dict(date="Depuis 2021", titre="Animatrice", precision="CDD pendant les vacances scolaires",
          lieu="Mairie de Croix, MJC de Croix, Planète aventure…",
          missions=["Animation en accueils collectifs de mineurs (ACM) et en colonies de vacances"],
          # Photos envoyées par Julien (26/10/2026), visages des enfants floutés.
@@ -173,13 +173,13 @@ EXPERIENCES = [
          # Photos envoyées par Julien (26/10/2026), visages des collègues floutés.
          photos=[("animation-commerciale-1", "Animation commerciale Zespri : Léa, à gauche, avec l'équipe en tee-shirt vert et la mascotte kiwi (visages des collègues floutés)."),
                  ("animation-commerciale-2", "Animation « Mission sauvetage de jouets » d'Ecomaison : Léa, à droite, en cape devant le camion (visage de sa collègue flouté).")]),
-    dict(date="Depuis 2023", titre="Conseillère de vente", precision="", lieu="Fan Avenue – Stade Pierre Mauroy",
+    dict(date="Depuis 2023", titre="Conseillère de vente", precision="Intérim", lieu="Fan Avenue – Stade Pierre Mauroy",
          missions=["Vente de merchandising lors des grands événements", "Mise en place du magasin et conseil",
                    "Manutention, mise en carton, gestion des stocks et caisse"],
          # Photos envoyées par Julien (27/10/2026).
          photos=[("fan-avenue-1", "Le stade vu des tribunes, pendant le montage d'une scène de concert."),
                  ("fan-avenue-2", "Stand de vente mobile, fermé, sur le parvis.")]),
-    dict(date="2023", titre="Conseillère de vente", precision="Renfort braderie de Lille", lieu="La Fée Maraboutée – Lille",
+    dict(date="2023", titre="Conseillère de vente", precision="Intérim, renfort braderie de Lille", lieu="La Fée Maraboutée – Lille",
          missions=["Mise en place du magasin et conseil",
                    "Manutention, réalisation de transferts, mise en carton et gestion des stocks"]),
 ]
