@@ -8,7 +8,7 @@ import json
 import os
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "20261113"  # à changer à chaque modification de styles.css ou site.js
+VERSION = "20261113b"  # à changer à chaque modification de styles.css ou site.js
 MAIL = "lea.rybak@outlook.fr"
 URL = "https://julienduq59.github.io/PortfolioLea/"
 
@@ -118,7 +118,9 @@ DIPLOMES = [
 ]
 CERTIFICATS = [
     dict(date="2021", titre="BAFA", lieu="Brevet d’aptitude aux fonctions d’animateur – Cemea", note=""),
-    dict(date="2018", titre="PSC1", lieu="Prévention et secours civiques de niveau 1", note=""),
+    # renouvellement : sur le site seulement (demande de Léa, 13/11/2026), pas dans le CV PDF.
+    dict(date="2018", titre="PSC1", lieu="Prévention et secours civiques de niveau 1", note="",
+         renouvellement="Renouvelé en octobre 2026"),
 ]
 # Sur le site seulement : le baccalauréat (portfolio V1), absent du CV d'octobre 2026.
 BAC = dict(date="2021", titre="Baccalauréat, mention très bien",
@@ -498,7 +500,9 @@ def page_parcours():
     expos = (f'<div class="sous-bloc"><h4 id="expos-licence">Expositions réalisées pendant la licence</h4>'
              f'<div class="cartes-culture">{bloc_expos_licence("h5")}</div></div>')
     frise = "".join(etape(f, expos if f is licence else "") for f in DIPLOMES + [BAC])
-    certificats = "".join(f'<li><b>{e(c["titre"])}</b><span>{e(c["lieu"])}</span><span class="an">{e(c["date"])}</span></li>'
+    def renouvele(c):
+        return f'<span class="renouvele">{e(c["renouvellement"])}</span>' if c.get("renouvellement") else ""
+    certificats = "".join(f'<li><b>{e(c["titre"])}</b><span>{e(c["lieu"])}</span><span class="an">{e(c["date"])}</span>{renouvele(c)}</li>'
                           for c in CERTIFICATS)
     competences = "".join(
         f'<article class="competence"><h3>{e(t)}</h3><ul class="etiquettes">{"".join(f"<li>{e(c)}</li>" for c in liste_c)}</ul></article>'
@@ -513,7 +517,11 @@ def page_parcours():
   <section class="bloc-parcours" aria-labelledby="titre-formation-p">
     <h2 id="titre-formation-p">Formation</h2>
     <ol class="frise">{frise}</ol>
-    <ul class="certificats" aria-label="Brevets et certificats">{certificats}</ul>
+  </section>
+
+  <section class="bloc-parcours" aria-labelledby="titre-diplomes">
+    <h2 id="titre-diplomes">Diplômes</h2>
+    <ul class="certificats">{certificats}</ul>
   </section>
 
   <section class="bloc-parcours" aria-labelledby="titre-competences">

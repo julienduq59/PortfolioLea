@@ -78,6 +78,8 @@ ne jamais changer cet ordre sans demande explicite.
 `outils/generer.py`, régénérer les pages et le CV (le QR code change), puis mettre à jour
 `sitemap.xml` et `robots.txt`. Les CV déjà imprimés pointeront vers l'ancienne adresse.
 
+**Page Parcours : rubrique « Diplômes » sous la Formation**, avec le BAFA et le PSC1 (`CERTIFICATS`). Le PSC1 porte la mention « Renouvelé en octobre 2026 » (clé `renouvellement`, sur le site seulement). Demande de Léa, validée sur aperçu le 13/11/2026.
+
 **Expositions STARTER 9 et 10 : projets d'études, rangés dans la Formation** (sous la licence),
 pas dans les expériences professionnelles (choix de Julien, 25/10/2026). Données : `EXPOS_LICENCE`.
 
