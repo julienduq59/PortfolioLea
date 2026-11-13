@@ -80,6 +80,10 @@ ne jamais changer cet ordre sans demande explicite.
 
 **Page Parcours : rubrique « Diplômes » sous la Formation**, avec le BAFA et le PSC1 (`CERTIFICATS`). Le PSC1 porte la mention « Renouvelé en octobre 2026 » (clé `renouvellement`, sur le site seulement). Demande de Léa, validée sur aperçu le 13/11/2026.
 
+**Mémoires de M1 et M2** : affichés sous le master sur la page Parcours (clé `memoires` de `DIPLOMES[0]`,
+sur le site seulement), donnés par Léa et validés sur aperçu le 13/11/2026. L'introduction de la page Parcours ne
+met plus en avant les deux expositions (demande de Léa).
+
 **Expositions STARTER 9 et 10 : projets d'études, rangés dans la Formation** (sous la licence),
 pas dans les expériences professionnelles (choix de Julien, 25/10/2026). Données : `EXPOS_LICENCE`.
 

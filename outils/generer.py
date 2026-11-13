@@ -8,7 +8,7 @@ import json
 import os
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "20261113e"  # à changer à chaque modification de styles.css ou site.js
+VERSION = "20261113f"  # à changer à chaque modification de styles.css ou site.js
 MAIL = "lea.rybak@outlook.fr"
 URL = "https://julienduq59.github.io/PortfolioLea/"
 # Page « Mes infos » (demande de Léa, 13/11/2026) : téléphone affiché sur cette page seulement,
@@ -118,7 +118,10 @@ VILLE = "Croix, Hauts-de-France"
 # Diplômes, puis brevets et certificats, dans l'ordre du CV.
 DIPLOMES = [
     dict(date="2024 - 2026", titre="Master Exposition-production des œuvres d’art contemporain",
-         lieu="Université de Lille", note="Obtention de la bourse « Aide à la recherche et à la mobilité » (M2)"),
+         lieu="Université de Lille", note="Obtention de la bourse « Aide à la recherche et à la mobilité » (M2)",
+         # Sur le site seulement (page Parcours), donnés par Léa le 13/11/2026.
+         memoires=[("Mémoire de M2", "La Pietà dans l’art contemporain : usage et représentation du motif des années 2000 à nos jours"),
+                   ("Mémoire de M1", "Les représentations de la Vierge Marie dans l’art contemporain des années 2000 à nos jours")]),
     dict(date="2021 - 2024", titre="Licence Arts plastiques et visuels", lieu="Université de Lille", note=""),
 ]
 CERTIFICATS = [
@@ -502,8 +505,10 @@ def page_parcours():
 
     def etape(f, extra=""):
         note = f'<p class="distinction">{e(f["note"])}</p>' if f["note"] else ""
+        memoires = ('<dl class="memoires">' + "".join(f"<div><dt>{e(t)}</dt><dd>{e(m)}</dd></div>" for t, m in f["memoires"])
+                    + "</dl>") if f.get("memoires") else ""
         return (f'<li class="etape"><p class="periode">{periode(f["date"])}</p><div class="etape-corps">'
-                f'<h3>{e(f["titre"])}</h3><p class="lieu">{e(f["lieu"])}</p>{note}{extra}</div></li>')
+                f'<h3>{e(f["titre"])}</h3><p class="lieu">{e(f["lieu"])}</p>{memoires}{note}{extra}</div></li>')
 
     licence = DIPLOMES[1]
     expos = (f'<div class="sous-bloc"><h4 id="expos-licence">Expositions réalisées pendant la licence</h4>'
@@ -521,7 +526,7 @@ def page_parcours():
     interets = "".join(f"<li>{e(i)}</li>" for i in CENTRES_INTERET.split(" · "))
     return f"""<section class="salle" aria-labelledby="titre-parcours"><div class="g">
   <h1 class="titre-salle" id="titre-parcours">Parcours</h1>
-  <div class="chapeau"><p>Une formation en arts plastiques puis en production d'expositions d'art contemporain, avec deux expositions réalisées pendant la licence. Voir aussi mes <a href="experiences.html">expériences professionnelles</a>.</p></div>
+  <div class="chapeau"><p>Une formation en arts plastiques puis en exposition-production des œuvres d'art contemporain, à l'Université de Lille. Voir aussi mes <a href="experiences.html">expériences professionnelles</a>.</p></div>
 
   <section class="bloc-parcours" aria-labelledby="titre-formation-p">
     <h2 id="titre-formation-p">Formation</h2>
