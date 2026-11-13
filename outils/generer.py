@@ -8,7 +8,7 @@ import json
 import os
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "20261026-5"  # à changer à chaque modification de styles.css ou site.js
+VERSION = "20261113"  # à changer à chaque modification de styles.css ou site.js
 MAIL = "lea.rybak@outlook.fr"
 URL = "https://julienduq59.github.io/PortfolioLea/"
 
@@ -144,6 +144,11 @@ EXPERIENCES = [
                  ("piscine-2", "Visite avec un groupe d'enfants dans une salle de peintures du musée : un enfant montre ses dessins (visages floutés)."),
                  ("piscine-3", "Atelier d'arts plastiques : des enfants dessinent sur de grandes bandes de papier (visages floutés)."),
                  ("piscine-4", "Peintures d'enfants représentant des nageurs, posées sur les tables de l'atelier.")]),
+    # Ajout de Léa (13/11/2026) : sur le portfolio seulement, pas dans le CV PDF (cv=False).
+    dict(date="Sept. - nov. 2026", titre="Animatrice", precision="Service civique, 2 mois",
+         lieu="Crous Lille Nord-Pas-de-Calais – Pôle animation et vie de campus",
+         missions=["Programmation des animations", "Création d’animations", "Animation", "Réalisation de devis"],
+         note="Service civique arrêté pour un contrat à temps partiel qui m’a été proposé.", cv=False),
     dict(date="2026", titre="Stage", precision="", lieu="Le Couvent – Roubaix",
          missions=["Logistique, manutention et scénographie", "Gestion du bar",
                    "Embauches ponctuelles à l’issue du stage pour renforcer les équipes lors de grands événements"],
@@ -314,11 +319,12 @@ def poste(x, niveau="h3", missions=True):
         liste += f'<div class="poste-photos{" paysage" if w > h else ""}">' + "".join(
             voir(n, alt, f'{titre_texte(x)}. {alt}', taille="(max-width: 820px) 100vw, 30vw")
             for n, alt in x["photos"]) + "</div>"
+    note = f'<p class="poste-note">{e(x["note"])}</p>' if missions and x.get("note") else ""
     return f"""<article class="poste">
       <p class="an">{e(x["date"])}</p>
       <{niveau}>{titre_poste(x)}</{niveau}>
       <p class="lieu">{e(x["lieu"])}</p>
-      {liste}
+      {liste}{note}
     </article>"""
 
 

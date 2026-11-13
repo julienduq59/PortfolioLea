@@ -151,7 +151,7 @@ h2{{font-size:13px;font-weight:400;color:#2e74b5;line-height:1.15;border-bottom:
   </section>
   <section>
     <h2>Expériences professionnelles</h2>
-    {"".join(experience(x) for x in g.EXPERIENCES)}
+    {"".join(experience(x) for x in g.EXPERIENCES if x.get("cv", True))}
   </section>
   <section>
     <h2>Centres d’intérêt</h2>

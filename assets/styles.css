@@ -293,3 +293,4 @@ p{margin:0}
   .pratiques li{grid-template-columns:minmax(0,1fr)}
   .pratiques .an{grid-row:auto}
 }
+.poste-note{margin-top:10px;font-size:.92rem;font-style:italic;color:var(--doux)}
